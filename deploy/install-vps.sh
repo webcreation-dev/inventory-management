@@ -47,19 +47,4 @@ COMPOSER_ALLOW_SUPERUSER=1 composer install --no-dev --prefer-dist --optimize-au
 php8.2 artisan key:generate --force
 php8.2 artisan migrate --force
 php8.2 tools/vps-init.php
-php8.2 artisan config:cache
-php8.2 artisan view:cache
-php8.2 artisan storage:link
-chown -R root:www-data /var/www/inventory-management
-chmod -R u=rwX,g=rX,o= /var/www/inventory-management
-chmod -R g+rwX storage bootstrap/cache public/uploads
-chmod 640 .env
-cp deploy/nginx-port5000.conf /etc/nginx/sites-available/inventory-management
-ln -s /etc/nginx/sites-available/inventory-management /etc/nginx/sites-enabled/inventory-management
-nginx -t
-systemctl enable --now php8.2-fpm
-systemctl reload nginx
-if command -v ufw >/dev/null && ufw status | grep -q '^Status: active'; then ufw allow 5000/tcp; fi
-curl --fail --silent --output /dev/null "http://127.0.0.1:5000/login"
-printf '\nApplication : http://%s:5000/login\n' "$INVENTORY_IP"
-printf 'Identifiants : /root/inventory-admin.txt\n'
+bash deploy/finish-vps.sh

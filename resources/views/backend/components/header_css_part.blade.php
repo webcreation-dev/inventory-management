@@ -31,3 +31,17 @@
 <script src="{{ asset('public/backend_assets/vendor/js/template-customizer.js') }}"></script>
 <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
 <script src="{{ asset('public/backend_assets/js/config.js') }}"></script>
+<style>
+  #layout-menu button.menu-link.menu-toggle {
+    width: calc(100% - 1rem);
+    border: 0;
+    background: transparent;
+    font: inherit;
+    text-align: start;
+    cursor: pointer;
+  }
+  #layout-menu button.menu-link.menu-toggle:focus-visible {
+    outline: 2px solid var(--bs-primary);
+    outline-offset: -2px;
+  }
+</style>

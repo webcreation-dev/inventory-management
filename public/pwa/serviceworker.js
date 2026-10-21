@@ -2,7 +2,7 @@
  * POS PWA Service Worker
  * Caches assets for offline support
  */
-const CACHE_NAME = 'pos-cache-v4';
+const CACHE_NAME = 'pos-cache-v5';
 
 const ASSETS_TO_CACHE = [
     '/',

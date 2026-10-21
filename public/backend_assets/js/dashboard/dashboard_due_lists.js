@@ -26,7 +26,18 @@ $(function () {
                     dashboardDtExtraParams(d);
                 },
                 error: function () {
-                    window.location.reload();
+                    // Keep navigation usable if a dashboard data request fails.
+                    $('.datatables-dashboard-due-customers, .datatables-dashboard-supplier-payables').attr('aria-busy', 'false');
+                    $('.dt-processing, .dataTables_processing').hide();
+                    if (!document.getElementById('dashboard-data-error')) {
+                        const alert = document.createElement('div');
+                        alert.id = 'dashboard-data-error';
+                        alert.className = 'alert alert-warning';
+                        alert.setAttribute('role', 'alert');
+                        alert.textContent = 'Une liste du tableau de bord n’a pas pu être chargée. Vous pouvez continuer à utiliser le menu et réessayer plus tard.';
+                        const container = document.querySelector('.content-wrapper');
+                        if (container) container.prepend(alert);
+                    }
                 }
             },
             columns: [
@@ -61,7 +72,18 @@ $(function () {
                     dashboardDtExtraParams(d);
                 },
                 error: function () {
-                    window.location.reload();
+                    // Keep navigation usable if a dashboard data request fails.
+                    $('.datatables-dashboard-due-customers, .datatables-dashboard-supplier-payables').attr('aria-busy', 'false');
+                    $('.dt-processing, .dataTables_processing').hide();
+                    if (!document.getElementById('dashboard-data-error')) {
+                        const alert = document.createElement('div');
+                        alert.id = 'dashboard-data-error';
+                        alert.className = 'alert alert-warning';
+                        alert.setAttribute('role', 'alert');
+                        alert.textContent = 'Une liste du tableau de bord n’a pas pu être chargée. Vous pouvez continuer à utiliser le menu et réessayer plus tard.';
+                        const container = document.querySelector('.content-wrapper');
+                        if (container) container.prepend(alert);
+                    }
                 }
             },
             columns: [

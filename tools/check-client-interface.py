@@ -36,3 +36,11 @@ finally:save(original)
 assert 'Stock' in get('/stock');print('Stock re-enabled: accessible')
 d=json.loads(get('/resources/lang/fr.json'));assert d['Save']=='Enregistrer';print('French UI dictionary endpoint: OK')
 get('/dashboard');get('/item/create');print('French dashboard and item form: OK')
+
+for endpoint in ['/dashboard/due-customers-data', '/dashboard/supplier-payables-data']:
+ request = urllib.request.Request(base + endpoint + '?draw=1&start=0&length=10', headers={'Accept':'application/json','X-Requested-With':'XMLHttpRequest'})
+ response = op.open(request)
+ payload = json.loads(response.read())
+ assert isinstance(payload['data'], list), endpoint
+ assert 'recordsTotal' in payload, endpoint
+ print(endpoint + ': valid DataTables response')

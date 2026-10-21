@@ -30,10 +30,10 @@
 
   @if((config('saas.enabled') || config('app.is_saas_env')) && Route::has('saas.dashboard') && auth()->check() && auth()->user()->isSaaSModuleAdmin())
     <li class="menu-item {{ request()->is('saas*') ? 'active open' : '' }}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
+      <button type="button" class="menu-link menu-toggle" aria-expanded="false">
         <i class="menu-icon icon-base ti tabler-cloud"></i>
         <div>{{ __('SaaS') }}</div>
-      </a>
+      </button>
       <ul class="menu-sub">
         <li class="menu-item {{ request()->routeIs('saas.dashboard') ? 'active' : '' }}">
           <a href="{{ route('saas.dashboard') }}" class="menu-link">
@@ -70,14 +70,6 @@
     </li>
     @endif
 
-    @can('role-edit')
-    <li class="menu-item {{ request()->is('module-usage') ? 'active' : '' }}">
-      <a href="{{ route('module-usage.index') }}" class="menu-link">
-        <i class="menu-icon icon-base ti tabler-adjustments"></i>
-        <div>{{ __('Gestion des modules') }}</div>
-      </a>
-    </li>
-    @endcan
     <!-- Dashboards -->
     <li class="menu-item {{ request()->is('user-home') ? 'active' : '' }}">
       <a href="{{ url('/user-home') }}" class="menu-link">
@@ -109,10 +101,10 @@
     @endif
     @if(Auth::user()->can('outlet-list') || Auth::user()->can('outlet-create') || Auth::user()->can('outlet-edit') || Auth::user()->can('outlet-destroy'))
     <li class="menu-item {{ request()->is('outlet*') ? 'active open' : '' }}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
+      <button type="button" class="menu-link menu-toggle" aria-expanded="false">
         <i class="menu-icon icon-base ti tabler-layout-grid"></i>
         <div>{{ __('Outlet') }}</div>
-      </a>
+      </button>
       <ul class="menu-sub">
         @can('outlet-create')
         <li class="menu-item {{ request()->is('outlet/create') || request()->is('outlet/*/edit') ? 'active' : '' }}">
@@ -143,10 +135,10 @@
 @endif
     @if(app(\App\Services\MenuModuleService::class)->enabled('menu_ecommerce_cms'))
 <li class="menu-item {{ request()->is('ecommerce/admin*') ? 'active open' : '' }}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
+      <button type="button" class="menu-link menu-toggle" aria-expanded="false">
         <i class="menu-icon icon-base ti tabler-shopping-bag"></i>
         <div>{{ __('Ecommerce CMS') }}</div>
-      </a>
+      </button>
       <ul class="menu-sub">
         <li class="menu-item {{ request()->routeIs('ecommerce.admin.branding.*') ? 'active' : '' }}">
           <a href="{{ route('ecommerce.admin.branding.edit') }}" class="menu-link">
@@ -244,10 +236,10 @@
     @if(Auth::user()->can('item-list') || Auth::user()->can('item-create') || Auth::user()->can('item-import'))
     @if(app(\App\Services\MenuModuleService::class)->enabled('menu_items'))
 <li class="menu-item {{ request()->is('item/create') || request()->is('item/*/edit') || request()->is('bulk-item-import') || request()->is('item') || request()->is('item/*/show') || request()->is('bulk-item-update') || request()->is('opening-stock-import') ? 'active open' : '' }}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
+      <button type="button" class="menu-link menu-toggle" aria-expanded="false">
         <i class="menu-icon icon-base ti tabler-heart-pin"></i>
         <div>{{ __('Item') }}</div>
-      </a>
+      </button>
       <ul class="menu-sub">
         @can('item-create')
         <li class="menu-item {{ request()->is('item/create') || request()->is('item/*/edit') ? 'active' : '' }}">
@@ -289,10 +281,10 @@
     @if(Auth::user()->can('category-list') || Auth::user()->can('category-create') || Auth::user()->can('brand-list') || Auth::user()->can('unit-list') || Auth::user()->can('rack-list') || Auth::user()->can('variation_attribute-list'))
     @if(app(\App\Services\MenuModuleService::class)->enabled('menu_item_configuration'))
 <li class="menu-item {{ (request()->is('item-category*') || request()->is('item-sub-category*') || request()->is('brand*') || request()->is('unit*') || request()->is('rack*') || request()->is('variation-attribute*') || request()->is('item-category/sort-category')) ? 'active open' : '' }}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
+      <button type="button" class="menu-link menu-toggle" aria-expanded="false">
         <i class="menu-icon icon-base ti tabler-settings-heart"></i>
         <div>{{ __('Item Configuration') }}</div>
-      </a>
+      </button>
       <ul class="menu-sub">
         @can('category-create')
         <li class="menu-item {{ request()->is('item-category/create') || request()->is('item-category/*/edit') ? 'active' : '' }}">
@@ -391,10 +383,10 @@
     @if(Auth::user()->can('stock-stock') || Auth::user()->can('stock-low_stock'))
     @if(app(\App\Services\MenuModuleService::class)->enabled('menu_stock'))
 <li class="menu-item {{ (request()->is('stock') && !request()->is('stock/low-stock')) || request()->is('stock/low-stock') ? 'active open' : '' }}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
+      <button type="button" class="menu-link menu-toggle" aria-expanded="false">
         <i class="menu-icon icon-base ti tabler-replace"></i>
         <div>{{ __('Stock') }}</div>
-      </a>
+      </button>
       <ul class="menu-sub">
         @can('stock-stock')
         <li class="menu-item {{ request()->is('stock') ? 'active' : '' }}">
@@ -425,10 +417,10 @@
     @if(Auth::user()->can('sale-list') || Auth::user()->can('promotion-list') || Auth::user()->can('delivery_partner-list'))
     @if(app(\App\Services\MenuModuleService::class)->enabled('menu_sales'))
 <li class="menu-item {{ request()->is('promotion*') || request()->is('delivery-partner*') || request()->is('pos*') || request()->is('sale') || request()->is('online-order*') ? 'active open' : '' }}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
+      <button type="button" class="menu-link menu-toggle" aria-expanded="false">
         <i class="menu-icon icon-base ti tabler-shopping-cart-heart"></i>
         <div>{{ __('Sale') }}</div>
-      </a>
+      </button>
       <ul class="menu-sub">
         <li class="menu-item">
           <a href="{{ route('pos.index') }}" class="menu-link">
@@ -486,10 +478,10 @@
     @if(Auth::user()->can('sale-list') || Auth::user()->can('sale-create'))
     @if(app(\App\Services\MenuModuleService::class)->enabled('menu_sale_returns'))
 <li class="menu-item {{ request()->is('sale-return*') ? 'active open' : '' }}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
+      <button type="button" class="menu-link menu-toggle" aria-expanded="false">
         <i class="menu-icon icon-base ti tabler-u-turn-right"></i>
         <div>{{ __('Sale Return') }}</div>
-      </a>
+      </button>
       <ul class="menu-sub">
         @can('sale-create')
         <li class="menu-item {{ request()->is('sale-return/create') || request()->is('sale-return/*/edit') ? 'active' : '' }}">
@@ -511,10 +503,10 @@
     @endif
     @if(module_enabled('installment_sale') && (Auth::user()->can('installment_sale-list') || Auth::user()->can('installment_sale-create')))
     <li class="menu-item {{ (request()->is('installment-sale*') || request()->is('installment-collection*') || request()->is('due-installment*') || request()->is('installment-customer*')) ? 'active open' : '' }}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
+      <button type="button" class="menu-link menu-toggle" aria-expanded="false">
         <i class="menu-icon icon-base ti tabler-stack-middle"></i>
         <div>{{ __('Installment Sale') }}</div>
-      </a>
+      </button>
       <ul class="menu-sub">
         @can('installment_sale-create')
         <li class="menu-item {{ request()->is('installment-sale/create') || request()->is('installment-sale/*/edit') || request()->is('installment-sale/*') ? 'active' : '' }}">
@@ -541,10 +533,10 @@
     @if(Auth::user()->can('customer-list') || Auth::user()->can('customer-create') || Auth::user()->can('customer_receive-list') || Auth::user()->can('customer_receive-create'))
     @if(app(\App\Services\MenuModuleService::class)->enabled('menu_customers'))
 <li class="menu-item {{ (request()->is('customer*') || request()->is('customer-receive*')) || request()->is('installment-customer*') ? 'active open' : '' }}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
+      <button type="button" class="menu-link menu-toggle" aria-expanded="false">
         <i class="menu-icon icon-base ti tabler-user-plus"></i>
         <div>{{ __('Customer') }}</div>
-      </a>
+      </button>
       <ul class="menu-sub">
         @can('customer-create')
         <li class="menu-item {{ request()->is('customer/create') || request()->is('customer/*/edit') ? 'active' : '' }}">
@@ -593,10 +585,10 @@
     @if(Auth::user()->can('income-list') || Auth::user()->can('income-create') || Auth::user()->can('income_category-list') || Auth::user()->can('income_category-create'))
     @if(app(\App\Services\MenuModuleService::class)->enabled('menu_income'))
 <li class="menu-item {{ request()->is('income*') ? 'active open' : '' }}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
+      <button type="button" class="menu-link menu-toggle" aria-expanded="false">
         <i class="menu-icon icon-base ti tabler-circle-plus"></i>
         <div>{{ __('Income') }}</div>
-      </a>
+      </button>
       <ul class="menu-sub">
         @can('income-create')
         <li class="menu-item {{ request()->is('income/create') || request()->is('income/*/edit') ? 'active' : '' }}">
@@ -642,10 +634,10 @@
     @if(Auth::user()->can('purchase-list') || Auth::user()->can('purchase-create'))
     @if(app(\App\Services\MenuModuleService::class)->enabled('menu_purchases'))
 <li class="menu-item {{ request()->is('purchase/create') || request()->is('purchase/*/edit') || request()->is('purchase') || request()->is('purchase/*/show')  ? 'active open' : '' }}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
+      <button type="button" class="menu-link menu-toggle" aria-expanded="false">
         <i class="menu-icon icon-base ti tabler-basket-down"></i>
         <div>{{ __('Purchase') }}</div>
-      </a>
+      </button>
       <ul class="menu-sub">
         @can('purchase-create')
         <li class="menu-item {{ request()->is('purchase/create') || request()->is('purchase/*/edit') ? 'active' : '' }}">
@@ -668,10 +660,10 @@
     @if(Auth::user()->can('purchase_return-list') || Auth::user()->can('purchase_return-create'))
     @if(app(\App\Services\MenuModuleService::class)->enabled('menu_purchase_returns'))
 <li class="menu-item {{ request()->is('purchase-return*') || request()->is('purchase-return/*/show') ? 'active open' : '' }}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
+      <button type="button" class="menu-link menu-toggle" aria-expanded="false">
         <i class="menu-icon icon-base ti tabler-u-turn-left"></i>
         <div>{{ __('Purchase Return') }}</div>
-      </a>
+      </button>
       <ul class="menu-sub">
         @can('purchase_return-create')
         <li class="menu-item {{ request()->is('purchase-return/create') || request()->is('purchase-return/*/edit') ? 'active' : '' }}">
@@ -694,10 +686,10 @@
     @if(Auth::user()->can('supplier-list') || Auth::user()->can('supplier-create') || Auth::user()->can('supplier_payment-list') || Auth::user()->can('supplier_payment-create'))
     @if(app(\App\Services\MenuModuleService::class)->enabled('menu_suppliers'))
 <li class="menu-item {{ request()->is('supplier*') ? 'active open' : '' }}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
+      <button type="button" class="menu-link menu-toggle" aria-expanded="false">
         <i class="menu-icon icon-base ti tabler-user-minus"></i>
         <div>{{ __('Supplier') }}</div>
-      </a>
+      </button>
       <ul class="menu-sub">
         @can('supplier-create')
         <li class="menu-item {{ request()->is('supplier/create') || request()->is('supplier/*/edit') ? 'active' : '' }}">
@@ -734,10 +726,10 @@
     @if(Auth::user()->can('expense-list') || Auth::user()->can('expense-create') || Auth::user()->can('expense_category-list') || Auth::user()->can('expense_category-create'))
     @if(app(\App\Services\MenuModuleService::class)->enabled('menu_expenses'))
 <li class="menu-item {{ request()->is('expense*') ? 'active open' : '' }}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
+      <button type="button" class="menu-link menu-toggle" aria-expanded="false">
         <i class="menu-icon icon-base ti tabler-circle-minus"></i>
         <div>{{ __('Expense') }}</div>
-      </a>
+      </button>
       <ul class="menu-sub">
         @can('expense-create')
         <li class="menu-item {{ request()->is('expense/create') || request()->is('expense/*/edit') ? 'active' : '' }}">
@@ -783,10 +775,10 @@
     @if(Auth::user()->can('transfer-list') || Auth::user()->can('transfer-create'))
     @if(app(\App\Services\MenuModuleService::class)->enabled('menu_transfers'))
 <li class="menu-item {{ request()->is('transfer*') ? 'active open' : '' }}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
+      <button type="button" class="menu-link menu-toggle" aria-expanded="false">
         <i class="menu-icon icon-base ti tabler-truck-delivery"></i>
         <div>{{ __('Transfer') }}</div>
-      </a>
+      </button>
       <ul class="menu-sub">
         @can('transfer-create')
         <li class="menu-item {{ request()->is('transfer/create') || request()->is('transfer/*/edit') ? 'active' : '' }}">
@@ -809,10 +801,10 @@
     @if(Auth::user()->can('damage-list') || Auth::user()->can('damage-create'))
     @if(app(\App\Services\MenuModuleService::class)->enabled('menu_damage'))
 <li class="menu-item {{ request()->is('damage*') ? 'active open' : '' }}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
+      <button type="button" class="menu-link menu-toggle" aria-expanded="false">
         <i class="menu-icon icon-base ti tabler-trash"></i>
         <div>{{ __('Damage') }}</div>
-      </a>
+      </button>
       <ul class="menu-sub ">
         @can('damage-create')
         <li class="menu-item {{ request()->is('damage/create') || request()->is('damage/*/edit') ? 'active' : '' }}">
@@ -835,10 +827,10 @@
     @if(Auth::user()->can('quotation-list') || Auth::user()->can('quotation-create'))
     @if(app(\App\Services\MenuModuleService::class)->enabled('menu_quotations'))
 <li class="menu-item {{ request()->is('quotation*') ? 'active open' : '' }}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
+      <button type="button" class="menu-link menu-toggle" aria-expanded="false">
         <i class="menu-icon icon-base ti tabler-pencil-star"></i>
         <div>{{ __('Quotation') }}</div>
-      </a>
+      </button>
       <ul class="menu-sub">
         @can('quotation-create')
         <li class="menu-item {{ request()->is('quotation/create') || request()->is('quotation/*/edit') ? 'active' : '' }}">
@@ -868,10 +860,10 @@
 @endif
     @if(app(\App\Services\MenuModuleService::class)->enabled('fixed_assets'))
 <li class="menu-item {{ request()->is('fixed-asset*') ? 'active open' : '' }}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
+      <button type="button" class="menu-link menu-toggle" aria-expanded="false">
         <i class="menu-icon icon-base ti tabler-tournament"></i>
         <div>{{ __('Fixed Asset') }}</div>
-      </a>
+      </button>
       <ul class="menu-sub">
         @can('fixed_asset_item-create')
         <li class="menu-item {{ request()->is('fixed-asset-item/create') || request()->is('fixed-asset-item/*/edit') ? 'active' : '' }}">
@@ -926,10 +918,10 @@
       <span class="menu-header-text">{{ __('Warranty & Servicing') }}</span>
     </li>
     <li class="menu-item {{ request()->is('warranty*') || request()->is('servicing*') || request()->is('warranty/checking')  ? 'active open' : '' }}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
+      <button type="button" class="menu-link menu-toggle" aria-expanded="false">
         <i class="menu-icon icon-base ti tabler-device-desktop-cog"></i>
         <div>{{ __('Warranty') }}</div>
-      </a>
+      </button>
       <ul class="menu-sub">
         @can('servicing-create')
         <li class="menu-item {{ request()->is('servicing/create') || request()->is('servicing/*/edit') ? 'active' : '' }}">
@@ -982,10 +974,10 @@
     @if(Auth::user()->can('payment_method-list') || Auth::user()->can('payment_method-create'))
     @if(app(\App\Services\MenuModuleService::class)->enabled('menu_payment_accounts'))
 <li class="menu-item {{ (request()->is('payment-method*') || request()->is('payment-method/sort-payment-method')) ? 'active open' : '' }}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
+      <button type="button" class="menu-link menu-toggle" aria-expanded="false">
         <i class="menu-icon icon-base ti tabler-building-bank"></i>
         <div>{{ __('Payment Account') }}</div>
-      </a>
+      </button>
       <ul class="menu-sub">
         @can('payment_method-create')
         <li class="menu-item {{ request()->is('payment-method/create') ? 'active' : '' }}">
@@ -1013,10 +1005,10 @@
     @if(Auth::user()->can('deposit_withdraw-list') || Auth::user()->can('deposit_withdraw-create'))
     @if(app(\App\Services\MenuModuleService::class)->enabled('menu_accounting'))
 <li class="menu-item {{ (request()->is('deposit-withdraw*') || request()->is('account-reports/account-balance/view') || request()->is('account-reports/balance-sheet/view') || request()->is('account-reports/account-statement/view') || request()->is('account-reports/transaction-history/view') || request()->is('account-reports/trial-balance/view')) ? 'active open' : '' }}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
+      <button type="button" class="menu-link menu-toggle" aria-expanded="false">
         <i class="menu-icon icon-base ti tabler-receipt-dollar"></i>
         <div>{{ __('Accounting') }}</div>
-      </a>
+      </button>
       <ul class="menu-sub">
         @can('deposit_withdraw-create')
         <li class="menu-item {{ request()->is('deposit-withdraw/create') || request()->is('deposit-withdraw/*/edit') ? 'active' : '' }}">
@@ -1081,10 +1073,10 @@
 @endif
     @if(app(\App\Services\MenuModuleService::class)->enabled('menu_marketing'))
 <li class="menu-item {{ request()->is('email-marketing') || request()->is('sms-marketing') || request()->is('whatsapp-marketing') ? 'active open' : '' }}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
+      <button type="button" class="menu-link menu-toggle" aria-expanded="false">
         <i class="menu-icon icon-base ti tabler-ad-2"></i>
         <div>{{ __('Marketing') }}</div>
-      </a>
+      </button>
       <ul class="menu-sub">
         @can('marketing-email')
         <li class="menu-item {{ request()->is('email-marketing') ? 'active' : '' }}">
@@ -1123,10 +1115,10 @@
     @if(Auth::user()->can('role-list') || Auth::user()->can('role-create'))
     @if(app(\App\Services\MenuModuleService::class)->enabled('menu_roles'))
 <li class="menu-item {{ request()->is('role*') ? 'active open' : '' }}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
+      <button type="button" class="menu-link menu-toggle" aria-expanded="false">
         <i class="menu-icon icon-base ti tabler-fingerprint"></i>
         <div>{{ __('Role Permission') }}</div>
-      </a>
+      </button>
       <ul class="menu-sub">
         @can('role-create')
         <li class="menu-item {{ request()->is('role/create') || request()->is('role/*/edit') ? 'active' : '' }}">
@@ -1149,10 +1141,10 @@
     @if(Auth::user()->can('user-create') || Auth::user()->can('user-list') || Auth::user()->can('user-edit'))
     @if(app(\App\Services\MenuModuleService::class)->enabled('menu_employees'))
 <li class="menu-item {{ request()->is('user*') ? 'active open' : '' }}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
+      <button type="button" class="menu-link menu-toggle" aria-expanded="false">
         <i class="menu-icon icon-base ti tabler-password-user"></i>
         <div>{{ __('Employee Account') }}</div>
-      </a>
+      </button>
       <ul class="menu-sub">
         @can('user-create')
         <li class="menu-item {{ request()->is('user/create') || request()->is('user/*/edit') ? 'active' : '' }}">
@@ -1182,10 +1174,10 @@
     @if(Auth::user()->can('attendance-list') || Auth::user()->can('attendance-create'))
     @if(app(\App\Services\MenuModuleService::class)->enabled('menu_attendance'))
 <li class="menu-item {{ request()->is('attendance*') ? 'active open' : '' }}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
+      <button type="button" class="menu-link menu-toggle" aria-expanded="false">
         <i class="menu-icon icon-base ti tabler-clock-24"></i>
         <div>{{ __('Attendance') }}</div>
-      </a>
+      </button>
       <ul class="menu-sub">
         @can('attendance-create')
         <li class="menu-item {{ request()->is('attendance/create') || request()->is('attendance/*/edit') ? 'active' : '' }}">
@@ -1208,10 +1200,10 @@
     @if(Auth::user()->can('salary-list') || Auth::user()->can('salary-create'))
     @if(app(\App\Services\MenuModuleService::class)->enabled('menu_payroll'))
 <li class="menu-item {{ request()->is('salary*') ? 'active open' : '' }}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
+      <button type="button" class="menu-link menu-toggle" aria-expanded="false">
         <i class="menu-icon icon-base ti tabler-wallet"></i>
         <div>{{ __('Salary/Payroll') }}</div>
-      </a>
+      </button>
       <ul class="menu-sub">
         @can('salary-create')
         <li class="menu-item {{ request()->is('salary/create') || request()->is('salary/*/edit') ? 'active' : '' }}">
@@ -1234,10 +1226,10 @@
     @if(Auth::user()->can('employee_advance_payment-list') || Auth::user()->can('employee_advance_payment-create'))
     @if(app(\App\Services\MenuModuleService::class)->enabled('menu_advances'))
 <li class="menu-item {{ request()->is('employee-advance-payment*') ? 'active open' : '' }}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
+      <button type="button" class="menu-link menu-toggle" aria-expanded="false">
         <i class="menu-icon icon-base ti tabler-cash"></i>
         <div>{{ __('Employee Advance Payment') }}</div>
-      </a>
+      </button>
       <ul class="menu-sub">
         @can('employee_advance_payment-create')
         <li class="menu-item {{ request()->is('employee-advance-payment/create') || request()->is('employee-advance-payment/*/edit') ? 'active' : '' }}">
@@ -1264,20 +1256,18 @@
       $reportPerms = ['report-register_report','report-z_report','report-daily_summary_report','report-sale_report','report-due_sale_report','report-final_invoice_due_report','report-service_sale_report','report-combo_service_report','report-stock_report','report-low_stock_report','report-expire_soon_report','report-employee_sale_report','report-customer_receive_report','report-attendance_report','report-product_profit_report','report-supplier_ledger_report','report-supplier_balance_report','report-customer_ledger_report','report-customer_balance_report','report-servicing_report','report-product_sale_report','report-tax_report','report-detailed_sale_report','report-profit_loss_report','report-purchase_report','report-expense_report','report-income_report','report-salary_report','report-purchase_return_report','report-sale_return_report','report-damage_report','report-installment_report','report-installment_due_report','report-item_tracking_report','report-price_history_report','report-cash_flow_report','report-available_loyalty_point_report','report-usage_loyalty_point_report'];
       $hasReportPermission = collect($reportPerms)->contains(fn($p) => Auth::user()->can($p));
     @endphp
-    @if($hasReportPermission || Auth::user()->can('denomination-list') || Auth::user()->can('multiple_currency-list') || Auth::user()->can('printer-list') || Auth::user()->can('counter-list') || Auth::user()->can('print_manager-dashboard') || Auth::user()->can('print_manager-settings') || Auth::user()->can('print_manager-test') || Auth::user()->can('print_manager-printers'))
-    @if(app(\App\Services\MenuModuleService::class)->any(['menu_reports','menu_printing']))
+    @if(Auth::user()->can('role-edit') || $hasReportPermission || Auth::user()->can('denomination-list') || Auth::user()->can('multiple_currency-list') || Auth::user()->can('printer-list') || Auth::user()->can('counter-list') || Auth::user()->can('print_manager-dashboard') || Auth::user()->can('print_manager-settings') || Auth::user()->can('print_manager-test') || Auth::user()->can('print_manager-printers'))
 <li class="menu-header small">
       <span class="menu-header-text">{{ __('Report & Setting') }}</span>
     </li>
-@endif
     @endif
     @if($hasReportPermission)
     @if(app(\App\Services\MenuModuleService::class)->enabled('menu_reports'))
 <li class="menu-item {{ request()->is('reports*') ? 'active open' : '' }}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
+      <button type="button" class="menu-link menu-toggle" aria-expanded="false">
         <i class="menu-icon icon-base ti tabler-book-2"></i>
         <div>{{ __('Report') }}</div>
-      </a>
+      </button>
       <ul class="menu-sub">
         @can('report-register_report')
         <li class="menu-item {{ request()->is('reports/register-report') ? 'active' : '' }}"><a href="{{ route('report.register-report') }}" class="menu-link"><div>{{ __('Register Report') }}</div></a></li>
@@ -1412,10 +1402,10 @@
     @endif
     @if(Auth::user()->can('denomination-list') || Auth::user()->can('denomination-create') || Auth::user()->can('multiple_currency-list') || Auth::user()->can('multiple_currency-create') || Auth::user()->can('printer-list') || Auth::user()->can('printer-create') || Auth::user()->can('counter-list') || Auth::user()->can('counter-create'))
     <li class="menu-item {{ (request()->is('setting*') || request()->is('denomination*') || request()->is('multiple-currency*') || request()->is('printer*') || request()->is('counter*')) ? 'active open' : '' }}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
+      <button type="button" class="menu-link menu-toggle" aria-expanded="false">
         <i class="menu-icon icon-base ti tabler-settings"></i>
         <div>{{ __('Settings') }}</div>
-      </a>
+      </button>
       <ul class="menu-sub">
         <li class="menu-item {{ request()->is('setting*') ? 'active' : '' }}">
           <a href="{{ route('setting', 'business_setting') }}" class="menu-link">
@@ -1487,13 +1477,22 @@
     </li>
     @endif
     
+    @can('role-edit')
+    <li class="menu-item {{ request()->is('module-usage') ? 'active' : '' }}">
+      <a href="{{ route('module-usage.index') }}" class="menu-link">
+        <i class="menu-icon icon-base ti tabler-adjustments"></i>
+        <div>{{ __('Gestion des modules') }}</div>
+      </a>
+    </li>
+    @endcan
+
     @if(Route::has('printmanager.index') && (Auth::user()->can('print_manager-dashboard') || Auth::user()->can('print_manager-settings') || Auth::user()->can('print_manager-test') || Auth::user()->can('print_manager-printers')))
     @if(app(\App\Services\MenuModuleService::class)->enabled('menu_printing'))
 <li class="menu-item {{ request()->is('print*') ? 'active open' : '' }}">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
+      <button type="button" class="menu-link menu-toggle" aria-expanded="false">
         <i class="menu-icon icon-base ti tabler-printer"></i>
         <div>{{ __('Print Manager') }}</div>
-      </a>
+      </button>
       <ul class="menu-sub">
         @can('print_manager-dashboard')
         <li class="menu-item {{ request()->routeIs('printmanager.index') ? 'active' : '' }}">

@@ -21,3 +21,5 @@
 <script src="{{ asset('public/backend_assets/js/extended-ui-sweetalert2.js')}}"></script>
 
 <script src="{{ asset('public/backend_assets/js/client-fr.js') }}?v={{ filemtime(public_path('backend_assets/js/client-fr.js')) }}"></script>
+
+<script src="{{ asset('public/backend_assets/js/sidebar-navigation.js') }}?v={{ filemtime(public_path('backend_assets/js/sidebar-navigation.js')) }}"></script>

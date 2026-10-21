@@ -883,13 +883,13 @@ class ReportController extends Controller
             }
             
             // 10. Installment Collection transactions (InstallmentSaleDetail with paid_status = Paid or Partial)
-            $installmentCollections = InstallmentSaleDetail::with(['installmentSale.customer'])
+            $installmentCollections = module_enabled('installment_sale') ? InstallmentSaleDetail::with(['installmentSale.customer'])
                 ->where('del_status', 'Live')
                 ->where('company_id', $companyId)
                 ->where('outlet_id', $outletId)
                 ->whereIn('paid_status', ['Paid', 'Partial'])
                 ->whereDate('paid_date', $date)
-                ->get();
+                ->get() : collect();
             
             if ($installmentCollections->count() > 0) {
                 // Add section header
@@ -6730,7 +6730,7 @@ class ReportController extends Controller
                     $transferOutBeforeQuery->where('from_outlet_id', $outletId);
                 }
                 
-                $transfersOutBefore = $transferOutBeforeQuery->get();
+                $transfersOutBefore = app(\App\Services\MenuModuleService::class)->enabled('menu_transfers') ? $transferOutBeforeQuery->get() : collect();
                 foreach ($transfersOutBefore as $transfer) {
                     $openingBalance -= floatval($transfer->quantity_amount ?? 0);
                 }
@@ -6747,7 +6747,7 @@ class ReportController extends Controller
                     $transferInBeforeQuery->where('to_outlet_id', $outletId);
                 }
                 
-                $transfersInBefore = $transferInBeforeQuery->get();
+                $transfersInBefore = app(\App\Services\MenuModuleService::class)->enabled('menu_transfers') ? $transferInBeforeQuery->get() : collect();
                 foreach ($transfersInBefore as $transfer) {
                     $openingBalance += floatval($transfer->quantity_amount ?? 0);
                 }
@@ -7012,7 +7012,7 @@ class ReportController extends Controller
                 $transferOutQuery->where('from_outlet_id', $outletId);
             }
             
-            $transfersOut = $transferOutQuery->get();
+            $transfersOut = app(\App\Services\MenuModuleService::class)->enabled('menu_transfers') ? $transferOutQuery->get() : collect();
             foreach ($transfersOut as $transfer) {
                 $qty = floatval($transfer->quantity_amount ?? 0);
                 $runningBalance -= $qty; // Transfer out reduces stock
@@ -7052,7 +7052,7 @@ class ReportController extends Controller
                 $transferInQuery->where('to_outlet_id', $outletId);
             }
             
-            $transfersIn = $transferInQuery->get();
+            $transfersIn = app(\App\Services\MenuModuleService::class)->enabled('menu_transfers') ? $transferInQuery->get() : collect();
             foreach ($transfersIn as $transfer) {
                 $qty = floatval($transfer->quantity_amount ?? 0);
                 $runningBalance += $qty; // Transfer in increases stock

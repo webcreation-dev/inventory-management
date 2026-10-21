@@ -19,6 +19,23 @@ class Expense extends Model
     ];
 
 
+    // A recovered SQL schema can contain a nullable column named category.
+    // Resolve the category relationship rather than that legacy placeholder.
+    public function getCategoryAttribute()
+    {
+        return $this->getRelationValue('category');
+    }
+
+    public function getAccountAttribute()
+    {
+        return $this->getRelationValue('account');
+    }
+
+    public function getEmployeeAttribute()
+    {
+        return $this->getRelationValue('employee');
+    }
+
     public function category()
     {
         return $this->belongsTo(ExpenseCategory::class, 'category_id');

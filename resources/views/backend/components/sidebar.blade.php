@@ -434,11 +434,13 @@
           </a>
         </li>
         @unless($lpIsBd)
+        @if(app(\App\Services\MenuModuleService::class)->enabled('menu_ecommerce'))
         <li class="menu-item {{ request()->is('online-order*') ? 'active' : '' }}">
           <a href="{{ route('online-order.index') }}" class="menu-link">
             <div>{{ __('Online Order') }}</div>
           </a>
         </li>
+        @endif
         @endunless
         @endcan
         @can('promotion-create')
@@ -1294,10 +1296,14 @@
         <li class="menu-item {{ request()->is('reports/combo-service-report') ? 'active' : '' }}"><a href="{{ route('report.combo-service-report') }}" class="menu-link"><div>{{ __('Combo Service Report') }}</div></a></li>
         @endcan
         @can('report-stock_report')
+        @if(app(\App\Services\MenuModuleService::class)->enabled('menu_stock'))
         <li class="menu-item {{ request()->is('reports/stock-report') ? 'active' : '' }}"><a href="{{ route('report.stock-report') }}" class="menu-link"><div>{{ __('Stock Report') }}</div></a></li>
+        @endif
         @endcan
         @can('report-low_stock_report')
+        @if(app(\App\Services\MenuModuleService::class)->enabled('menu_stock'))
         <li class="menu-item {{ request()->is('reports/low-stock-report') ? 'active' : '' }}"><a href="{{ route('report.low-stock-report') }}" class="menu-link"><div>{{ __('Low Stock Report') }}</div></a></li>
+        @endif
         @endcan
         @if(module_enabled('pharmacy_information'))
         @can('report-expire_soon_report')
@@ -1311,7 +1317,9 @@
         <li class="menu-item {{ request()->is('reports/customer-receive-report') ? 'active' : '' }}"><a href="{{ route('report.customer-receive-report') }}" class="menu-link"><div>{{ __('Customer Receive Report') }}</div></a></li>
         @endcan
         @can('report-attendance_report')
+        @if(app(\App\Services\MenuModuleService::class)->enabled('menu_attendance'))
         <li class="menu-item {{ request()->is('reports/attendance-report') ? 'active' : '' }}"><a href="{{ route('report.attendance-report') }}" class="menu-link"><div>{{ __('Attendance Report') }}</div></a></li>
+        @endif
         @endcan
         @can('report-product_profit_report')
         <li class="menu-item {{ request()->is('reports/product-profit-report') ? 'active' : '' }}"><a href="{{ route('report.product-profit-report') }}" class="menu-link"><div>{{ __('Product Profit Report') }}</div></a></li>
@@ -1351,25 +1359,39 @@
         <li class="menu-item {{ request()->is('reports/profit-loss-report') ? 'active' : '' }}"><a href="{{ route('report.profit-loss-report') }}" class="menu-link"><div>{{ __('Profit Loss Report') }}</div></a></li>
         @endcan
         @can('report-purchase_report')
+        @if(app(\App\Services\MenuModuleService::class)->enabled('menu_purchases'))
         <li class="menu-item {{ request()->is('reports/purchase-report') ? 'active' : '' }}"><a href="{{ route('report.purchase-report') }}" class="menu-link"><div>{{ __('Purchase Report') }}</div></a></li>
+        @endif
         @endcan
         @can('report-expense_report')
+        @if(app(\App\Services\MenuModuleService::class)->enabled('menu_expenses'))
         <li class="menu-item {{ request()->is('reports/expense-report') ? 'active' : '' }}"><a href="{{ route('report.expense-report') }}" class="menu-link"><div>{{ __('Expense Report') }}</div></a></li>
+        @endif
         @endcan
         @can('report-income_report')
+        @if(app(\App\Services\MenuModuleService::class)->enabled('menu_income'))
         <li class="menu-item {{ request()->is('reports/income-report') ? 'active' : '' }}"><a href="{{ route('report.income-report') }}" class="menu-link"><div>{{ __('Income Report') }}</div></a></li>
+        @endif
         @endcan
         @can('report-salary_report')
+        @if(app(\App\Services\MenuModuleService::class)->enabled('menu_payroll'))
         <li class="menu-item {{ request()->is('reports/salary-report') ? 'active' : '' }}"><a href="{{ route('report.salary-report') }}" class="menu-link"><div>{{ __('Salary Report') }}</div></a></li>
+        @endif
         @endcan
         @can('report-purchase_return_report')
+        @if(app(\App\Services\MenuModuleService::class)->enabled('menu_purchase_returns'))
         <li class="menu-item {{ request()->is('reports/purchase-return-report') ? 'active' : '' }}"><a href="{{ route('report.purchase-return-report') }}" class="menu-link"><div>{{ __('Purchase Return Report') }}</div></a></li>
+        @endif
         @endcan
         @can('report-sale_return_report')
+        @if(app(\App\Services\MenuModuleService::class)->enabled('menu_sale_returns'))
         <li class="menu-item {{ request()->is('reports/sale-return-report') ? 'active' : '' }}"><a href="{{ route('report.sale-return-report') }}" class="menu-link"><div>{{ __('Sale Return Report') }}</div></a></li>
+        @endif
         @endcan
         @can('report-damage_report')
+        @if(app(\App\Services\MenuModuleService::class)->enabled('menu_damage'))
         <li class="menu-item {{ request()->is('reports/damage-report') ? 'active' : '' }}"><a href="{{ route('report.damage-report') }}" class="menu-link"><div>{{ __('Damage Report') }}</div></a></li>
+        @endif
         @endcan
         @if(module_enabled('installment_sale'))
         @can('report-installment_report')

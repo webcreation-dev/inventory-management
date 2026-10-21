@@ -488,6 +488,7 @@ class RegisterController extends Controller
                 - $refundAmount 
                 - $totalExpense 
                 - $totalPurchase 
+                - $totalDuePayment
                 + $totalPurchaseReturn;
 
             // Update register to closed with all calculated totals

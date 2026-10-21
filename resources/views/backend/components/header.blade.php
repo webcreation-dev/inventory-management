@@ -36,6 +36,9 @@
 
     <!-- /Search -->
 
+    @if($isDemoDataset ?? false)
+      <span class="badge bg-label-warning ms-2" title="Clients, coordonnées, prix et opérations fictifs">Données de démonstration</span>
+    @endif
     <ul class="navbar-nav flex-row align-items-center ms-md-auto">
 
       @if(app(\App\Services\MenuModuleService::class)->enabled('menu_sales'))

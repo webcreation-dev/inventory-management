@@ -170,7 +170,7 @@ class DashboardController extends Controller
                 $monthRevenue = $monthRevenue->sum('total_payable');
                 
                 $revenueData[] = [
-                    'month' => $current->format('M'),
+                    'month' => $current->locale('fr')->translatedFormat('M'),
                     'revenue' => floatval($monthRevenue)
                 ];
                 
@@ -181,7 +181,7 @@ class DashboardController extends Controller
             for ($i = 11; $i >= 0; $i--) {
                 $monthStart = $today->copy()->subMonths($i)->startOfMonth();
                 $monthEnd = $today->copy()->subMonths($i)->endOfMonth();
-                $monthName = $monthStart->format('M');
+                $monthName = $monthStart->locale('fr')->translatedFormat('M');
                 
                 $monthRevenue = Sale::where('del_status', 'Live')
                     ->where('company_id', $companyId)
@@ -348,8 +348,8 @@ class DashboardController extends Controller
             ->map(function($sale) {
                 return [
                     'type' => 'Sale',
-                    'title' => 'Sale',
-                    'description' => 'Sale Invoice: ' . ($sale->sale_no ?? '-'),
+                    'title' => __('Sale'),
+                    'description' => __('Sale Invoice') . ': ' . ($sale->sale_no ?? '-'),
                     'amount' => floatval($sale->total_payable ?? 0),
                     'is_positive' => true,
                     'icon' => 'tabler-currency-dollar',
@@ -368,7 +368,7 @@ class DashboardController extends Controller
             ->map(function($expense) {
                 return [
                     'type' => 'Expense',
-                    'title' => 'Expense',
+                    'title' => __('Expense'),
                     'description' => ($expense->note ?? 'Expense') . ' - ' . ($expense->reference_no ?? '-'),
                     'amount' => floatval($expense->amount ?? 0),
                     'is_positive' => false,

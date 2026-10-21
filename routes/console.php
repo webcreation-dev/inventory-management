@@ -77,3 +77,16 @@ Artisan::command('app:generate-key', function () {
     $this->info(Artisan::output());
     $this->info('Application key generated and written to .env');
 })->purpose('Generate application key and write to .env file');
+
+Artisan::command('demo:seed-electronics {--company=1} {--end-date=} {--force}', function () {
+    if (app()->isProduction() && !$this->option('force')) {
+        $this->error('Jeu fictif : utiliser --force uniquement sur une installation de démonstration vide.');
+        return 1;
+    }
+    $seeder = new \Database\Seeders\ElectronicsDemoSeeder;
+    $seeder->companyId = (int) $this->option('company');
+    $seeder->endDate = $this->option('end-date');
+    $seeder->setCommand($this);
+    $seeder->run();
+    return 0;
+})->purpose('Créer six mois de démonstration informatique dans les modules actifs, sur un seul point de vente');

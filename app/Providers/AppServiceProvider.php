@@ -36,6 +36,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->ensureModuleViewNamespaces();
+        View::composer('backend.components.header', function ($view) {
+            $companyId = session('company.company_id');
+            $isDemo = $companyId && \Illuminate\Support\Facades\Schema::hasTable('demo_datasets')
+                && \Illuminate\Support\Facades\DB::table('demo_datasets')->where('dataset_key', 'electronics-v1-company-'.$companyId)->exists();
+            $view->with('isDemoDataset', (bool) $isDemo);
+        });
 
         View::composer([
             'install.layout',

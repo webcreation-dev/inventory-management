@@ -11,7 +11,7 @@ return [
         'label' => 'Boutique en ligne',
         'source_label' => 'Ecommerce',
         'description' => 'Gère les commandes et les clients de la boutique en ligne. Permet de suivre leur traitement et leur livraison.',
-        'prefixes' => ['ecommerce'],
+        'prefixes' => ['ecommerce', 'online-order'],
     ],
     'menu_ecommerce_cms' => [
         'label' => 'Contenu de la boutique en ligne',

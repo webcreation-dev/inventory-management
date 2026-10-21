@@ -425,7 +425,7 @@
 
         console.log(language_key.purchase ?? 'Purchase');
         
-        const categories = ['Purchase', 'Sale', 'Damage', 'Expense', 'Customer Receive', 'Supplier Payment'];
+        const categories = ['Purchase', 'Sale', 'Damage', 'Expense', 'Customer Receive', 'Supplier Payment'].map(label => language_key[label] || label);
         const data = [
             operationalData.purchase || 0,
             operationalData.sale || 0,
@@ -601,7 +601,7 @@
                     }
 
                     // Update Earning Reports
-                    $('#earningSalesCount').text((data.statistics.totalSalesCount) + ' Sales');
+                    $('#earningSalesCount').text((data.statistics.totalSalesCount) + ' ' + (language_key['Sales'] || 'Ventes'));
                     $('#earningNetProfit').text(formatCurrency(data.earning.netProfit));
                     $('#earningTotalIncome').text(formatCurrency(data.earning.totalIncome));
                     $('#earningTotalExpenses').text(formatCurrency(data.earning.totalExpenses));

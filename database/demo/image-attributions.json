@@ -1,0 +1,150 @@
+{
+  "laptop": {
+    "file": "laptop.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File%3ADell_Latitude_laptops_%281%29.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Dell_Latitude_laptops_%281%29.jpg",
+    "author": "Jualbelilaptop",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "note": "Illustration de famille de produits, modèle exact non garanti. Original conservé sans modification."
+  },
+  "desktop": {
+    "file": "desktop.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File%3ADell_Optiplex_780.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Dell_Optiplex_780.jpg",
+    "author": "Delta HDD",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "note": "Illustration de famille de produits, modèle exact non garanti. Original conservé sans modification."
+  },
+  "monitor": {
+    "file": "monitor.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File%3AComputer_monitor.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/a/a4/Computer_monitor.jpg",
+    "author": "Zzubnik",
+    "license": "Public domain",
+    "license_url": "https://creativecommons.org/publicdomain/mark/1.0/",
+    "note": "Illustration de famille de produits, modèle exact non garanti. Original conservé sans modification."
+  },
+  "phone": {
+    "file": "phone.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File%3ASamsung_Galaxy_A54_5G_2023.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/2/27/Samsung_Galaxy_A54_5G_2023.jpg",
+    "author": "Captainmorlypogi1959",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "note": "Illustration de famille de produits, modèle exact non garanti. Original conservé sans modification."
+  },
+  "iphone": {
+    "file": "iphone.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File%3AIPhone_13_Pro.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/c/c5/IPhone_13_Pro.jpg",
+    "author": "SimonWaldherr",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "note": "Illustration de famille de produits, modèle exact non garanti. Original conservé sans modification."
+  },
+  "tablet": {
+    "file": "tablet.png",
+    "source": "https://commons.wikimedia.org/wiki/File%3ASamsung_Galaxy_Tab_A11_Gray.png",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/d/d5/Samsung_Galaxy_Tab_A11_Gray.png",
+    "author": "Armin hpj",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "note": "Illustration de famille de produits, modèle exact non garanti. Original conservé sans modification."
+  },
+  "mouse": {
+    "file": "mouse.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File%3A2023_Mysz_komputerowa_Logitech_G903_Lightspeed.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/7/71/2023_Mysz_komputerowa_Logitech_G903_Lightspeed.jpg",
+    "author": "Jacek Halicki",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "note": "Illustration de famille, modèle exact non garanti. Vignette Wikimedia, sans autre modification.",
+    "download": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/2023_Mysz_komputerowa_Logitech_G903_Lightspeed.jpg/960px-2023_Mysz_komputerowa_Logitech_G903_Lightspeed.jpg"
+  },
+  "keyboard": {
+    "file": "keyboard.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File%3ABacklit_keyboard.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/c/c4/Backlit_keyboard.jpg",
+    "author": "User:Colin",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "note": "Illustration de famille, modèle exact non garanti. Vignette Wikimedia, sans autre modification.",
+    "download": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Backlit_keyboard.jpg/960px-Backlit_keyboard.jpg"
+  },
+  "webcam": {
+    "file": "webcam.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File%3AWebcam_01.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/5/55/Webcam_01.jpg",
+    "author": "Pmwiki1",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "note": "Illustration de famille, modèle exact non garanti. Vignette Wikimedia, sans autre modification.",
+    "download": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Webcam_01.jpg/960px-Webcam_01.jpg"
+  },
+  "headphones": {
+    "file": "headphones.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File%3A1970s_or_earlier_Elega_DR_243C_stereo_headphones_made_in_Japan.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/5/5b/1970s_or_earlier_Elega_DR_243C_stereo_headphones_made_in_Japan.jpg",
+    "author": "R. Henrik Nilsson",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "note": "Illustration de famille de produits, modèle exact non garanti. Original conservé sans modification."
+  },
+  "storage": {
+    "file": "storage.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File%3A2017_Dysk_SSD_Plextor_M8Pe%28Y%29_256GB.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/7/7a/2017_Dysk_SSD_Plextor_M8Pe%28Y%29_256GB.jpg",
+    "author": "Jacek Halicki",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "note": "Illustration de famille de produits, modèle exact non garanti. Original conservé sans modification."
+  },
+  "memory": {
+    "file": "memory.png",
+    "source": "https://commons.wikimedia.org/wiki/File%3A16_GiB-DDR4-RAM-Riegel_RAM019FIX_Small_Crop_90_PCNT.png",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/8/85/16_GiB-DDR4-RAM-Riegel_RAM019FIX_Small_Crop_90_PCNT.png",
+    "author": "PantheraLeo1359531",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "note": "Illustration de famille de produits, modèle exact non garanti. Original conservé sans modification."
+  },
+  "charger": {
+    "file": "charger.png",
+    "source": "https://commons.wikimedia.org/wiki/File%3A1.5V_Lithium_Battery_Charger_and_Cable_Back_Picture.png",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/7/76/1.5V_Lithium_Battery_Charger_and_Cable_Back_Picture.png",
+    "author": "TealComet",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "note": "Illustration de famille de produits, modèle exact non garanti. Original conservé sans modification."
+  },
+  "cable": {
+    "file": "cable.png",
+    "source": "https://commons.wikimedia.org/wiki/File%3AUSB-C.png",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/f/f3/USB-C.png",
+    "author": "Xxmarijnw",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "note": "Illustration de famille de produits, modèle exact non garanti. Original conservé sans modification."
+  },
+  "printer": {
+    "file": "printer.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File%3AHP_Color_LaserJet_CM1312nfi_Multifunction_Printer.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/b/b8/HP_Color_LaserJet_CM1312nfi_Multifunction_Printer.jpg",
+    "author": "Sgroey",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "note": "Illustration de famille, modèle exact non garanti. Vignette Wikimedia, sans autre modification.",
+    "download": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/HP_Color_LaserJet_CM1312nfi_Multifunction_Printer.jpg/960px-HP_Color_LaserJet_CM1312nfi_Multifunction_Printer.jpg"
+  },
+  "router": {
+    "file": "router.jpg",
+    "source": "https://www.tp-link.com/us/home-networking/wifi-router/archer-c6/",
+    "original": "https://static.tp-link.com/Archer-C6-1_normal_1533257570157g.jpg",
+    "author": "TP-Link",
+    "license": "Image fabricant — tous droits réservés",
+    "license_url": "https://www.tp-link.com/us/about-us/privacy/",
+    "note": "Illustration de famille, modèle exact non garanti. Visuel fabricant utilisé pour la démonstration."
+  }
+}

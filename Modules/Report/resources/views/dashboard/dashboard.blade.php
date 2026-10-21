@@ -2,6 +2,7 @@
 @section('page-title', __('Dashboard'))
 @push('page-css')
 <link rel="stylesheet" href="{{ asset('public/backend_assets/vendor/libs/swiper/swiper.css') }}" />
+<style>#statRevenueAmount { font-size:clamp(1rem, 1.5vw, 1.5rem); overflow-wrap:anywhere; }</style>
 @endpush
 @section('page-content')
 
@@ -145,7 +146,7 @@
                         <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                         <div class="me-2">
                             <h6 class="mb-0">{{ __('Net Profit') }}</h6>
-                            <small class="text-body" id="earningSalesCount">{{ number_format($totalSalesCount) }} Sales</small>
+                            <small class="text-body" id="earningSalesCount">{{ number_format($totalSalesCount) }} {{ __('Sales') }}</small>
                         </div>
                         <div class="user-progress d-flex align-items-center gap-4">
                             <small id="earningNetProfit">{{ formatAmount($netProfit) }}</small>
@@ -165,7 +166,7 @@
                         <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                         <div class="me-2">
                             <h6 class="mb-0">{{ __('Total Income') }}</h6>
-                            <small class="text-body">Sales, Income</small>
+                            <small class="text-body">{{ __('Sales') }}</small>
                         </div>
                         <div class="user-progress d-flex align-items-center gap-4">
                             <small id="earningTotalIncome">{{ formatAmount($totalIncome) }}</small>

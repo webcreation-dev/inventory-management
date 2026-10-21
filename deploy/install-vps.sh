@@ -11,10 +11,18 @@ fi
 apt-get update
 apt-get install -y git unzip python3 php8.2-fpm php8.2-mysql php8.2-mbstring php8.2-xml php8.2-curl php8.2-zip php8.2-gd php8.2-bcmath php8.2-intl
 systemctl start mysql
-# A dedicated database; CREATE deliberately fails if it already exists.
-DB_PASS=$(openssl rand -hex 24)
+# Resume safely when an earlier attempt created only the empty database.
+TABLE_COUNT=$(mysql --batch --skip-column-names -e "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='inventory_management';")
+if [ "$TABLE_COUNT" != 0 ]; then
+    echo 'La base inventory_management contient déjà des tables ; arrêt sans modification.' >&2; exit 1
+fi
+USER_COUNT=$(mysql --batch --skip-column-names -e "SELECT COUNT(*) FROM mysql.user WHERE User='inventory_app' AND Host='127.0.0.1';")
+if [ "$USER_COUNT" != 0 ]; then
+    echo 'Le compte MySQL inventory_app existe déjà ; vérifier avant de reprendre.' >&2; exit 1
+fi
+DB_PASS="Aa1!$(openssl rand -hex 24)"
 mysql <<SQL
-CREATE DATABASE inventory_management CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE IF NOT EXISTS inventory_management CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 CREATE USER 'inventory_app'@'127.0.0.1' IDENTIFIED BY '$DB_PASS';
 GRANT ALL PRIVILEGES ON inventory_management.* TO 'inventory_app'@'127.0.0.1';
 SQL

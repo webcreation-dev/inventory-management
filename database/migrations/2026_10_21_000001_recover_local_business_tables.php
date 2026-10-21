@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        if (!app()->environment('local')) {
-            throw new RuntimeException('The recovered schema is for local development only.');
+        if (!app()->environment('local') && !config('recovery.enabled')) {
+            throw new RuntimeException('Set ALLOW_RECOVERED_SCHEMA=true to explicitly enable the inferred schema.');
         }
         $definitions = json_decode(file_get_contents(database_path('local-recovery-schema.json')), true, 512, JSON_THROW_ON_ERROR);
         foreach ($definitions as $name => $columns) {

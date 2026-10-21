@@ -65,6 +65,6 @@ class StateSeeder extends Seeder
             );
         }
 
-        $this->command->info('GST states seeded successfully. Total: ' . count($this->states));
+        $this->command?->info('GST states seeded successfully. Total: ' . count($this->states));
     }
 }

@@ -226,9 +226,9 @@ class RolePermissionSeeder extends Seeder
         $superAdminRole->syncPermissions($allPermissions);
 
         // Find and assign role to user with ID 1
-        $user = User::find(1);
+        $user = User::where('email', 'admin@doorsoft.co')->first();
         if (!$user) {
-            throw new \Exception('User with ID 1 not found');
+            throw new \Exception('Initial administrator not found');
         }
         $user->assignRole($superAdminRole);
 

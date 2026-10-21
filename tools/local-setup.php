@@ -1,8 +1,10 @@
 <?php
-require __DIR__.'/../vendor/autoload.php';
-$app = require __DIR__.'/../bootstrap/app.php';
-$app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
-if (!$app->environment('local')) throw new RuntimeException('Local environment required');
+if (!isset($app)) {
+    require __DIR__.'/../vendor/autoload.php';
+    $app = require __DIR__.'/../bootstrap/app.php';
+    $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+}
+if (!$app->environment('local') && !config('recovery.enabled')) throw new RuntimeException('Recovered schema opt-in required');
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;

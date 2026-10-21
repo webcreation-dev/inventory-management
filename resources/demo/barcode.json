@@ -1,0 +1,20 @@
+{
+    "label_width": "50",
+    "label_height": "30",
+    "barcode_height": "30",
+    "barcode_width": "1.5",
+    "barcode_font_size": "12",
+    "company_font_size": "14",
+    "item_font_size": "12",
+    "price_font_size": "14",
+    "company_font_weight": "700",
+    "item_font_weight": "500",
+    "price_font_weight": "400",
+    "line_height": "1.2",
+    "print_mode": "label",
+    "multiple_per_page": "12",
+    "show_company_name": true,
+    "show_item_name": true,
+    "show_price": true,
+    "show_barcode": true
+}

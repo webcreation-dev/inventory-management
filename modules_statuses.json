@@ -1,0 +1,11 @@
+{
+    "Stock": true,
+    "Sale": true,
+    "Configuration": true,
+    "Purchase": true,
+    "Administrator": true,
+    "Accounting": true,
+    "Report": true,
+    "Ecommerce": true,
+    "PrintManager": true
+}

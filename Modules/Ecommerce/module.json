@@ -1,0 +1,15 @@
+{
+    "name": "Ecommerce",
+    "alias": "ecommerce",
+    "description": "Ecommerce storefront with admin CMS for branding, banners, categories, brands, featured products, and flash sales",
+    "keywords": [
+        "ecommerce",
+        "storefront",
+        "tailwind"
+    ],
+    "priority": 0,
+    "providers": [
+        "Modules\\Ecommerce\\Providers\\EcommerceServiceProvider"
+    ],
+    "files": []
+}

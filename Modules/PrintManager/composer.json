@@ -1,0 +1,21 @@
+{
+    "name": "modules/printmanager",
+    "description": "PrintManager module for centralized printing",
+    "authors": [
+        {
+            "name": "OFF POS",
+            "email": "support@example.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {}
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\PrintManager\\": "app/"
+        }
+    }
+}

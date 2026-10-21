@@ -1,0 +1,28 @@
+{
+    "business_type": "toy_store",
+    "business_type_label": "Toy Store",
+    "product_types": [
+        "General"
+    ],
+    "modules": {
+        "warranty_guarantee": false,
+        "pull_low_stock": false,
+        "booking": false,
+        "rack": false,
+        "pharmacy_information": false,
+        "fiscal_printer": false,
+        "weight_scale": false,
+        "double_unit": false,
+        "loyalty_feature": false,
+        "warranty": false,
+        "installment_sale": false,
+        "installment_customer": false,
+        "variation_information": false,
+        "variation_attribute": false,
+        "multiple_currency": true,
+        "denomination": true,
+        "fixed_assets": true,
+        "zatca": true,
+        "gst": true
+    }
+}

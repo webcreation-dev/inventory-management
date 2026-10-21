@@ -1,0 +1,16 @@
+{
+    "name": "PrintManager",
+    "alias": "printmanager",
+    "description": "Centralized printing module with QZ Tray, browser print, and extensible print drivers",
+    "keywords": [
+        "print",
+        "qz-tray",
+        "receipt",
+        "escpos"
+    ],
+    "priority": 0,
+    "providers": [
+        "Modules\\PrintManager\\Providers\\PrintManagerServiceProvider"
+    ],
+    "files": []
+}

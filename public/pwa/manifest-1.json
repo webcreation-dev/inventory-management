@@ -1,0 +1,20 @@
+{
+    "name": "Retail POS",
+    "short_name": "RPOS",
+    "start_url": "http://localhost/off_pos_laravel",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#7367f0",
+    "icons": [
+        {
+            "src": "http://localhost/off_pos_laravel/public/pwa/icons/1/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "http://localhost/off_pos_laravel/public/pwa/icons/1/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

@@ -78,7 +78,7 @@ window.templateName = document.documentElement.getAttribute('data-template');
 /**
  * TemplateCustomizer settings
  * -------------------------------------------------------------------------------------
- * displayCustomizer: true(Show customizer), false(Hide customizer)
+ * displayCustomizer: false(Show customizer), false(Hide customizer)
  * lang: To set default language, Add more languages and set default. Fallback language is 'en'
  * defaultPrimaryColor: '#7367F0' | Set default primary color
  * defaultSkin: 0(Default), 1(Bordered)
@@ -96,8 +96,8 @@ window.templateName = document.documentElement.getAttribute('data-template');
 
 if (typeof TemplateCustomizer !== 'undefined') {
   window.templateCustomizer = new TemplateCustomizer({
-    displayCustomizer: true,
-    lang: localStorage.getItem('templateCustomizer-' + templateName + '--Lang') || 'en', // Set default language here
+    displayCustomizer: false,
+    lang: 'fr', // Set default language here
     // defaultPrimaryColor: '#D11BB4',
     // defaultSkin: 1,
     // defaultTheme: 'system',

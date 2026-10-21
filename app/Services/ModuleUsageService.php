@@ -17,7 +17,7 @@ class ModuleUsageService
     {
         $labels = config('business_types.feature_labels', []);
 
-        return [
+        $definitions = [
             'warranty_guarantee' => [
                 'label' => $labels['warranty_guarantee'] ?? 'Warranty & Guarantee',
                 'type' => 'Feature',
@@ -114,6 +114,14 @@ class ModuleUsageService
                 'description' => 'GST tax support',
             ],
         ];
+        foreach (config('menu_modules', []) as $key => $definition) {
+            $definitions[$key] = [
+                'label' => $definition['label'],
+                'type' => 'Module du menu',
+                'description' => $definition['description'],
+            ];
+        }
+        return $definitions;
     }
 
     public function filePath(): string
@@ -128,7 +136,7 @@ class ModuleUsageService
     {
         $defaults = [];
         foreach (array_keys($this->definitions()) as $key) {
-            $defaults[$key] = false;
+            $defaults[$key] = str_starts_with($key, 'menu_');
         }
 
         return $defaults;
@@ -164,7 +172,7 @@ class ModuleUsageService
 
         $company = Company::query()->find($resolvedId);
 
-        return $company !== null && filter_var($company->is_saas ?? false, FILTER_VALIDATE_BOOLEAN);
+        return $company !== null;
     }
 
     /**
@@ -180,7 +188,7 @@ class ModuleUsageService
             return true;
         }
 
-        return $this->usesCompanyStorage(null);
+        return $this->resolveCompanyId(null) > 0;
     }
 
     public function businessType(?int $companyId = null): ?string
@@ -240,9 +248,9 @@ class ModuleUsageService
         ?array $productTypes = null,
         ?int $companyId = null
     ): array {
-        $modules = $this->defaults();
-        foreach ($modules as $key => $_) {
-            $modules[$key] = filter_var($input[$key] ?? false, FILTER_VALIDATE_BOOLEAN);
+        $modules = $this->all($companyId);
+        foreach ($modules as $key => $current) {
+            $modules[$key] = array_key_exists($key, $input) ? filter_var($input[$key], FILTER_VALIDATE_BOOLEAN) : $current;
         }
 
         $payload = [
@@ -331,12 +339,8 @@ class ModuleUsageService
 
     public function isEnabled(string $key): bool
     {
-        $modules = session(self::SESSION_KEY);
-        if (! is_array($modules)) {
-            $modules = $this->all();
-        }
-
-        return filter_var($modules[$key] ?? false, FILTER_VALIDATE_BOOLEAN);
+        if (!array_key_exists($key, $this->definitions())) return false;
+        return app(MenuModuleService::class)->enabled($key);
     }
 
     /**
@@ -356,7 +360,7 @@ class ModuleUsageService
                 }
             }
 
-            return $this->defaultPayload();
+            return $this->normalizePayload($this->readFileData());
         }
 
         return $this->normalizePayload($this->readFileData());
@@ -389,7 +393,7 @@ class ModuleUsageService
             return $companyId;
         }
 
-        return (int) session('company.company_id', 0);
+        return (int) session('company.company_id', auth()->user()?->company_id ?? 0);
     }
 
     protected function companyStorageAvailable(): bool

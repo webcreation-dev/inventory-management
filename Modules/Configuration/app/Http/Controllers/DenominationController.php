@@ -60,7 +60,7 @@ class DenominationController extends Controller
         try {
             $this->denominationService->createDenomination($request->validated());
             return redirect()->route('denomination.index')
-                ->with('success', 'Denomination Created Successfully');
+                ->with('success', __('Denomination Created Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('denomination.create')
                 ->with('error', $e->getMessage())
@@ -86,7 +86,7 @@ class DenominationController extends Controller
             
             if (!$denomination) {
                 return redirect()->route('denomination.index')
-                    ->with('error', 'Denomination not found');
+                    ->with('error', __('Denomination not found'));
             }
 
             return view('configuration::denomination.create', compact('denomination'));
@@ -104,7 +104,7 @@ class DenominationController extends Controller
         try {
             $this->denominationService->updateDenomination($id, $request->validated());
             return redirect()->route('denomination.index')
-                ->with('success', 'Denomination Updated Successfully');
+                ->with('success', __('Denomination Updated Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('denomination.edit', $id)
                 ->with('error', $e->getMessage())
@@ -120,7 +120,7 @@ class DenominationController extends Controller
         try {
             $this->denominationService->deleteDenomination($id);
             return redirect()->route('denomination.index')
-                ->with('success', 'Denomination Deleted Successfully');
+                ->with('success', __('Denomination Deleted Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('denomination.index')
                 ->with('error', $e->getMessage());

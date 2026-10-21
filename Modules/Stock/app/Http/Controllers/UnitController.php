@@ -59,7 +59,7 @@ class UnitController extends Controller
         try {
             $this->unitService->createUnit($request->validated());
             return redirect()->route('unit.index')
-                ->with('success', 'Unit created successfully.');
+                ->with('success', __('Unit created successfully.'));
         } catch (\Exception $e) {
             return redirect()->route('unit.create')
                 ->with('error', $e->getMessage())
@@ -85,7 +85,7 @@ class UnitController extends Controller
             
             if (!$unit) {
                 return redirect()->route('unit.index')
-                    ->with('error', 'Unit not found');
+                    ->with('error', __('Unit not found'));
             }
 
             return view('stock::unit.create', compact('unit'));
@@ -103,7 +103,7 @@ class UnitController extends Controller
         try {
             $this->unitService->updateUnit($id, $request->validated());
             return redirect()->route('unit.index')
-                ->with('success', 'Unit updated successfully.');
+                ->with('success', __('Unit updated successfully.'));
         } catch (\Exception $e) {
             return redirect()->route('unit.edit', $id)
                 ->with('error', $e->getMessage())
@@ -119,7 +119,7 @@ class UnitController extends Controller
         try {
             $this->unitService->deleteUnit($id);
             return redirect()->route('unit.index')
-                ->with('success', 'Unit deleted successfully.');
+                ->with('success', __('Unit deleted successfully.'));
         } catch (\Exception $e) {
             return redirect()->route('unit.index')
                 ->with('error', $e->getMessage());

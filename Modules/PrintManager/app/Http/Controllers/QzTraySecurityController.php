@@ -34,7 +34,7 @@ class QzTraySecurityController extends Controller
         if ($this->qzSecurity->isDevelopment() && !$this->qzSecurity->certificateExists()) {
             return response()->json([
                 'success' => false,
-                'message' => 'Development mode: no certificate file configured. QZ Tray will show trust prompts.',
+                'message' => __('Development mode: no certificate file configured. QZ Tray will show trust prompts.'),
                 'error_code' => 'development_unsigned',
                 'security' => $this->qzSecurity->securityStatus(),
             ], 200);
@@ -74,7 +74,7 @@ class QzTraySecurityController extends Controller
         if ($payload === '') {
             return response()->json([
                 'success' => false,
-                'message' => 'Missing request payload to sign.',
+                'message' => __('Missing request payload to sign.'),
                 'error_code' => 'missing_request',
             ], 422);
         }
@@ -84,7 +84,7 @@ class QzTraySecurityController extends Controller
 
             return response()->json([
                 'success' => false,
-                'message' => 'Development mode: private key not configured. Use QZ Tray Allow prompt or add demo keys.',
+                'message' => __('Development mode: private key not configured. Use QZ Tray Allow prompt or add demo keys.'),
                 'error_code' => 'development_unsigned',
             ], 503);
         }

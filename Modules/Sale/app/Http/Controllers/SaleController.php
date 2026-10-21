@@ -43,7 +43,7 @@ class SaleController extends Controller
         
         if (!$sale) {
             return redirect()->back()
-                ->with('error', 'Sale not found');
+                ->with('error', __('Sale not found'));
         }
         
         // Load relationships (only live sale details)
@@ -81,7 +81,7 @@ class SaleController extends Controller
 
             if (!$sale) {
                 return redirect()->back()
-                    ->with('error', 'Sale not found');
+                    ->with('error', __('Sale not found'));
             }
 
             // Load relationships (only live sale details and payments)
@@ -140,7 +140,7 @@ class SaleController extends Controller
                 ->header('Expires', '0');
         } catch (\Exception $e) {
             return redirect()->back()
-                ->with('error', 'Sale not found');
+                ->with('error', __('Sale not found'));
         }
     }
 
@@ -154,7 +154,7 @@ class SaleController extends Controller
             $sale = $this->saleService->getSaleByEncryptedId($id);
             if (!$sale) {
                 return redirect()->back()
-                    ->with('error', 'Sale not found');
+                    ->with('error', __('Sale not found'));
             }
             $sale->load([
                 'customer',
@@ -173,7 +173,7 @@ class SaleController extends Controller
             return view('sale::sale.challan', compact('sale'));
         } catch (\Exception $e) {
             return redirect()->back()
-                ->with('error', 'Sale not found');
+                ->with('error', __('Sale not found'));
         }
     }
 
@@ -187,7 +187,7 @@ class SaleController extends Controller
 
             if (!$sale) {
                 return redirect()->back()
-                    ->with('error', 'Sale not found');
+                    ->with('error', __('Sale not found'));
             }
 
             // Load relationships (only live sale details and payments)
@@ -248,7 +248,7 @@ class SaleController extends Controller
                 ->header('Content-Length', strlen($pdfContent));
         } catch (\Exception $e) {
             return redirect()->back()
-                ->with('error', 'Error generating PDF: ' . $e->getMessage());
+                ->with('error', __('Error generating PDF: ') . $e->getMessage());
         }
     }
 
@@ -262,7 +262,7 @@ class SaleController extends Controller
 
         if (!$sale) {
             return redirect()->back()
-                ->with('error', 'Sale not found');
+                ->with('error', __('Sale not found'));
         }
 
         return redirect()->route('pos.index', ['edit_sale' => $id]);
@@ -277,7 +277,7 @@ class SaleController extends Controller
             $this->saleService->deleteSale($id);
             
             return redirect()->back()
-                ->with('success', 'Sale deleted successfully');
+                ->with('success', __('Sale deleted successfully'));
         } catch (\Exception $e) {
             return redirect()->back()
                 ->with('error', $e->getMessage());

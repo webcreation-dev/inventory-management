@@ -1,7 +1,7 @@
 
 <!doctype html>
 <html
-  lang="en"
+  lang="{{ app()->getLocale() }}"
   class="layout-wide customizer-hide"
   dir="ltr"
   data-skin="default"

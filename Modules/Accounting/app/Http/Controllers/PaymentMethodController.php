@@ -108,7 +108,7 @@ class PaymentMethodController extends Controller
             
             PaymentMethod::create($storeData);
             return redirect()->route('payment-method.index')
-                ->with('success', 'Payment Method Created Successfully');
+                ->with('success', __('Payment Method Created Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('payment-method.create')
                 ->withInput()
@@ -137,7 +137,7 @@ class PaymentMethodController extends Controller
             return view('accounting::payment-method.create', $data);
         } catch (\Exception $e) {
             return redirect()->route('payment-method.index')
-                ->with('error', 'Payment Method not found');
+                ->with('error', __('Payment Method not found'));
         }
     }
 
@@ -180,7 +180,7 @@ class PaymentMethodController extends Controller
             
             $paymentMethod->update($updateData);
             return redirect()->route('payment-method.index')
-                ->with('success', 'Payment Method Updated Successfully');
+                ->with('success', __('Payment Method Updated Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('payment-method.edit', encrypt($decryptedId))
                 ->withInput()
@@ -198,7 +198,7 @@ class PaymentMethodController extends Controller
             $payment_method = PaymentMethod::findOrFail($decryptedId);
             $payment_method->update(['del_status' => 'Deleted']);
             return redirect()->route('payment-method.index')
-                ->with('success', 'Payment Method Deleted Successfully');
+                ->with('success', __('Payment Method Deleted Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('payment-method.index')
                 ->with('error', $e->getMessage());
@@ -221,7 +221,7 @@ class PaymentMethodController extends Controller
             return view('accounting::payment-method.sort-payment-method', compact('paymentMethods'));
         } catch (\Exception $e) {
             return redirect()->route('payment-method.index')
-                ->with('error', 'Error loading sort page: ' . $e->getMessage());
+                ->with('error', __('Error loading sort page: ') . $e->getMessage());
         }
     }
 
@@ -237,7 +237,7 @@ class PaymentMethodController extends Controller
             if (empty($sortedIds)) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'No payment methods to sort'
+                    'message' => __('No payment methods to sort')
                 ], 400);
             }
 
@@ -249,7 +249,7 @@ class PaymentMethodController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'Payment method order updated successfully.'
+                'message' => __('Payment method order updated successfully.')
             ]);
         } catch (\Exception $e) {
             return response()->json([

@@ -24,7 +24,7 @@ class SMSService
             if (!$company) {
                 return [
                     'status' => 'Error',
-                    'message' => 'Company not found'
+                    'message' => __('Company not found')
                 ];
             }
 
@@ -95,14 +95,14 @@ class SMSService
                 default:
                     return [
                         'status' => 'Error',
-                        'message' => 'Unsupported SMS service: ' . $smsType
+                        'message' => __('Unsupported SMS service: ') . $smsType
                     ];
             }
         } catch (\Exception $e) {
             Log::error('SMS sending failed', ['exception' => $e]);
             return [
                 'status' => 'Error',
-                'message' => 'SMS sending failed: ' . $e->getMessage()
+                'message' => __('SMS sending failed: ') . $e->getMessage()
             ];
         }
     }
@@ -127,18 +127,18 @@ class SMSService
             if ($response->successful() && isset($result['status']) && $result['status'] === 'success') {
                 return [
                     'status' => 'Success',
-                    'message' => 'SMS sent successfully via Mobishastra'
+                    'message' => __('SMS sent successfully via Mobishastra')
                 ];
             } else {
                 return [
                     'status' => 'Error',
-                    'message' => 'Mobishastra SMS sending failed: ' . ($result['message'] ?? 'Unknown error')
+                    'message' => __('Mobishastra SMS sending failed: ') . ($result['message'] ?? 'Unknown error')
                 ];
             }
         } catch (\Exception $e) {
             return [
                 'status' => 'Error',
-                'message' => 'Mobishastra SMS sending failed: ' . $e->getMessage()
+                'message' => __('Mobishastra SMS sending failed: ') . $e->getMessage()
             ];
         }
     }
@@ -161,18 +161,18 @@ class SMSService
             if ($response->successful() && isset($result['status']) && in_array($result['status'], ['queued', 'sent', 'delivered'])) {
                 return [
                     'status' => 'Success',
-                    'message' => 'SMS sent successfully via Twilio'
+                    'message' => __('SMS sent successfully via Twilio')
                 ];
             } else {
                 return [
                     'status' => 'Error',
-                    'message' => 'Twilio SMS sending failed: ' . ($result['message'] ?? 'Unknown error')
+                    'message' => __('Twilio SMS sending failed: ') . ($result['message'] ?? 'Unknown error')
                 ];
             }
         } catch (\Exception $e) {
             return [
                 'status' => 'Error',
-                'message' => 'Twilio SMS sending failed: ' . $e->getMessage()
+                'message' => __('Twilio SMS sending failed: ') . $e->getMessage()
             ];
         }
     }
@@ -196,18 +196,18 @@ class SMSService
             if ($response->successful() && isset($result['status']) && $result['status'] === 'success') {
                 return [
                     'status' => 'Success',
-                    'message' => 'SMS sent successfully via TextLocal'
+                    'message' => __('SMS sent successfully via TextLocal')
                 ];
             } else {
                 return [
                     'status' => 'Error',
-                    'message' => 'TextLocal SMS sending failed: ' . ($result['message'] ?? 'Unknown error')
+                    'message' => __('TextLocal SMS sending failed: ') . ($result['message'] ?? 'Unknown error')
                 ];
             }
         } catch (\Exception $e) {
             return [
                 'status' => 'Error',
-                'message' => 'TextLocal SMS sending failed: ' . $e->getMessage()
+                'message' => __('TextLocal SMS sending failed: ') . $e->getMessage()
             ];
         }
     }
@@ -242,7 +242,7 @@ class SMSService
             if ($curlError) {
                 return [
                     'status' => 'Error',
-                    'message' => 'MiMSMS cURL error: ' . $curlError
+                    'message' => __('MiMSMS cURL error: ') . $curlError
                 ];
             }
 
@@ -250,7 +250,7 @@ class SMSService
             if (!is_array($result)) {
                 return [
                     'status' => 'Success',
-                    'message' => 'SMS sent successfully via MiMSMS'
+                    'message' => __('SMS sent successfully via MiMSMS')
                 ];
             }
 
@@ -270,12 +270,12 @@ class SMSService
             $errorMessage = $result['Message'] ?? $result['message'] ?? $result['ErrorMessage'] ?? $result['error'] ?? 'Unknown error';
             return [
                 'status' => 'Error',
-                'message' => 'MiMSMS: ' . (is_string($errorMessage) ? $errorMessage : json_encode($errorMessage))
+                'message' => __('MiMSMS: ') . (is_string($errorMessage) ? $errorMessage : json_encode($errorMessage))
             ];
         } catch (\Exception $e) {
             return [
                 'status' => 'Error',
-                'message' => 'MiMSMS SMS sending failed: ' . $e->getMessage()
+                'message' => __('MiMSMS SMS sending failed: ') . $e->getMessage()
             ];
         }
     }

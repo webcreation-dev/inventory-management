@@ -91,6 +91,9 @@ class SearchController extends Controller
                 }
 
                 $url = (string) $item['url'];
+                $menuModules = app(\App\Services\MenuModuleService::class);
+                $menuKey = $menuModules->forPath(parse_url($url, PHP_URL_PATH) ?? '');
+                if ($menuKey && !$menuModules->enabled($menuKey)) return false;
                 foreach ($moduleUrlMap as $moduleKey => $patterns) {
                     foreach ($patterns as $pattern) {
                         if (str_contains($url, $pattern) && ! module_enabled($moduleKey)) {
@@ -114,7 +117,7 @@ class SearchController extends Controller
             }
 
             if (! empty($filteredItems)) {
-                $filtered[$section] = array_values($filteredItems);
+                $filtered[__($section)] = array_values($filteredItems);
             }
         }
 
@@ -939,18 +942,7 @@ class SearchController extends Controller
             ]
         ];
         
-        // Filter out items with null URLs
-        $filtered = [];
-        foreach ($suggestions as $section => $items) {
-            $filteredItems = array_filter($items, function($item) {
-                return !empty($item['url']);
-            });
-            if (!empty($filteredItems)) {
-                $filtered[$section] = array_values($filteredItems);
-            }
-        }
-        
-        return $filtered;
+        return $this->filterNavigationItems($suggestions);
         } catch (\Exception $e) {
             \Log::error('Error building suggestions: ' . $e->getMessage());
             return [];

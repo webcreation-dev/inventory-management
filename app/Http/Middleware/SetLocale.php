@@ -21,7 +21,8 @@ class SetLocale
         $availableLocales = available_ui_locales();
         
         // Get locale from session, or use default from config
-        $locale = Session::get('locale', config('app.locale'));
+        $locale = 'fr';
+        Session::put('locale', $locale);
         
         // Validate locale is in available locales
         if (! in_array($locale, $availableLocales, true)) {
@@ -33,6 +34,7 @@ class SetLocale
         
         // Set the application locale
         App::setLocale($locale);
+        $request->setLocale($locale);
         
         // Share locale with all views
         view()->share('currentLocale', $locale);

@@ -52,7 +52,7 @@ class SupplierController extends Controller
             $this->supplierService->createSupplier($request->validated());
 
             return redirect()->route('supplier.index')
-                ->with('success', 'Supplier Created Successfully');
+                ->with('success', __('Supplier Created Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('supplier.create')
                 ->with('error', $e->getMessage());
@@ -77,13 +77,13 @@ class SupplierController extends Controller
 
             if (!$supplier) {
                 return redirect()->route('supplier.index')
-                    ->with('error', 'Supplier not found');
+                    ->with('error', __('Supplier not found'));
             }
 
             return view('purchase::supplier.create', compact('supplier'));
         } catch (\Exception $e) {
             return redirect()->route('supplier.index')
-                ->with('error', 'Supplier not found');
+                ->with('error', __('Supplier not found'));
         }
     }
 
@@ -97,13 +97,13 @@ class SupplierController extends Controller
 
             if (!$supplier) {
                 return redirect()->route('supplier.index')
-                    ->with('error', 'Supplier not found');
+                    ->with('error', __('Supplier not found'));
             }
 
             $this->supplierService->updateSupplier($supplier, $request->validated());
 
             return redirect()->route('supplier.index')
-                ->with('success', 'Supplier Updated Successfully');
+                ->with('success', __('Supplier Updated Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('supplier.index')
                 ->with('error', $e->getMessage());
@@ -120,13 +120,13 @@ class SupplierController extends Controller
 
             if (!$supplier) {
                 return redirect()->route('supplier.index')
-                    ->with('error', 'Supplier not found');
+                    ->with('error', __('Supplier not found'));
             }
 
             $this->supplierService->deleteSupplier($supplier);
 
             return redirect()->route('supplier.index')
-                ->with('success', 'Supplier Deleted Successfully');
+                ->with('success', __('Supplier Deleted Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('supplier.index')
                 ->with('error', $e->getMessage());
@@ -147,7 +147,7 @@ class SupplierController extends Controller
             if (!$supplier) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Supplier not found'
+                    'message' => __('Supplier not found')
                 ], 404);
             }
 

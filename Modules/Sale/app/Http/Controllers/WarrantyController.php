@@ -65,7 +65,7 @@ class WarrantyController extends Controller
             $this->warrantyService->createWarranty($request->validated());
 
             return redirect()->route('warranty.index')
-                ->with('success', 'Warranty Created Successfully');
+                ->with('success', __('Warranty Created Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('warranty.create')
                 ->withInput()
@@ -83,7 +83,7 @@ class WarrantyController extends Controller
 
             if (!$warranty) {
                 return redirect()->route('warranty.index')
-                    ->with('error', 'Warranty not found');
+                    ->with('error', __('Warranty not found'));
             }
 
             $warranty->load(['customer', 'technician', 'user', 'outlet', 'company']);
@@ -91,7 +91,7 @@ class WarrantyController extends Controller
             return view('sale::warranty.show', compact('warranty'));
         } catch (\Exception $e) {
             return redirect()->route('warranty.index')
-                ->with('error', 'Warranty not found');
+                ->with('error', __('Warranty not found'));
         }
     }
 
@@ -105,7 +105,7 @@ class WarrantyController extends Controller
 
             if (!$warranty) {
                 return redirect()->route('warranty.index')
-                    ->with('error', 'Warranty not found');
+                    ->with('error', __('Warranty not found'));
             }
 
             $companyId = session('company.company_id');
@@ -123,7 +123,7 @@ class WarrantyController extends Controller
             return view('sale::warranty.create', compact('warranty', 'customers', 'technicians'));
         } catch (\Exception $e) {
             return redirect()->route('warranty.index')
-                ->with('error', 'Warranty not found');
+                ->with('error', __('Warranty not found'));
         }
     }
 
@@ -137,13 +137,13 @@ class WarrantyController extends Controller
 
             if (!$warranty) {
                 return redirect()->route('warranty.index')
-                    ->with('error', 'Warranty not found');
+                    ->with('error', __('Warranty not found'));
             }
 
             $this->warrantyService->updateWarranty($id, $request->validated());
 
             return redirect()->route('warranty.index')
-                ->with('success', 'Warranty Updated Successfully');
+                ->with('success', __('Warranty Updated Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('warranty.edit', $id)
                 ->withInput()
@@ -161,13 +161,13 @@ class WarrantyController extends Controller
 
             if (!$warranty) {
                 return redirect()->route('warranty.index')
-                    ->with('error', 'Warranty not found');
+                    ->with('error', __('Warranty not found'));
             }
 
             $this->warrantyService->deleteWarranty($id);
 
             return redirect()->route('warranty.index')
-                ->with('success', 'Warranty Deleted Successfully');
+                ->with('success', __('Warranty Deleted Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('warranty.index')
                 ->with('error', $e->getMessage());
@@ -182,14 +182,14 @@ class WarrantyController extends Controller
         $imeiSerial = request()->get('imei_serial');
         
         if (!$imeiSerial) {
-            return response()->json(['error' => 'IMEI/Serial number is required'], 400);
+            return response()->json(['error' => __('IMEI/Serial number is required')], 400);
         }
 
         try {
             $result = $this->warrantyService->searchProductByImeiSerial($imeiSerial);
             
             if (!$result) {
-                return response()->json(['error' => 'Product not found with this IMEI/Serial number'], 404);
+                return response()->json(['error' => __('Product not found with this IMEI/Serial number')], 404);
             }
 
             return response()->json($result);
@@ -207,12 +207,12 @@ class WarrantyController extends Controller
         $status = request()->get('status');
 
         if (!$id || !$status) {
-            return response()->json(['error' => 'ID and Status are required'], 400);
+            return response()->json(['error' => __('ID and Status are required')], 400);
         }
 
         try {
             $this->warrantyService->updateStatus($id, $status);
-            return response()->json(['success' => true, 'message' => 'Status updated successfully']);
+            return response()->json(['success' => true, 'message' => __('Status updated successfully')]);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
@@ -235,18 +235,18 @@ class WarrantyController extends Controller
         $searchValue = request()->get('search_value');
 
         if (!$searchType || !$searchValue) {
-            return response()->json(['error' => 'Search type and value are required'], 400);
+            return response()->json(['error' => __('Search type and value are required')], 400);
         }
 
         if (!in_array($searchType, ['imei', 'invoice', 'imei_history'], true)) {
-            return response()->json(['error' => 'Invalid search type'], 400);
+            return response()->json(['error' => __('Invalid search type')], 400);
         }
 
         try {
             $result = $this->warrantyService->searchForWarrantyCheck($searchType, $searchValue);
             
             if (!$result) {
-                return response()->json(['error' => 'No sale found with the provided information'], 404);
+                return response()->json(['error' => __('No sale found with the provided information')], 404);
             }
 
             return response()->json(['success' => true, 'data' => $result]);
@@ -284,7 +284,7 @@ class WarrantyController extends Controller
 
             if (! $sale) {
                 return redirect()->route('warranty.checking')
-                    ->with('error', 'Sale not found');
+                    ->with('error', __('Sale not found'));
             }
 
             $this->ensureZatcaQRCodeForSale($sale);
@@ -297,7 +297,7 @@ class WarrantyController extends Controller
                 ->header('Expires', '0');
         } catch (\Exception $e) {
             return redirect()->route('warranty.checking')
-                ->with('error', 'Invalid sale ID');
+                ->with('error', __('Invalid sale ID'));
         }
     }
 

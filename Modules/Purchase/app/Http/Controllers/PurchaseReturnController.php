@@ -89,19 +89,19 @@ class PurchaseReturnController extends Controller
             if ($request->ajax()) {
                 return response()->json([
                     'status' => 'success',
-                    'message' => 'Purchase Return created successfully',
+                    'message' => __('Purchase Return created successfully'),
                     'data' => $purchaseReturn
                 ]);
             }
             
             return redirect()->route('purchase-return.index')
-                ->with('success', 'Purchase Return created successfully');
+                ->with('success', __('Purchase Return created successfully'));
         } catch (\Illuminate\Validation\ValidationException $e) {
             // Return JSON response for AJAX requests
             if ($request->ajax()) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'Validation failed',
+                    'message' => __('Validation failed'),
                     'errors' => $e->errors()
                 ], 422);
             }
@@ -113,7 +113,7 @@ class PurchaseReturnController extends Controller
             if ($request->ajax()) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'Failed to create purchase return: ' . $e->getMessage()
+                    'message' => __('Failed to create purchase return: ') . $e->getMessage()
                 ], 500);
             }
             return redirect()->back()
@@ -131,7 +131,7 @@ class PurchaseReturnController extends Controller
         
         if (!$purchaseReturn) {
             return redirect()->route('purchase-return.index')
-                ->with('error', 'Purchase Return not found');
+                ->with('error', __('Purchase Return not found'));
         }
         
         // Load relationships (only live purchase return details)
@@ -158,7 +158,7 @@ class PurchaseReturnController extends Controller
 
             if (!$purchaseReturn) {
                 return redirect()->route('purchase-return.index')
-                    ->with('error', 'Purchase Return not found');
+                    ->with('error', __('Purchase Return not found'));
             }
 
             // Load relationships (only live purchase return details)
@@ -175,7 +175,7 @@ class PurchaseReturnController extends Controller
             return view('purchase::purchase-return.a4-invoice', compact('purchaseReturn'));
         } catch (\Exception $e) {
             return redirect()->route('purchase-return.index')
-                ->with('error', 'Purchase Return not found');
+                ->with('error', __('Purchase Return not found'));
         }
     }
 
@@ -189,7 +189,7 @@ class PurchaseReturnController extends Controller
 
             if (!$purchaseReturn) {
                 return redirect()->route('purchase-return.index')
-                    ->with('error', 'Purchase Return not found');
+                    ->with('error', __('Purchase Return not found'));
             }
 
             // Load relationships (only live purchase return details)
@@ -234,7 +234,7 @@ class PurchaseReturnController extends Controller
                 ->header('Content-Length', strlen($pdfContent));
         } catch (\Exception $e) {
             return redirect()->route('purchase-return.index')
-                ->with('error', 'Error generating PDF: ' . $e->getMessage());
+                ->with('error', __('Error generating PDF: ') . $e->getMessage());
         }
     }
 
@@ -247,7 +247,7 @@ class PurchaseReturnController extends Controller
         
         if (!$purchaseReturn) {
             return redirect()->route('purchase-return.index')
-                ->with('error', 'Purchase Return not found');
+                ->with('error', __('Purchase Return not found'));
         }
         
         // Load relationships (only live purchase return details)
@@ -298,19 +298,19 @@ class PurchaseReturnController extends Controller
             if ($request->ajax()) {
                 return response()->json([
                     'status' => 'success',
-                    'message' => 'Purchase Return updated successfully',
+                    'message' => __('Purchase Return updated successfully'),
                     'data' => $purchaseReturn
                 ]);
             }
             
             return redirect()->route('purchase-return.index')
-                ->with('success', 'Purchase Return updated successfully');
+                ->with('success', __('Purchase Return updated successfully'));
         } catch (\Illuminate\Validation\ValidationException $e) {
             // Return JSON response for AJAX requests
             if ($request->ajax()) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'Validation failed',
+                    'message' => __('Validation failed'),
                     'errors' => $e->errors()
                 ], 422);
             }
@@ -322,7 +322,7 @@ class PurchaseReturnController extends Controller
             if ($request->ajax()) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'Failed to update purchase return: ' . $e->getMessage()
+                    'message' => __('Failed to update purchase return: ') . $e->getMessage()
                 ], 500);
             }
             return redirect()->back()
@@ -340,7 +340,7 @@ class PurchaseReturnController extends Controller
             $this->purchaseReturnService->deletePurchaseReturn($id);
             
             return redirect()->route('purchase-return.index')
-                ->with('success', 'Purchase Return deleted successfully');
+                ->with('success', __('Purchase Return deleted successfully'));
         } catch (\Exception $e) {
             return redirect()->route('purchase-return.index')
                 ->with('error', $e->getMessage());
@@ -356,7 +356,7 @@ class PurchaseReturnController extends Controller
         $item = Item::find($itemId);
         
         if (!$item) {
-            return response()->json(['error' => 'Item not found'], 404);
+            return response()->json(['error' => __('Item not found')], 404);
         }
         
         return response()->json([
@@ -406,7 +406,7 @@ class PurchaseReturnController extends Controller
         $outletId = $request->outlet_id ?? session('outlet.outlet_id');
 
         if (!$itemId) {
-            return response()->json(['error' => 'Item ID required'], 400);
+            return response()->json(['error' => __('Item ID required')], 400);
         }
 
         $result = DB::table('items as p')

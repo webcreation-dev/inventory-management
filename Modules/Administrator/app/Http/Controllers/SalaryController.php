@@ -55,7 +55,7 @@ class SalaryController extends Controller
         try {
             $this->salaryService->createSalary($request);
             return redirect()->route('salary.index')
-                ->with('success', 'Salary Created Successfully');
+                ->with('success', __('Salary Created Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('salary.create')
                 ->with('error', $e->getMessage())
@@ -72,12 +72,12 @@ class SalaryController extends Controller
             $salary = $this->salaryService->getRepository()->findByEncryptedId($id);
             if (!$salary) {
                 return redirect()->route('salary.index')
-                    ->with('error', 'Salary not found');
+                    ->with('error', __('Salary not found'));
             }
             return view('administrator::salary.show', compact('salary'));
         } catch (\Exception $e) {
             return redirect()->route('salary.index')
-                ->with('error', 'Invalid salary ID');
+                ->with('error', __('Invalid salary ID'));
         }
     }
 
@@ -91,7 +91,7 @@ class SalaryController extends Controller
             return view('administrator::salary.create', $data);
         } catch (\Exception $e) {
             return redirect()->route('salary.index')
-                ->with('error', 'Invalid salary ID');
+                ->with('error', __('Invalid salary ID'));
         }
     }
 
@@ -103,7 +103,7 @@ class SalaryController extends Controller
         try {
             $this->salaryService->updateSalary($id, $request);
             return redirect()->route('salary.index', $id)
-                ->with('success', 'Salary Updated Successfully');
+                ->with('success', __('Salary Updated Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('salary.edit', $id)
                 ->with('error', $e->getMessage())
@@ -119,7 +119,7 @@ class SalaryController extends Controller
         try {
             $this->salaryService->deleteSalary($id);
             return redirect()->route('salary.index')
-                ->with('success', 'Salary Deleted Successfully');
+                ->with('success', __('Salary Deleted Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('salary.index')
                 ->with('error', $e->getMessage());

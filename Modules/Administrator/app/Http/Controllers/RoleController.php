@@ -116,10 +116,10 @@ class RoleController extends Controller
             $this->roleService->createRole($data);
             
             return redirect()->route('role.index')
-                ->with('success', 'Role created successfully');
+                ->with('success', __('Role created successfully'));
         } catch (\Exception $e) {
             return redirect()->back()
-                ->with('error', 'Something went wrong: ' . $e->getMessage())
+                ->with('error', __('Something went wrong: ') . $e->getMessage())
                 ->withInput();
         }
     }
@@ -133,11 +133,11 @@ class RoleController extends Controller
             $role = $this->roleService->getRepository()->findByEncryptedId($id);
             if (!$role) {
                 return redirect()->route('role.index')
-                    ->with('error', 'Role not found');
+                    ->with('error', __('Role not found'));
             }
         } catch (\Exception $e) {
             return redirect()->route('role.index')
-                ->with('error', 'Invalid role ID');
+                ->with('error', __('Invalid role ID'));
         }
 
         if (! $this->roleBelongsToCurrentCompany($role)) {
@@ -157,11 +157,11 @@ class RoleController extends Controller
             $role = $this->roleService->getRepository()->findByEncryptedId($id);
             if (!$role) {
                 return redirect()->route('role.index')
-                    ->with('error', 'Role not found');
+                    ->with('error', __('Role not found'));
             }
         } catch (\Exception $e) {
             return redirect()->route('role.index')
-                ->with('error', 'Invalid role ID');
+                ->with('error', __('Invalid role ID'));
         }
 
         if (! $this->roleBelongsToCurrentCompany($role)) {
@@ -191,7 +191,7 @@ class RoleController extends Controller
         }
         if (!$role) {
             return redirect()->route('role.index')
-                ->with('error', 'Role not found');
+                ->with('error', __('Role not found'));
         }
 
         if (! $this->roleBelongsToCurrentCompany($role)) {
@@ -209,10 +209,10 @@ class RoleController extends Controller
             $this->roleService->updateRole($role, $data);
 
             return redirect()->route('role.index')
-                ->with('success', 'Role updated successfully');
+                ->with('success', __('Role updated successfully'));
         } catch (\Exception $e) {
             return redirect()->back()
-                ->with('error', 'Something went wrong: ' . $e->getMessage())
+                ->with('error', __('Something went wrong: ') . $e->getMessage())
                 ->withInput();
         }
     }
@@ -226,11 +226,11 @@ class RoleController extends Controller
             $role = $this->roleService->getRepository()->findByEncryptedId($id);
             if (!$role) {
                 return redirect()->route('role.index')
-                    ->with('error', 'Role not found');
+                    ->with('error', __('Role not found'));
             }
         } catch (\Exception $e) {
             return redirect()->route('role.index')
-                ->with('error', 'Invalid role ID');
+                ->with('error', __('Invalid role ID'));
         }
 
         if (! $this->roleBelongsToCurrentCompany($role)) {
@@ -247,10 +247,10 @@ class RoleController extends Controller
             $this->roleService->deleteRole($role);
             
             return redirect()->route('role.index')
-                ->with('success', 'Role deleted successfully');
+                ->with('success', __('Role deleted successfully'));
         } catch (\Exception $e) {
             return redirect()->route('role.index')
-                ->with('error', 'Something went wrong: ' . $e->getMessage());
+                ->with('error', __('Something went wrong: ') . $e->getMessage());
         }
     }
 }

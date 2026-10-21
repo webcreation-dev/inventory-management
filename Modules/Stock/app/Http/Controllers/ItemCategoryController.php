@@ -63,7 +63,7 @@ class ItemCategoryController extends Controller
             }
             $this->itemCategoryService->createItemCategory($data);
             return redirect()->route('item-category.index')
-                ->with('success', 'Item Category created successfully.');
+                ->with('success', __('Item Category created successfully.'));
         } catch (\Exception $e) {
             return redirect()->route('item-category.create')
                 ->with('error', $e->getMessage())
@@ -89,7 +89,7 @@ class ItemCategoryController extends Controller
             
             if (!$itemCategory) {
                 return redirect()->route('item-category.index')
-                    ->with('error', 'Item Category not found');
+                    ->with('error', __('Item Category not found'));
             }
 
             return view('stock::item-category.create', compact('itemCategory'));
@@ -111,7 +111,7 @@ class ItemCategoryController extends Controller
             }
             $this->itemCategoryService->updateItemCategory($id, $data);
             return redirect()->route('item-category.index')
-                ->with('success', 'Item Category updated successfully.');
+                ->with('success', __('Item Category updated successfully.'));
         } catch (\Exception $e) {
             return redirect()->route('item-category.edit', $id)
                 ->with('error', $e->getMessage())
@@ -127,7 +127,7 @@ class ItemCategoryController extends Controller
         try {
             $this->itemCategoryService->deleteItemCategory($id);
             return redirect()->route('item-category.index')
-                ->with('success', 'Item Category deleted successfully.');
+                ->with('success', __('Item Category deleted successfully.'));
         } catch (\Exception $e) {
             return redirect()->route('item-category.index')
                 ->with('error', $e->getMessage());
@@ -141,7 +141,7 @@ class ItemCategoryController extends Controller
             return view('stock::item-category.sort-category', compact('categories'));
         } catch (\Exception $e) {
             return redirect()->route('item-category.index')
-                ->with('error', 'Error loading sort page: ' . $e->getMessage());
+                ->with('error', __('Error loading sort page: ') . $e->getMessage());
         }
     }
 
@@ -155,7 +155,7 @@ class ItemCategoryController extends Controller
             $this->itemCategoryService->updateSortOrder($sortedIds);
             return response()->json([
                 'status' => 'success',
-                'message' => 'Category order updated successfully.'
+                'message' => __('Category order updated successfully.')
             ]);
         } catch (\Exception $e) {
             return response()->json([

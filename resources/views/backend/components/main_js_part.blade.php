@@ -19,3 +19,5 @@
 <script src="{{ asset('public/backend_assets/vendor/libs/notyf/notyf.js') }}"></script>
 <script src="{{ asset('public/backend_assets/vendor/libs/sweetalert2/sweetalert2.js')}}"></script>
 <script src="{{ asset('public/backend_assets/js/extended-ui-sweetalert2.js')}}"></script>
+
+<script src="{{ asset('public/backend_assets/js/client-fr.js') }}?v={{ filemtime(public_path('backend_assets/js/client-fr.js')) }}"></script>

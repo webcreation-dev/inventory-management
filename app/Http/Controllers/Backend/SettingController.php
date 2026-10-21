@@ -152,19 +152,19 @@ class SettingController extends Controller
             session(['company' => $sessionCompany]);
             return response()->json([
                 'status' => 'success',
-                'message' => 'Business setting saved successfully'
+                'message' => __('Business setting saved successfully')
             ], 201);
 
         } catch (ValidationException $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Validation failed',
+                'message' => __('Validation failed'),
                 'errors' => $e->errors()
             ], 422);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to create Brand',
+                'message' => __('Failed to create Brand'),
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -236,19 +236,19 @@ class SettingController extends Controller
             
             return response()->json([
                 'status' => 'success',
-                'message' => 'POS setting saved successfully'
+                'message' => __('POS setting saved successfully')
             ], 201);
 
         } catch (ValidationException $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Validation failed',
+                'message' => __('Validation failed'),
                 'errors' => $e->errors()
             ], 422);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to save POS settings',
+                'message' => __('Failed to save POS settings'),
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -332,19 +332,19 @@ class SettingController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'Tax setting saved successfully'
+                'message' => __('Tax setting saved successfully')
             ], 201);
 
         } catch (ValidationException $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Validation failed',
+                'message' => __('Validation failed'),
                 'errors' => $e->errors()
             ], 422);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to save tax settings',
+                'message' => __('Failed to save tax settings'),
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -415,19 +415,19 @@ class SettingController extends Controller
             
             return response()->json([
                 'status' => 'success',
-                'message' => 'Email setting saved successfully'
+                'message' => __('Email setting saved successfully')
             ], 201);
 
         } catch (ValidationException $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Validation failed',
+                'message' => __('Validation failed'),
                 'errors' => $e->errors()
             ], 422);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to save email settings',
+                'message' => __('Failed to save email settings'),
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -523,19 +523,19 @@ class SettingController extends Controller
             
             return response()->json([
                 'status' => 'success',
-                'message' => 'SMS setting saved successfully'
+                'message' => __('SMS setting saved successfully')
             ], 201);
 
         } catch (ValidationException $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Validation failed',
+                'message' => __('Validation failed'),
                 'errors' => $e->errors()
             ], 422);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to save SMS settings',
+                'message' => __('Failed to save SMS settings'),
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -562,19 +562,19 @@ class SettingController extends Controller
             $company->save();
             return response()->json([
                 'status' => 'success',
-                'message' => 'WhatsApp setting saved successfully'
+                'message' => __('WhatsApp setting saved successfully')
             ], 201);
 
         } catch (ValidationException $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Validation failed',
+                'message' => __('Validation failed'),
                 'errors' => $e->errors()
             ], 422);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to save WhatsApp settings',
+                'message' => __('Failed to save WhatsApp settings'),
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -625,19 +625,19 @@ class SettingController extends Controller
             
             return response()->json([
                 'status' => 'success',
-                'message' => 'Payment setting saved successfully'
+                'message' => __('Payment setting saved successfully')
             ], 201);
 
         } catch (ValidationException $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Validation failed',
+                'message' => __('Validation failed'),
                 'errors' => $e->errors()
             ], 422);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to save payment settings',
+                'message' => __('Failed to save payment settings'),
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -749,19 +749,19 @@ class SettingController extends Controller
             $company->save();
             return response()->json([
                 'status' => 'success',
-                'message' => 'White label settings saved successfully'
+                'message' => __('White label settings saved successfully')
             ], 201);
 
         } catch (ValidationException $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Validation failed',
+                'message' => __('Validation failed'),
                 'errors' => $e->errors()
             ], 422);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to save white label settings',
+                'message' => __('Failed to save white label settings'),
                 'error' => $e->getMessage()
             ], 500);
         }

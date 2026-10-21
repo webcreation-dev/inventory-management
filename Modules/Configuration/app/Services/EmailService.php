@@ -33,7 +33,7 @@ class EmailService
             if (!$company) {
                 return [
                     'status' => 'Error',
-                    'message' => 'Company not found'
+                    'message' => __('Company not found')
                 ];
             }
 
@@ -149,7 +149,7 @@ class EmailService
 
             return [
                 'status' => 'Success',
-                'message' => 'Email sent successfully via SMTP'
+                'message' => __('Email sent successfully via SMTP')
             ];
         } catch (\Exception $e) {
             Log::error('SMTP email failed', ['exception' => $e->getMessage(), 'trace' => $e->getTraceAsString()]);
@@ -212,7 +212,7 @@ class EmailService
                 Log::info('Brevo API email sent', ['messageId' => $response->json()['messageId'] ?? '']);
                 return [
                     'status' => 'Success',
-                    'message' => 'Email sent successfully via Brevo API',
+                    'message' => __('Email sent successfully via Brevo API'),
                     'messageId' => $response->json()['messageId'] ?? ''
                 ];
             }
@@ -220,7 +220,7 @@ class EmailService
             Log::error('Brevo API send failed', ['response' => $response->body()]);
             return [
                 'status' => 'Error',
-                'message' => 'Failed to send email via Brevo API',
+                'message' => __('Failed to send email via Brevo API'),
                 'details' => $response->json()
             ];
         } catch (\Exception $e) {

@@ -55,7 +55,7 @@ class AttendanceController extends Controller
             $attendanceData = $request->all();
             $this->attendanceService->createAttendance($attendanceData);
             return redirect()->route('attendance.index')
-                ->with('success', 'Attendance Created Successfully');
+                ->with('success', __('Attendance Created Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('attendance.create')
                 ->with('error', $e->getMessage());
@@ -88,18 +88,18 @@ class AttendanceController extends Controller
             $attendance = $this->attendanceService->getRepository()->findByEncryptedId($id);
             if (!$attendance) {
                 return redirect()->route('attendance.index')
-                    ->with('error', 'Attendance not found');
+                    ->with('error', __('Attendance not found'));
             }
         } catch (\Exception $e) {
             return redirect()->route('attendance.index')
-                ->with('error', 'Invalid attendance ID');
+                ->with('error', __('Invalid attendance ID'));
         }
 
         try {
             $attendanceData = $request->all();
             $this->attendanceService->updateAttendance($id, $attendanceData);
             return redirect()->route('attendance.edit', $id)
-                ->with('success', 'Attendance Updated Successfully');
+                ->with('success', __('Attendance Updated Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('attendance.edit', $id)
                 ->with('error', $e->getMessage());
@@ -114,7 +114,7 @@ class AttendanceController extends Controller
         try {
             $this->attendanceService->deleteAttendance($id);
             return redirect()->route('attendance.index')
-                ->with('success', 'Attendance Deleted Successfully');
+                ->with('success', __('Attendance Deleted Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('attendance.index')
                 ->with('error', $e->getMessage());

@@ -526,7 +526,7 @@ class DashboardController extends Controller
     public function getUserSales(Request $request)
     {
         if (!$request->ajax()) {
-            return response()->json(['error' => 'Invalid request'], 400);
+            return response()->json(['error' => __('Invalid request')], 400);
         }
 
         $userId = Auth::id();

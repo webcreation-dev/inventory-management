@@ -8,6 +8,14 @@ use App\Http\Controllers\UpdateController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 
+// Public UI dictionary only; do not expose the resources directory in Nginx.
+Route::get('resources/lang/fr.json', function () {
+    return response()->file(resource_path('lang/fr.json'), [
+        'Content-Type' => 'application/json; charset=UTF-8',
+        'Cache-Control' => 'no-cache',
+    ]);
+});
+
 /*
 |--------------------------------------------------------------------------
 | LP favicon/logo image (when LP=BD) - served as PNG so it always displays

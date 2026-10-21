@@ -62,7 +62,7 @@ class PrintController extends Controller
             if ($decoded === false) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Invalid base64 raw payload.',
+                    'message' => __('Invalid base64 raw payload.'),
                     'error_code' => 'invalid_base64',
                 ], 422);
             }
@@ -110,7 +110,7 @@ class PrintController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Print log updated.',
+            'message' => __('Print log updated.'),
         ]);
     }
 

@@ -78,19 +78,19 @@ class SaleReturnController extends Controller
             if ($request->ajax()) {
                 return response()->json([
                     'status' => 'success',
-                    'message' => 'Sale return created successfully',
+                    'message' => __('Sale return created successfully'),
                     'data' => $saleReturn
                 ]);
             }
             
             return redirect()->route('sale-return.index')
-                ->with('success', 'Sale return created successfully');
+                ->with('success', __('Sale return created successfully'));
         } catch (\Illuminate\Validation\ValidationException $e) {
             // Return JSON response for AJAX requests
             if ($request->ajax()) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'Validation failed',
+                    'message' => __('Validation failed'),
                     'errors' => $e->errors()
                 ], 422);
             }
@@ -102,7 +102,7 @@ class SaleReturnController extends Controller
             if ($request->ajax()) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'Failed to create sale return: ' . $e->getMessage()
+                    'message' => __('Failed to create sale return: ') . $e->getMessage()
                 ], 500);
             }
             return redirect()->back()
@@ -120,7 +120,7 @@ class SaleReturnController extends Controller
         
         if (!$saleReturn) {
             return redirect()->route('sale-return.index')
-                ->with('error', 'Sale return not found');
+                ->with('error', __('Sale return not found'));
         }
         
         // Load relationships (only live sale return details)
@@ -149,7 +149,7 @@ class SaleReturnController extends Controller
 
             if (!$saleReturn) {
                 return redirect()->route('sale-return.index')
-                    ->with('error', 'Sale return not found');
+                    ->with('error', __('Sale return not found'));
             }
 
             // Load relationships (only live sale return details)
@@ -168,7 +168,7 @@ class SaleReturnController extends Controller
             return view('sale::sale-return.a4-invoice', compact('saleReturn'));
         } catch (\Exception $e) {
             return redirect()->route('sale-return.index')
-                ->with('error', 'Sale return not found');
+                ->with('error', __('Sale return not found'));
         }
     }
 
@@ -182,7 +182,7 @@ class SaleReturnController extends Controller
 
             if (!$saleReturn) {
                 return redirect()->route('sale-return.index')
-                    ->with('error', 'Sale return not found');
+                    ->with('error', __('Sale return not found'));
             }
 
             // Load relationships (only live sale return details)
@@ -229,7 +229,7 @@ class SaleReturnController extends Controller
                 ->header('Content-Length', strlen($pdfContent));
         } catch (\Exception $e) {
             return redirect()->route('sale-return.index')
-                ->with('error', 'Error generating PDF: ' . $e->getMessage());
+                ->with('error', __('Error generating PDF: ') . $e->getMessage());
         }
     }
 
@@ -242,7 +242,7 @@ class SaleReturnController extends Controller
         
         if (!$saleReturn) {
             return redirect()->route('sale-return.index')
-                ->with('error', 'Sale return not found');
+                ->with('error', __('Sale return not found'));
         }
         
         // Load relationships (only live sale return details)
@@ -281,19 +281,19 @@ class SaleReturnController extends Controller
             if ($request->ajax()) {
                 return response()->json([
                     'status' => 'success',
-                    'message' => 'Sale return updated successfully',
+                    'message' => __('Sale return updated successfully'),
                     'data' => $saleReturn
                 ]);
             }
             
             return redirect()->route('sale-return.index')
-                ->with('success', 'Sale return updated successfully');
+                ->with('success', __('Sale return updated successfully'));
         } catch (\Illuminate\Validation\ValidationException $e) {
             // Return JSON response for AJAX requests
             if ($request->ajax()) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'Validation failed',
+                    'message' => __('Validation failed'),
                     'errors' => $e->errors()
                 ], 422);
             }
@@ -305,7 +305,7 @@ class SaleReturnController extends Controller
             if ($request->ajax()) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'Failed to update sale return: ' . $e->getMessage()
+                    'message' => __('Failed to update sale return: ') . $e->getMessage()
                 ], 500);
             }
             return redirect()->back()
@@ -323,7 +323,7 @@ class SaleReturnController extends Controller
             $this->saleReturnService->deleteSaleReturn($id);
             
             return redirect()->route('sale-return.index')
-                ->with('success', 'Sale return deleted successfully');
+                ->with('success', __('Sale return deleted successfully'));
         } catch (\Exception $e) {
             return redirect()->route('sale-return.index')
                 ->with('error', $e->getMessage());

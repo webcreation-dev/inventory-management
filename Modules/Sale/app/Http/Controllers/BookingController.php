@@ -173,7 +173,7 @@ class BookingController extends Controller
         
         return response()->json([
             'success' => true,
-            'message' => 'Booking created successfully',
+            'message' => __('Booking created successfully'),
             'booking' => $booking->load(['customer', 'serviceSeller', 'outlet'])
         ]);
     }
@@ -234,7 +234,7 @@ class BookingController extends Controller
         
         return response()->json([
             'success' => true,
-            'message' => 'Booking updated successfully',
+            'message' => __('Booking updated successfully'),
             'booking' => $booking->load(['customer', 'serviceSeller', 'outlet'])
         ]);
     }
@@ -255,7 +255,7 @@ class BookingController extends Controller
         
         return response()->json([
             'success' => true,
-            'message' => 'Booking deleted successfully'
+            'message' => __('Booking deleted successfully')
         ]);
     }
 

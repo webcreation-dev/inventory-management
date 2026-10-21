@@ -59,7 +59,7 @@ class BrandController extends Controller
         try {
             $this->brandService->createBrand($request->validated());
             return redirect()->route('brand.index')
-                ->with('success', 'Brand created successfully.');
+                ->with('success', __('Brand created successfully.'));
         } catch (\Exception $e) {
             return redirect()->route('brand.create')
                 ->with('error', $e->getMessage())
@@ -85,7 +85,7 @@ class BrandController extends Controller
             
             if (!$brand) {
                 return redirect()->route('brand.index')
-                    ->with('error', 'Brand not found');
+                    ->with('error', __('Brand not found'));
             }
 
             return view('stock::brand.create', compact('brand'));
@@ -103,7 +103,7 @@ class BrandController extends Controller
         try {
             $this->brandService->updateBrand($id, $request->validated());
             return redirect()->route('brand.index')
-                ->with('success', 'Brand updated successfully.');
+                ->with('success', __('Brand updated successfully.'));
         } catch (\Exception $e) {
             return redirect()->route('brand.edit', $id)
                 ->with('error', $e->getMessage())
@@ -119,7 +119,7 @@ class BrandController extends Controller
         try {
             $this->brandService->deleteBrand($id);
             return redirect()->route('brand.index')
-                ->with('success', 'Brand deleted successfully.');
+                ->with('success', __('Brand deleted successfully.'));
         } catch (\Exception $e) {
             return redirect()->route('brand.index')
                 ->with('error', $e->getMessage());

@@ -52,7 +52,7 @@ class SupplierPaymentController extends Controller
             $this->supplierPaymentService->createSupplierPayment($request->validated());
 
             return redirect()->route('supplier-payment.index')
-                ->with('success', 'Supplier Payment Created Successfully');
+                ->with('success', __('Supplier Payment Created Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('supplier-payment.create')
                 ->with('error', $e->getMessage());
@@ -77,14 +77,14 @@ class SupplierPaymentController extends Controller
 
             if (!$supplierPayment) {
                 return redirect()->route('supplier-payment.index')
-                    ->with('error', 'Supplier Payment not found');
+                    ->with('error', __('Supplier Payment not found'));
             }
 
             $data = $this->supplierPaymentService->getFormData($supplierPayment);
             return view('purchase::supplier-payment.create', $data);
         } catch (\Exception $e) {
             return redirect()->route('supplier-payment.index')
-                ->with('error', 'Supplier Payment not found');
+                ->with('error', __('Supplier Payment not found'));
         }
     }
 
@@ -98,13 +98,13 @@ class SupplierPaymentController extends Controller
 
             if (!$supplierPayment) {
                 return redirect()->route('supplier-payment.index')
-                    ->with('error', 'Supplier Payment not found');
+                    ->with('error', __('Supplier Payment not found'));
             }
 
             $this->supplierPaymentService->updateSupplierPayment($supplierPayment, $request->validated());
 
             return redirect()->route('supplier-payment.index')
-                ->with('success', 'Supplier Payment Updated Successfully');
+                ->with('success', __('Supplier Payment Updated Successfully'));
         } catch (\Exception $e) {
             $decryptedId = decrypt($id);
             return redirect()->route('supplier-payment.edit', encrypt($decryptedId))
@@ -122,13 +122,13 @@ class SupplierPaymentController extends Controller
 
             if (!$supplierPayment) {
                 return redirect()->route('supplier-payment.index')
-                    ->with('error', 'Supplier Payment not found');
+                    ->with('error', __('Supplier Payment not found'));
             }
 
             $this->supplierPaymentService->deleteSupplierPayment($supplierPayment);
 
             return redirect()->route('supplier-payment.index')
-                ->with('success', 'Supplier Payment Deleted Successfully');
+                ->with('success', __('Supplier Payment Deleted Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('supplier-payment.index')
                 ->with('error', $e->getMessage());

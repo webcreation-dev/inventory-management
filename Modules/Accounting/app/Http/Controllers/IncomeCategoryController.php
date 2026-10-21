@@ -55,7 +55,7 @@ class IncomeCategoryController extends Controller
 
                 return response()->json([
                     'status' => 'success',
-                    'message' => 'Income Category Created Successfully',
+                    'message' => __('Income Category Created Successfully'),
                     'data' => [
                         'category' => $category,
                         'categories' => $categories,
@@ -64,7 +64,7 @@ class IncomeCategoryController extends Controller
             }
 
             return redirect()->route('income-category.index')
-                ->with('success', 'Income Category Created Successfully');
+                ->with('success', __('Income Category Created Successfully'));
         } catch (\Exception $e) {
             if ($request->ajax()) {
                 return response()->json([
@@ -96,7 +96,7 @@ class IncomeCategoryController extends Controller
             return view('accounting::income-category.create', compact('income_category'));
         } catch (\Exception $e) {
             return redirect()->route('income-category.index')
-                ->with('error', 'Income Category not found');
+                ->with('error', __('Income Category not found'));
         }
     }
 
@@ -108,7 +108,7 @@ class IncomeCategoryController extends Controller
         try {
             $this->incomeCategoryService->update($id, $request->validated());
             return redirect()->route('income-category.index')
-                ->with('success', 'Income Category Updated Successfully');
+                ->with('success', __('Income Category Updated Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('income-category.index')
                 ->with('error', $e->getMessage());
@@ -123,7 +123,7 @@ class IncomeCategoryController extends Controller
         try {
             $this->incomeCategoryService->delete($id);
             return redirect()->route('income-category.index')
-                ->with('success', 'Income Category Deleted Successfully');
+                ->with('success', __('Income Category Deleted Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('income-category.index')
                 ->with('error', $e->getMessage());

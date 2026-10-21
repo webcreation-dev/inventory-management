@@ -59,7 +59,7 @@ class DeliveryPartnerController extends Controller
         try {
             $this->deliveryPartnerService->createDeliveryPartner($request->validated());
             return redirect()->route('delivery-partner.index')
-                ->with('success', 'Delivery Partner Created Successfully');
+                ->with('success', __('Delivery Partner Created Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('delivery-partner.create')
                 ->with('error', $e->getMessage())
@@ -85,7 +85,7 @@ class DeliveryPartnerController extends Controller
             
             if (!$partner) {
                 return redirect()->route('delivery-partner.index')
-                    ->with('error', 'Delivery Partner not found');
+                    ->with('error', __('Delivery Partner not found'));
             }
 
             return view('configuration::delivery-partner.create', compact('partner'));
@@ -103,7 +103,7 @@ class DeliveryPartnerController extends Controller
         try {
             $this->deliveryPartnerService->updateDeliveryPartner($id, $request->validated());
             return redirect()->route('delivery-partner.index')
-                ->with('success', 'Delivery Partner Updated Successfully');
+                ->with('success', __('Delivery Partner Updated Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('delivery-partner.edit', $id)
                 ->with('error', $e->getMessage())
@@ -119,7 +119,7 @@ class DeliveryPartnerController extends Controller
         try {
             $this->deliveryPartnerService->deleteDeliveryPartner($id);
             return redirect()->route('delivery-partner.index')
-                ->with('success', 'Delivery Partner Deleted Successfully');
+                ->with('success', __('Delivery Partner Deleted Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('delivery-partner.index')
                 ->with('error', $e->getMessage());

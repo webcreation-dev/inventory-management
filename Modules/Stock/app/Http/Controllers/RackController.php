@@ -59,7 +59,7 @@ class RackController extends Controller
         try {
             $this->rackService->createRack($request->validated());
             return redirect()->route('rack.index')
-                ->with('success', 'Rack Created Successfully');
+                ->with('success', __('Rack Created Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('rack.create')
                 ->with('error', $e->getMessage())
@@ -84,7 +84,7 @@ class RackController extends Controller
             $rack = $this->rackService->getRackByEncryptedId($id);
             if (!$rack) {
                 return redirect()->route('rack.index')
-                    ->with('error', 'Rack not found');
+                    ->with('error', __('Rack not found'));
             }
             return view('stock::rack.create', compact('rack'));
         } catch (\Exception $e) {
@@ -101,7 +101,7 @@ class RackController extends Controller
         try {
             $this->rackService->updateRack($id, $request->validated());
             return redirect()->route('rack.index')
-                ->with('success', 'Rack updated successfully.');
+                ->with('success', __('Rack updated successfully.'));
         } catch (\Exception $e) {
             return redirect()->route('rack.edit', $id)
                 ->with('error', $e->getMessage())
@@ -117,7 +117,7 @@ class RackController extends Controller
         try {
             $this->rackService->deleteRack($id);
             return redirect()->route('rack.index')
-                ->with('success', 'Rack deleted successfully.');
+                ->with('success', __('Rack deleted successfully.'));
         } catch (\Exception $e) {
             return redirect()->route('rack.index')
                 ->with('error', $e->getMessage());

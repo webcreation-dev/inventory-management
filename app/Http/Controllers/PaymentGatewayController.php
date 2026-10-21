@@ -52,7 +52,7 @@ class PaymentGatewayController extends Controller
                 if (!$paymentMethod) {
                     return response()->json([
                         'status' => 'error',
-                        'message' => 'Payment method not found'
+                        'message' => __('Payment method not found')
                     ], 404);
                 }
             }
@@ -161,7 +161,7 @@ class PaymentGatewayController extends Controller
 
             return response()->json([
                 'status' => 'error',
-                'message' => 'Payment verification failed'
+                'message' => __('Payment verification failed')
             ], 500);
         }
     }
@@ -256,7 +256,7 @@ class PaymentGatewayController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'Refund processed successfully',
+                'message' => __('Refund processed successfully'),
                 'refunded' => $success,
             ]);
 
@@ -273,7 +273,7 @@ class PaymentGatewayController extends Controller
 
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to process refund'
+                'message' => __('Failed to process refund')
             ], 500);
         }
     }
@@ -296,7 +296,7 @@ class PaymentGatewayController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to get available gateways'
+                'message' => __('Failed to get available gateways')
             ], 500);
         }
     }
@@ -401,7 +401,7 @@ class PaymentGatewayController extends Controller
 
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to get gateway configuration: ' . $e->getMessage()
+                'message' => __('Failed to get gateway configuration: ') . $e->getMessage()
             ], 500);
         }
     }

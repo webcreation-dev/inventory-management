@@ -59,7 +59,7 @@ class VariationAttributeController extends Controller
         try {
             $this->variationService->createVariation($request->validated());
             return redirect()->route('variation-attribute.index')
-                ->with('success', 'Variation Attribute Created Successfully');
+                ->with('success', __('Variation Attribute Created Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('variation-attribute.create')
                 ->with('error', $e->getMessage())
@@ -85,7 +85,7 @@ class VariationAttributeController extends Controller
             
             if (!$variation_attribute) {
                 return redirect()->route('variation-attribute.index')
-                    ->with('error', 'Variation Attribute not found');
+                    ->with('error', __('Variation Attribute not found'));
             }
 
             return view('stock::variation.create', compact('variation_attribute'));
@@ -103,7 +103,7 @@ class VariationAttributeController extends Controller
         try {
             $this->variationService->updateVariation($id, $request->validated());
             return redirect()->route('variation-attribute.index')
-                ->with('success', 'Variation Attribute Updated Successfully');
+                ->with('success', __('Variation Attribute Updated Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('variation-attribute.edit', $id)
                 ->with('error', $e->getMessage())
@@ -119,7 +119,7 @@ class VariationAttributeController extends Controller
         try {
             $this->variationService->deleteVariation($id);
             return redirect()->route('variation-attribute.index')
-                ->with('success', 'Variation Attribute deleted successfully.');
+                ->with('success', __('Variation Attribute deleted successfully.'));
         } catch (\Exception $e) {
             return redirect()->route('variation-attribute.index')
                 ->with('error', $e->getMessage());

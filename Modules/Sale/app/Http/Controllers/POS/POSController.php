@@ -553,7 +553,7 @@ class POSController extends Controller
             if (!$product) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'Product not found or not a Variation_Product'
+                    'message' => __('Product not found or not a Variation_Product')
                 ], 404);
             }
 
@@ -635,7 +635,7 @@ class POSController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to fetch variations: ' . $e->getMessage()
+                'message' => __('Failed to fetch variations: ') . $e->getMessage()
             ], 500);
         }
     }
@@ -860,7 +860,7 @@ class POSController extends Controller
                     if ($existingSale) {
                         return response()->json([
                             'status' => 'success',
-                            'message' => 'Sale already synced',
+                            'message' => __('Sale already synced'),
                             'sale_id' => $existingSale->id,
                             'sale_no' => $existingSale->sale_no,
                             'encrypted_id' => $existingSale->encrypted_id,
@@ -955,7 +955,7 @@ class POSController extends Controller
                             if ($dueAmount > $availableCredit) {
                                 return response()->json([
                                     'status' => 'error',
-                                    'message' => 'Customer credit limit exceeded. Credit limit: ' . number_format($creditLimit, 2) . ', Current due: ' . number_format($currentDue, 2) . ', Available credit: ' . number_format($availableCredit, 2) . '. This sale would add ' . number_format($dueAmount, 2) . ' as due.',
+                                    'message' => __('Customer credit limit exceeded. Credit limit: ') . number_format($creditLimit, 2) . ', Current due: ' . number_format($currentDue, 2) . ', Available credit: ' . number_format($availableCredit, 2) . '. This sale would add ' . number_format($dueAmount, 2) . ' as due.',
                                 ], 422);
                             }
                         }
@@ -1453,7 +1453,7 @@ class POSController extends Controller
 
                 return response()->json([
                     'status' => 'success',
-                    'message' => 'Sale saved successfully',
+                    'message' => __('Sale saved successfully'),
                     'sale_id' => $sale->id,
                     'sale_no' => $sale->sale_no,
                     'encrypted_id' => $sale->encrypted_id,
@@ -1471,7 +1471,7 @@ class POSController extends Controller
         } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Validation failed',
+                'message' => __('Validation failed'),
                 'errors' => $e->errors()
             ], 422);
         } catch (\Mdiqbal\LaravelPayments\Exceptions\PaymentException $e) {
@@ -1711,7 +1711,7 @@ class POSController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to generate hold number: ' . $e->getMessage()
+                'message' => __('Failed to generate hold number: ') . $e->getMessage()
             ], 500);
         }
     }
@@ -2013,7 +2013,7 @@ class POSController extends Controller
 
                 return response()->json([
                     'status' => 'success',
-                    'message' => 'Hold saved successfully',
+                    'message' => __('Hold saved successfully'),
                     'hold_id' => $hold->id,
                     'hold_no' => $hold->hold_no,
                 ]);
@@ -2021,13 +2021,13 @@ class POSController extends Controller
         } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Validation failed',
+                'message' => __('Validation failed'),
                 'errors' => $e->errors()
             ], 422);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to save hold: ' . $e->getMessage()
+                'message' => __('Failed to save hold: ') . $e->getMessage()
             ], 500);
         }
     }
@@ -2132,7 +2132,7 @@ class POSController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to fetch holds: ' . $e->getMessage()
+                'message' => __('Failed to fetch holds: ') . $e->getMessage()
             ], 500);
         }
     }
@@ -2165,7 +2165,7 @@ class POSController extends Controller
             if (!$hold) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'Hold not found'
+                    'message' => __('Hold not found')
                 ], 404);
             }
             // One HoldDetail per IMEI/serial is saved; group into one cart line with all serials
@@ -2206,7 +2206,7 @@ class POSController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to fetch hold: ' . $e->getMessage()
+                'message' => __('Failed to fetch hold: ') . $e->getMessage()
             ], 500);
         }
     }
@@ -2235,7 +2235,7 @@ class POSController extends Controller
                 if (!$hold) {
                     return response()->json([
                         'status' => 'error',
-                        'message' => 'Hold not found'
+                        'message' => __('Hold not found')
                     ], 404);
                 }
                 
@@ -2246,14 +2246,14 @@ class POSController extends Controller
                 if ($holdData['status'] !== 'success') {
                     return response()->json([
                         'status' => 'error',
-                        'message' => 'Failed to fetch hold data'
+                        'message' => __('Failed to fetch hold data')
                     ], 500);
                 }
                 
                 // Return cart items data
                 return response()->json([
                     'status' => 'success',
-                    'message' => 'Hold data retrieved successfully',
+                    'message' => __('Hold data retrieved successfully'),
                     'cart_items' => $holdData['data']['items'],
                     'customer_id' => $holdData['data']['hold']['customer_id'],
                     'employee_id' => $holdData['data']['hold']['employee_id'],
@@ -2268,7 +2268,7 @@ class POSController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to convert hold: ' . $e->getMessage()
+                'message' => __('Failed to convert hold: ') . $e->getMessage()
             ], 500);
         }
     }
@@ -2295,7 +2295,7 @@ class POSController extends Controller
                 if (!$hold) {
                     return response()->json([
                         'status' => 'error',
-                        'message' => 'Hold not found'
+                        'message' => __('Hold not found')
                     ], 404);
                 }
                 
@@ -2308,13 +2308,13 @@ class POSController extends Controller
                 
                 return response()->json([
                     'status' => 'success',
-                    'message' => 'Hold deleted successfully'
+                    'message' => __('Hold deleted successfully')
                 ]);
             });
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to delete hold: ' . $e->getMessage()
+                'message' => __('Failed to delete hold: ') . $e->getMessage()
             ], 500);
         }
     }
@@ -2339,7 +2339,7 @@ class POSController extends Controller
             if (!$lastSale) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'No sale found'
+                    'message' => __('No sale found')
                 ], 404);
             }
             
@@ -2354,7 +2354,7 @@ class POSController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to get last sale: ' . $e->getMessage()
+                'message' => __('Failed to get last sale: ') . $e->getMessage()
             ], 500);
         }
     }
@@ -2448,7 +2448,7 @@ class POSController extends Controller
             if (!$token) {
                 return view('sale::pos.payment.paypal-return', [
                     'success' => false,
-                    'message' => 'Payment token not found'
+                    'message' => __('Payment token not found')
                 ]);
             }
 
@@ -2463,7 +2463,7 @@ class POSController extends Controller
                     if ($response->isSuccess()) {
                         return view('sale::pos.payment.paypal-return', [
                             'success' => true,
-                            'message' => 'Payment completed successfully',
+                            'message' => __('Payment completed successfully'),
                             'transaction_id' => $response->getTransactionId() ?? $token,
                             'amount' => $amount,
                             'payment_method_id' => $paymentMethodId
@@ -2471,7 +2471,7 @@ class POSController extends Controller
                     } else {
                         return view('sale::pos.payment.paypal-return', [
                             'success' => false,
-                            'message' => 'Payment capture failed: ' . ($response->getMessage() ?? 'Unknown error'),
+                            'message' => __('Payment capture failed: ') . ($response->getMessage() ?? 'Unknown error'),
                             'transaction_id' => $response->getTransactionId() ?? $token
                         ]);
                     }
@@ -2497,7 +2497,7 @@ class POSController extends Controller
                     } catch (\Exception $retrieveError) {
                         return view('sale::pos.payment.paypal-return', [
                             'success' => false,
-                            'message' => 'Payment processing failed: ' . $captureError->getMessage(),
+                            'message' => __('Payment processing failed: ') . $captureError->getMessage(),
                             'transaction_id' => $token
                         ]);
                     }
@@ -2524,7 +2524,7 @@ class POSController extends Controller
 
             return view('sale::pos.payment.paypal-return', [
                 'success' => false,
-                'message' => 'An error occurred: ' . $e->getMessage(),
+                'message' => __('An error occurred: ') . $e->getMessage(),
                 'transaction_id' => $request->query('token')
             ]);
         }
@@ -2541,7 +2541,7 @@ class POSController extends Controller
         $paymentMethodId = $request->query('payment_method_id');
         
         return view('sale::pos.payment.paypal-cancel', [
-            'message' => 'Payment was cancelled',
+            'message' => __('Payment was cancelled'),
             'payment_method_id' => $paymentMethodId
         ]);
     }
@@ -2605,7 +2605,7 @@ class POSController extends Controller
 
             return redirect()->route('pos.payment.paytm.return', [
                 'status' => 'error',
-                'message' => 'An error occurred while processing payment: ' . $e->getMessage(),
+                'message' => __('An error occurred while processing payment: ') . $e->getMessage(),
             ]);
         }
     }
@@ -2668,7 +2668,7 @@ class POSController extends Controller
             if (!$reference) {
                 return redirect()->route('pos.payment.paystack.return', [
                     'status' => 'error',
-                    'message' => 'Payment reference not found'
+                    'message' => __('Payment reference not found')
                 ]);
             }
 
@@ -2716,7 +2716,7 @@ class POSController extends Controller
 
             return redirect()->route('pos.payment.paystack.return', [
                 'status' => 'error',
-                'message' => 'An error occurred while processing payment: ' . $e->getMessage(),
+                'message' => __('An error occurred while processing payment: ') . $e->getMessage(),
             ]);
         }
     }
@@ -2778,7 +2778,7 @@ class POSController extends Controller
             if (!$txRef && !$transactionId) {
                 return redirect()->route('pos.payment.flutterwave.return', [
                     'status' => 'error',
-                    'message' => 'Transaction reference not found'
+                    'message' => __('Transaction reference not found')
                 ]);
             }
 
@@ -2830,7 +2830,7 @@ class POSController extends Controller
 
             return redirect()->route('pos.payment.flutterwave.return', [
                 'status' => 'error',
-                'message' => 'An error occurred while processing payment: ' . $e->getMessage(),
+                'message' => __('An error occurred while processing payment: ') . $e->getMessage(),
             ]);
         }
     }
@@ -2892,7 +2892,7 @@ class POSController extends Controller
             if (!$paymentId && !$invoiceId) {
                 return redirect()->route('pos.payment.myfatoorah.return', [
                     'status' => 'error',
-                    'message' => 'Payment ID or Invoice ID not found'
+                    'message' => __('Payment ID or Invoice ID not found')
                 ]);
             }
 
@@ -2944,7 +2944,7 @@ class POSController extends Controller
 
             return redirect()->route('pos.payment.myfatoorah.return', [
                 'status' => 'error',
-                'message' => 'An error occurred while processing payment: ' . $e->getMessage(),
+                'message' => __('An error occurred while processing payment: ') . $e->getMessage(),
             ]);
         }
     }
@@ -3135,7 +3135,7 @@ class POSController extends Controller
             if (!$sale) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'Sale not found'
+                    'message' => __('Sale not found')
                 ], 404);
             }
 
@@ -3144,7 +3144,7 @@ class POSController extends Controller
             if (!$zatcaInvoice) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'ZATCA invoice not found'
+                    'message' => __('ZATCA invoice not found')
                 ], 404);
             }
 
@@ -3165,7 +3165,7 @@ class POSController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to get ZATCA status: ' . $e->getMessage()
+                'message' => __('Failed to get ZATCA status: ') . $e->getMessage()
             ], 500);
         }
     }
@@ -3187,7 +3187,7 @@ class POSController extends Controller
             if (!$sale) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'Sale not found'
+                    'message' => __('Sale not found')
                 ], 404);
             }
 
@@ -3196,7 +3196,7 @@ class POSController extends Controller
             if (!$zatcaInvoice) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'ZATCA invoice not found'
+                    'message' => __('ZATCA invoice not found')
                 ], 404);
             }
 
@@ -3214,7 +3214,7 @@ class POSController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to retry ZATCA submission: ' . $e->getMessage()
+                'message' => __('Failed to retry ZATCA submission: ') . $e->getMessage()
             ], 500);
         }
     }
@@ -3407,7 +3407,7 @@ class POSController extends Controller
         try {
             $id = decrypt($encryptedId);
         } catch (\Exception $e) {
-            return response()->json(['status' => 'error', 'message' => 'Invalid sale ID'], 400);
+            return response()->json(['status' => 'error', 'message' => __('Invalid sale ID')], 400);
         }
 
         $companyId = session('company.company_id');
@@ -3432,7 +3432,7 @@ class POSController extends Controller
             ->first();
 
         if (!$sale) {
-            return response()->json(['status' => 'error', 'message' => 'Sale not found'], 404);
+            return response()->json(['status' => 'error', 'message' => __('Sale not found')], 404);
         }
 
         $detailIds = $sale->saleDetails->pluck('id')->toArray();
@@ -3656,7 +3656,7 @@ class POSController extends Controller
         try {
             $id = decrypt($sale);
         } catch (\Exception $e) {
-            return response()->json(['status' => 'error', 'message' => 'Invalid sale ID'], 400);
+            return response()->json(['status' => 'error', 'message' => __('Invalid sale ID')], 400);
         }
 
         $companyId = session('company.company_id');
@@ -3668,7 +3668,7 @@ class POSController extends Controller
             ->first();
 
         if (!$existingSale) {
-            return response()->json(['status' => 'error', 'message' => 'Sale not found'], 404);
+            return response()->json(['status' => 'error', 'message' => __('Sale not found')], 404);
         }
 
         try {
@@ -3797,7 +3797,7 @@ class POSController extends Controller
                             if ($newTotalDue > $creditLimit) {
                                 return response()->json([
                                     'status' => 'error',
-                                    'message' => 'Customer credit limit exceeded. Credit limit: ' . number_format($creditLimit, 2) . ', New total due would be: ' . number_format($newTotalDue, 2) . '.',
+                                    'message' => __('Customer credit limit exceeded. Credit limit: ') . number_format($creditLimit, 2) . ', New total due would be: ' . number_format($newTotalDue, 2) . '.',
                                 ], 422);
                             }
                         }
@@ -4050,7 +4050,7 @@ class POSController extends Controller
 
                 return response()->json([
                     'status' => 'success',
-                    'message' => 'Sale updated successfully',
+                    'message' => __('Sale updated successfully'),
                     'sale_id' => $sale->id,
                     'sale_no' => $sale->sale_no,
                     'encrypted_id' => $sale->encrypted_id,
@@ -4059,7 +4059,7 @@ class POSController extends Controller
         } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Validation failed',
+                'message' => __('Validation failed'),
                 'errors' => $e->errors(),
             ], 422);
         } catch (HttpResponseException $e) {
@@ -4112,7 +4112,7 @@ class POSController extends Controller
 
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to check payment status: ' . $e->getMessage()
+                'message' => __('Failed to check payment status: ') . $e->getMessage()
             ], 500);
         }
     }

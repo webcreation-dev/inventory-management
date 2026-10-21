@@ -5,7 +5,7 @@
   <div class="app-brand demo">
     <a href="{{ url('/') }}" class="app-brand-link">
       <span class="demo menu-text fw-bold site-logo-sidebar">
-        <img src="{!! lpFaviconLogoUrl(asset('public/uploads/whitelabel/' . (session('white_label.site_logo') ?? 'initial-logo.png'))) !!}" alt="Site-Logo">
+        <img src="{!! lpFaviconLogoUrl(asset('public/uploads/whitelabel/' . (session('white_label.site_logo') ?? 'initial-logo.png'))) !!}" alt="Logo de la boutique">
       </span>
     </a>
 
@@ -70,6 +70,14 @@
     </li>
     @endif
 
+    @can('role-edit')
+    <li class="menu-item {{ request()->is('module-usage') ? 'active' : '' }}">
+      <a href="{{ route('module-usage.index') }}" class="menu-link">
+        <i class="menu-icon icon-base ti tabler-adjustments"></i>
+        <div>{{ __('Gestion des modules') }}</div>
+      </a>
+    </li>
+    @endcan
     <!-- Dashboards -->
     <li class="menu-item {{ request()->is('user-home') ? 'active' : '' }}">
       <a href="{{ url('/user-home') }}" class="menu-link">
@@ -79,12 +87,14 @@
     </li>
 
     @if(Auth::user()->can('dashboard-dashboard'))
-    <li class="menu-item {{ request()->is('dashboard') ? 'active' : '' }}">
+    @if(app(\App\Services\MenuModuleService::class)->enabled('menu_dashboard'))
+<li class="menu-item {{ request()->is('dashboard') ? 'active' : '' }}">
       <a href="{{ url('/dashboard') }}" class="menu-link">
         <i class="menu-icon icon-base ti tabler-gauge"></i>
         <div>{{ __('Dashboard') }}</div>
       </a>
     </li>
+@endif
     @endif
     
 
@@ -126,10 +136,13 @@
     @unless($lpIsBd)
     @can('ecommerce-cms')
     @if(Route::has('ecommerce.admin.branding.edit'))
-    <li class="menu-header small">
+    @if(app(\App\Services\MenuModuleService::class)->enabled('menu_ecommerce'))
+<li class="menu-header small">
       <span class="menu-header-text">{{ __('Ecommerce') }}</span>
     </li>
-    <li class="menu-item {{ request()->is('ecommerce/admin*') ? 'active open' : '' }}">
+@endif
+    @if(app(\App\Services\MenuModuleService::class)->enabled('menu_ecommerce_cms'))
+<li class="menu-item {{ request()->is('ecommerce/admin*') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon icon-base ti tabler-shopping-bag"></i>
         <div>{{ __('Ecommerce CMS') }}</div>
@@ -215,18 +228,22 @@
         @endif
       </ul>
     </li>
+@endif
     @endif
     @endcan
     @endunless
 
     @if(Auth::user()->can('item-list') || Auth::user()->can('item-create') || Auth::user()->can('item-import') || Auth::user()->can('category-list') || Auth::user()->can('category-create') || Auth::user()->can('brand-list') || Auth::user()->can('brand-create') || Auth::user()->can('unit-list') || Auth::user()->can('unit-create') || Auth::user()->can('rack-list') || Auth::user()->can('rack-create') || Auth::user()->can('variation_attribute-list') || Auth::user()->can('variation_attribute-create') || Auth::user()->can('stock-stock') || Auth::user()->can('stock-low_stock') || Auth::user()->can('opening-stock-import'))
     <!-- Item & Stock: header only when at least one menu in group is visible -->
-    <li class="menu-header small">
+    @if(app(\App\Services\MenuModuleService::class)->any(['menu_items','menu_item_configuration','menu_stock']))
+<li class="menu-header small">
       <span class="menu-header-text">{{ __('Item & Stock') }}</span>
     </li>
+@endif
     @endif
     @if(Auth::user()->can('item-list') || Auth::user()->can('item-create') || Auth::user()->can('item-import'))
-    <li class="menu-item {{ request()->is('item/create') || request()->is('item/*/edit') || request()->is('bulk-item-import') || request()->is('item') || request()->is('item/*/show') || request()->is('bulk-item-update') || request()->is('opening-stock-import') ? 'active open' : '' }}">
+    @if(app(\App\Services\MenuModuleService::class)->enabled('menu_items'))
+<li class="menu-item {{ request()->is('item/create') || request()->is('item/*/edit') || request()->is('bulk-item-import') || request()->is('item') || request()->is('item/*/show') || request()->is('bulk-item-update') || request()->is('opening-stock-import') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon icon-base ti tabler-heart-pin"></i>
         <div>{{ __('Item') }}</div>
@@ -267,9 +284,11 @@
         @endcan
       </ul>
     </li>
+@endif
     @endif
     @if(Auth::user()->can('category-list') || Auth::user()->can('category-create') || Auth::user()->can('brand-list') || Auth::user()->can('unit-list') || Auth::user()->can('rack-list') || Auth::user()->can('variation_attribute-list'))
-    <li class="menu-item {{ (request()->is('item-category*') || request()->is('item-sub-category*') || request()->is('brand*') || request()->is('unit*') || request()->is('rack*') || request()->is('variation-attribute*') || request()->is('item-category/sort-category')) ? 'active open' : '' }}">
+    @if(app(\App\Services\MenuModuleService::class)->enabled('menu_item_configuration'))
+<li class="menu-item {{ (request()->is('item-category*') || request()->is('item-sub-category*') || request()->is('brand*') || request()->is('unit*') || request()->is('rack*') || request()->is('variation-attribute*') || request()->is('item-category/sort-category')) ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon icon-base ti tabler-settings-heart"></i>
         <div>{{ __('Item Configuration') }}</div>
@@ -367,9 +386,11 @@
         @endif
       </ul>
     </li>
+@endif
     @endif
     @if(Auth::user()->can('stock-stock') || Auth::user()->can('stock-low_stock'))
-    <li class="menu-item {{ (request()->is('stock') && !request()->is('stock/low-stock')) || request()->is('stock/low-stock') ? 'active open' : '' }}">
+    @if(app(\App\Services\MenuModuleService::class)->enabled('menu_stock'))
+<li class="menu-item {{ (request()->is('stock') && !request()->is('stock/low-stock')) || request()->is('stock/low-stock') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon icon-base ti tabler-replace"></i>
         <div>{{ __('Stock') }}</div>
@@ -391,15 +412,19 @@
         @endcan
       </ul>
     </li>
+@endif
     @endif
     <!-- Sale Income -->
     @if(Auth::user()->can('sale-list') || Auth::user()->can('promotion-list') || Auth::user()->can('delivery_partner-list') || Auth::user()->can('customer-list') || Auth::user()->can('customer_receive-list') || Auth::user()->can('installment_sale-list') || Auth::user()->can('quotation-list') || Auth::user()->can('income-list'))
-    <li class="menu-header small">
+    @if(app(\App\Services\MenuModuleService::class)->any(['menu_sales','menu_sale_returns','menu_customers','menu_income','installment_sale']))
+<li class="menu-header small">
       <span class="menu-header-text">{{ __('Sale & Customer') }}</span>
     </li>
+@endif
     @endif
     @if(Auth::user()->can('sale-list') || Auth::user()->can('promotion-list') || Auth::user()->can('delivery_partner-list'))
-    <li class="menu-item {{ request()->is('promotion*') || request()->is('delivery-partner*') || request()->is('pos*') || request()->is('sale') || request()->is('online-order*') ? 'active open' : '' }}">
+    @if(app(\App\Services\MenuModuleService::class)->enabled('menu_sales'))
+<li class="menu-item {{ request()->is('promotion*') || request()->is('delivery-partner*') || request()->is('pos*') || request()->is('sale') || request()->is('online-order*') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon icon-base ti tabler-shopping-cart-heart"></i>
         <div>{{ __('Sale') }}</div>
@@ -456,9 +481,11 @@
         @endunless
       </ul>
     </li>
+@endif
     @endif
     @if(Auth::user()->can('sale-list') || Auth::user()->can('sale-create'))
-    <li class="menu-item {{ request()->is('sale-return*') ? 'active open' : '' }}">
+    @if(app(\App\Services\MenuModuleService::class)->enabled('menu_sale_returns'))
+<li class="menu-item {{ request()->is('sale-return*') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon icon-base ti tabler-u-turn-right"></i>
         <div>{{ __('Sale Return') }}</div>
@@ -480,6 +507,7 @@
         @endcan
       </ul>
     </li>
+@endif
     @endif
     @if(module_enabled('installment_sale') && (Auth::user()->can('installment_sale-list') || Auth::user()->can('installment_sale-create')))
     <li class="menu-item {{ (request()->is('installment-sale*') || request()->is('installment-collection*') || request()->is('due-installment*') || request()->is('installment-customer*')) ? 'active open' : '' }}">
@@ -511,7 +539,8 @@
     </li>
     @endif
     @if(Auth::user()->can('customer-list') || Auth::user()->can('customer-create') || Auth::user()->can('customer_receive-list') || Auth::user()->can('customer_receive-create'))
-    <li class="menu-item {{ (request()->is('customer*') || request()->is('customer-receive*')) || request()->is('installment-customer*') ? 'active open' : '' }}">
+    @if(app(\App\Services\MenuModuleService::class)->enabled('menu_customers'))
+<li class="menu-item {{ (request()->is('customer*') || request()->is('customer-receive*')) || request()->is('installment-customer*') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon icon-base ti tabler-user-plus"></i>
         <div>{{ __('Customer') }}</div>
@@ -559,9 +588,11 @@
         @endcan
       </ul>
     </li>
+@endif
     @endif
     @if(Auth::user()->can('income-list') || Auth::user()->can('income-create') || Auth::user()->can('income_category-list') || Auth::user()->can('income_category-create'))
-    <li class="menu-item {{ request()->is('income*') ? 'active open' : '' }}">
+    @if(app(\App\Services\MenuModuleService::class)->enabled('menu_income'))
+<li class="menu-item {{ request()->is('income*') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon icon-base ti tabler-circle-plus"></i>
         <div>{{ __('Income') }}</div>
@@ -597,16 +628,20 @@
         @endcan
       </ul>
     </li>
+@endif
     @endif
     
     <!-- Purchase Supplier -->
     @if(Auth::user()->can('purchase-list') || Auth::user()->can('purchase_return-list') || Auth::user()->can('supplier-list') || Auth::user()->can('supplier_payment-list') || Auth::user()->can('expense-list') || Auth::user()->can('transfer-list') || Auth::user()->can('damage-list') || Auth::user()->can('quotation-list'))
-    <li class="menu-header small">
+    @if(app(\App\Services\MenuModuleService::class)->any(['menu_purchases','menu_purchase_returns','menu_suppliers','menu_expenses']))
+<li class="menu-header small">
       <span class="menu-header-text">{{ __('Purchase & Supplier') }}</span>
     </li>
+@endif
     @endif
     @if(Auth::user()->can('purchase-list') || Auth::user()->can('purchase-create'))
-    <li class="menu-item {{ request()->is('purchase/create') || request()->is('purchase/*/edit') || request()->is('purchase') || request()->is('purchase/*/show')  ? 'active open' : '' }}">
+    @if(app(\App\Services\MenuModuleService::class)->enabled('menu_purchases'))
+<li class="menu-item {{ request()->is('purchase/create') || request()->is('purchase/*/edit') || request()->is('purchase') || request()->is('purchase/*/show')  ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon icon-base ti tabler-basket-down"></i>
         <div>{{ __('Purchase') }}</div>
@@ -628,9 +663,11 @@
         @endcan
       </ul>
     </li>
+@endif
     @endif
     @if(Auth::user()->can('purchase_return-list') || Auth::user()->can('purchase_return-create'))
-    <li class="menu-item {{ request()->is('purchase-return*') || request()->is('purchase-return/*/show') ? 'active open' : '' }}">
+    @if(app(\App\Services\MenuModuleService::class)->enabled('menu_purchase_returns'))
+<li class="menu-item {{ request()->is('purchase-return*') || request()->is('purchase-return/*/show') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon icon-base ti tabler-u-turn-left"></i>
         <div>{{ __('Purchase Return') }}</div>
@@ -652,9 +689,11 @@
         @endcan
       </ul>
     </li>
+@endif
     @endif
     @if(Auth::user()->can('supplier-list') || Auth::user()->can('supplier-create') || Auth::user()->can('supplier_payment-list') || Auth::user()->can('supplier_payment-create'))
-    <li class="menu-item {{ request()->is('supplier*') ? 'active open' : '' }}">
+    @if(app(\App\Services\MenuModuleService::class)->enabled('menu_suppliers'))
+<li class="menu-item {{ request()->is('supplier*') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon icon-base ti tabler-user-minus"></i>
         <div>{{ __('Supplier') }}</div>
@@ -690,9 +729,11 @@
         @endcan
       </ul>
     </li>
+@endif
     @endif
     @if(Auth::user()->can('expense-list') || Auth::user()->can('expense-create') || Auth::user()->can('expense_category-list') || Auth::user()->can('expense_category-create'))
-    <li class="menu-item {{ request()->is('expense*') ? 'active open' : '' }}">
+    @if(app(\App\Services\MenuModuleService::class)->enabled('menu_expenses'))
+<li class="menu-item {{ request()->is('expense*') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon icon-base ti tabler-circle-minus"></i>
         <div>{{ __('Expense') }}</div>
@@ -728,16 +769,20 @@
         @endcan
       </ul>
     </li>
+@endif
     @endif
 
     <!-- Transfer & Damage -->
     @if(Auth::user()->can('transfer-list') || Auth::user()->can('damage-list') || Auth::user()->can('quotation-list'))
-    <li class="menu-header small">
+    @if(app(\App\Services\MenuModuleService::class)->any(['menu_transfers','menu_damage','menu_quotations']))
+<li class="menu-header small">
       <span class="menu-header-text">{{ __('Transfer & Damage') }}</span>
     </li>
+@endif
     @endif
     @if(Auth::user()->can('transfer-list') || Auth::user()->can('transfer-create'))
-    <li class="menu-item {{ request()->is('transfer*') ? 'active open' : '' }}">
+    @if(app(\App\Services\MenuModuleService::class)->enabled('menu_transfers'))
+<li class="menu-item {{ request()->is('transfer*') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon icon-base ti tabler-truck-delivery"></i>
         <div>{{ __('Transfer') }}</div>
@@ -759,9 +804,11 @@
         @endcan
       </ul>
     </li>
+@endif
     @endif
     @if(Auth::user()->can('damage-list') || Auth::user()->can('damage-create'))
-    <li class="menu-item {{ request()->is('damage*') ? 'active open' : '' }}">
+    @if(app(\App\Services\MenuModuleService::class)->enabled('menu_damage'))
+<li class="menu-item {{ request()->is('damage*') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon icon-base ti tabler-trash"></i>
         <div>{{ __('Damage') }}</div>
@@ -783,9 +830,11 @@
         @endcan
       </ul>
     </li>
+@endif
     @endif
     @if(Auth::user()->can('quotation-list') || Auth::user()->can('quotation-create'))
-    <li class="menu-item {{ request()->is('quotation*') ? 'active open' : '' }}">
+    @if(app(\App\Services\MenuModuleService::class)->enabled('menu_quotations'))
+<li class="menu-item {{ request()->is('quotation*') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon icon-base ti tabler-pencil-star"></i>
         <div>{{ __('Quotation') }}</div>
@@ -807,14 +856,18 @@
         @endcan
       </ul>
     </li>
+@endif
     @endif
 
     <!-- Fixed Assets -->
     @if(module_enabled('fixed_assets') && (Auth::user()->can('fixed_asset_item-list') || Auth::user()->can('fixed_asset_item-create') || Auth::user()->can('fixed_asset_stock_in-list') || Auth::user()->can('fixed_asset_stock_in-create') || Auth::user()->can('fixed_asset_stock_out-list') || Auth::user()->can('fixed_asset_stock_out-create')))
-    <li class="menu-header small">
+    @if(app(\App\Services\MenuModuleService::class)->enabled('fixed_assets'))
+<li class="menu-header small">
       <span class="menu-header-text">{{ __('Fixed Asset') }}</span>
     </li>
-    <li class="menu-item {{ request()->is('fixed-asset*') ? 'active open' : '' }}">
+@endif
+    @if(app(\App\Services\MenuModuleService::class)->enabled('fixed_assets'))
+<li class="menu-item {{ request()->is('fixed-asset*') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon icon-base ti tabler-tournament"></i>
         <div>{{ __('Fixed Asset') }}</div>
@@ -864,6 +917,7 @@
         @endcan
       </ul>
     </li>
+@endif
     @endif
 
     <!-- Warranty Servicing -->
@@ -919,12 +973,15 @@
 
     <!-- Accounting Payroll -->
     @if(Auth::user()->can('payment_method-list') || Auth::user()->can('payment_method-create') || Auth::user()->can('deposit_withdraw-list') || Auth::user()->can('deposit_withdraw-create'))
-    <li class="menu-header small">
+    @if(app(\App\Services\MenuModuleService::class)->enabled('menu_accounting'))
+<li class="menu-header small">
       <span class="menu-header-text">{{ __('Accounting') }}</span>
     </li>
+@endif
     @endif
     @if(Auth::user()->can('payment_method-list') || Auth::user()->can('payment_method-create'))
-    <li class="menu-item {{ (request()->is('payment-method*') || request()->is('payment-method/sort-payment-method')) ? 'active open' : '' }}">
+    @if(app(\App\Services\MenuModuleService::class)->enabled('menu_payment_accounts'))
+<li class="menu-item {{ (request()->is('payment-method*') || request()->is('payment-method/sort-payment-method')) ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon icon-base ti tabler-building-bank"></i>
         <div>{{ __('Payment Account') }}</div>
@@ -951,9 +1008,11 @@
         @endcan
       </ul>
     </li>
+@endif
     @endif
     @if(Auth::user()->can('deposit_withdraw-list') || Auth::user()->can('deposit_withdraw-create'))
-    <li class="menu-item {{ (request()->is('deposit-withdraw*') || request()->is('account-reports/account-balance/view') || request()->is('account-reports/balance-sheet/view') || request()->is('account-reports/account-statement/view') || request()->is('account-reports/transaction-history/view') || request()->is('account-reports/trial-balance/view')) ? 'active open' : '' }}">
+    @if(app(\App\Services\MenuModuleService::class)->enabled('menu_accounting'))
+<li class="menu-item {{ (request()->is('deposit-withdraw*') || request()->is('account-reports/account-balance/view') || request()->is('account-reports/balance-sheet/view') || request()->is('account-reports/account-statement/view') || request()->is('account-reports/transaction-history/view') || request()->is('account-reports/trial-balance/view')) ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon icon-base ti tabler-receipt-dollar"></i>
         <div>{{ __('Accounting') }}</div>
@@ -1010,14 +1069,18 @@
         @endcan
       </ul>
     </li>
+@endif
     @endif
 
     <!-- Marketing -->
     @if(Auth::user()->can('marketing-email') || Auth::user()->can('marketing-sms') || Auth::user()->can('marketing-whatsapp'))
-    <li class="menu-header small">
+    @if(app(\App\Services\MenuModuleService::class)->enabled('menu_marketing'))
+<li class="menu-header small">
       <span class="menu-header-text">{{ __('Marketing') }}</span>
     </li>
-    <li class="menu-item {{ request()->is('email-marketing') || request()->is('sms-marketing') || request()->is('whatsapp-marketing') ? 'active open' : '' }}">
+@endif
+    @if(app(\App\Services\MenuModuleService::class)->enabled('menu_marketing'))
+<li class="menu-item {{ request()->is('email-marketing') || request()->is('sms-marketing') || request()->is('whatsapp-marketing') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon icon-base ti tabler-ad-2"></i>
         <div>{{ __('Marketing') }}</div>
@@ -1046,16 +1109,20 @@
         @endcan
       </ul>
     </li>
+@endif
     @endif
     
     
     <!-- Account Attendance -->
     @if(Auth::user()->can('role-list') || Auth::user()->can('role-create') || Auth::user()->can('user-list') || Auth::user()->can('user-create') || Auth::user()->can('user-edit') || Auth::user()->can('attendance-list') || Auth::user()->can('attendance-create') || Auth::user()->can('salary-list') || Auth::user()->can('salary-create') || Auth::user()->can('employee_advance_payment-list') || Auth::user()->can('employee_advance_payment-create'))
-    <li class="menu-header small">
+    @if(app(\App\Services\MenuModuleService::class)->any(['menu_roles','menu_employees','menu_attendance','menu_payroll','menu_advances']))
+<li class="menu-header small">
       <span class="menu-header-text">{{ __('Human Resource Management') }}</span>
     </li>
+@endif
     @if(Auth::user()->can('role-list') || Auth::user()->can('role-create'))
-    <li class="menu-item {{ request()->is('role*') ? 'active open' : '' }}">
+    @if(app(\App\Services\MenuModuleService::class)->enabled('menu_roles'))
+<li class="menu-item {{ request()->is('role*') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon icon-base ti tabler-fingerprint"></i>
         <div>{{ __('Role Permission') }}</div>
@@ -1077,9 +1144,11 @@
         @endcan
       </ul>
     </li>
+@endif
     @endif
     @if(Auth::user()->can('user-create') || Auth::user()->can('user-list') || Auth::user()->can('user-edit'))
-    <li class="menu-item {{ request()->is('user*') ? 'active open' : '' }}">
+    @if(app(\App\Services\MenuModuleService::class)->enabled('menu_employees'))
+<li class="menu-item {{ request()->is('user*') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon icon-base ti tabler-password-user"></i>
         <div>{{ __('Employee Account') }}</div>
@@ -1108,9 +1177,11 @@
         @endcan
       </ul>
     </li>
+@endif
     @endif
     @if(Auth::user()->can('attendance-list') || Auth::user()->can('attendance-create'))
-    <li class="menu-item {{ request()->is('attendance*') ? 'active open' : '' }}">
+    @if(app(\App\Services\MenuModuleService::class)->enabled('menu_attendance'))
+<li class="menu-item {{ request()->is('attendance*') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon icon-base ti tabler-clock-24"></i>
         <div>{{ __('Attendance') }}</div>
@@ -1132,9 +1203,11 @@
         @endcan
       </ul>
     </li>
+@endif
     @endif
     @if(Auth::user()->can('salary-list') || Auth::user()->can('salary-create'))
-    <li class="menu-item {{ request()->is('salary*') ? 'active open' : '' }}">
+    @if(app(\App\Services\MenuModuleService::class)->enabled('menu_payroll'))
+<li class="menu-item {{ request()->is('salary*') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon icon-base ti tabler-wallet"></i>
         <div>{{ __('Salary/Payroll') }}</div>
@@ -1156,9 +1229,11 @@
         @endcan
       </ul>
     </li>
+@endif
     @endif
     @if(Auth::user()->can('employee_advance_payment-list') || Auth::user()->can('employee_advance_payment-create'))
-    <li class="menu-item {{ request()->is('employee-advance-payment*') ? 'active open' : '' }}">
+    @if(app(\App\Services\MenuModuleService::class)->enabled('menu_advances'))
+<li class="menu-item {{ request()->is('employee-advance-payment*') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon icon-base ti tabler-cash"></i>
         <div>{{ __('Employee Advance Payment') }}</div>
@@ -1180,6 +1255,7 @@
         @endcan
       </ul>
     </li>
+@endif
     @endif
     @endif
 
@@ -1189,12 +1265,15 @@
       $hasReportPermission = collect($reportPerms)->contains(fn($p) => Auth::user()->can($p));
     @endphp
     @if($hasReportPermission || Auth::user()->can('denomination-list') || Auth::user()->can('multiple_currency-list') || Auth::user()->can('printer-list') || Auth::user()->can('counter-list') || Auth::user()->can('print_manager-dashboard') || Auth::user()->can('print_manager-settings') || Auth::user()->can('print_manager-test') || Auth::user()->can('print_manager-printers'))
-    <li class="menu-header small">
+    @if(app(\App\Services\MenuModuleService::class)->any(['menu_reports','menu_printing']))
+<li class="menu-header small">
       <span class="menu-header-text">{{ __('Report & Setting') }}</span>
     </li>
+@endif
     @endif
     @if($hasReportPermission)
-    <li class="menu-item {{ request()->is('reports*') ? 'active open' : '' }}">
+    @if(app(\App\Services\MenuModuleService::class)->enabled('menu_reports'))
+<li class="menu-item {{ request()->is('reports*') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon icon-base ti tabler-book-2"></i>
         <div>{{ __('Report') }}</div>
@@ -1329,6 +1408,7 @@
         @endif
       </ul>
     </li>
+@endif
     @endif
     @if(Auth::user()->can('denomination-list') || Auth::user()->can('denomination-create') || Auth::user()->can('multiple_currency-list') || Auth::user()->can('multiple_currency-create') || Auth::user()->can('printer-list') || Auth::user()->can('printer-create') || Auth::user()->can('counter-list') || Auth::user()->can('counter-create'))
     <li class="menu-item {{ (request()->is('setting*') || request()->is('denomination*') || request()->is('multiple-currency*') || request()->is('printer*') || request()->is('counter*')) ? 'active open' : '' }}">
@@ -1408,7 +1488,8 @@
     @endif
     
     @if(Route::has('printmanager.index') && (Auth::user()->can('print_manager-dashboard') || Auth::user()->can('print_manager-settings') || Auth::user()->can('print_manager-test') || Auth::user()->can('print_manager-printers')))
-    <li class="menu-item {{ request()->is('print*') ? 'active open' : '' }}">
+    @if(app(\App\Services\MenuModuleService::class)->enabled('menu_printing'))
+<li class="menu-item {{ request()->is('print*') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon icon-base ti tabler-printer"></i>
         <div>{{ __('Print Manager') }}</div>
@@ -1444,33 +1525,40 @@
         @endcan
       </ul>
     </li>
+@endif
     @endif
     @if(! config('app.re', false) && ! config('app.is_saas_env', false))
     @can('security-update')
-    <li class="menu-item {{ request()->is('update*') ? 'active' : '' }}">
+    @if(app(\App\Services\MenuModuleService::class)->enabled('menu_updates'))
+<li class="menu-item {{ request()->is('update*') ? 'active' : '' }}">
       <a href="{{ route('update.verification') }}" class="menu-link">
         <i class="menu-icon icon-base ti tabler-cloud-upload"></i>
         <div>{{ __('Update') }}</div>
       </a>
     </li>
+@endif
     @endcan
     @can('security-uninstall')
-    <li class="menu-item">
+    @if(app(\App\Services\MenuModuleService::class)->enabled('menu_uninstall'))
+<li class="menu-item">
       <a href="{{ route('uninstall.license') }}" class="menu-link">
         <i class="menu-icon icon-base ti tabler-cloud-x"></i>
         <div>{{ __('Uninstall') }}</div>
       </a>
     </li>
+@endif
     @endcan
     @endif
     @can('security-dbbackup')
     @if((int) session('company.company_id') === 1)
-    <li class="menu-item {{ request()->is('dbb*') ? 'active' : '' }}">
+    @if(app(\App\Services\MenuModuleService::class)->enabled('menu_backups'))
+<li class="menu-item {{ request()->is('dbb*') ? 'active' : '' }}">
       <a href="{{ url('dbb') }}?action=database_backup" class="menu-link">
         <i class="menu-icon icon-base ti tabler-database-export"></i>
         <div>{{ __('Database Backup') }}</div>
       </a>
     </li>
+@endif
     @endif
     @endcan
     

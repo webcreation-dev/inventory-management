@@ -66,7 +66,7 @@ class GuzzlePaystackGateway extends AbstractGateway
             'access_code' => $data['access_code'] ?? null,
             'authorization_url' => $authUrl,
             'status' => 'created',
-            'message' => 'Transaction created successfully',
+            'message' => __('Transaction created successfully'),
         ]);
     }
 

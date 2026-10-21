@@ -63,32 +63,3 @@ $response = $kernel->handle(
 )->send();
 
 $kernel->terminate($request, $response);
-
-/*
-|--------------------------------------------------------------------------
-| Display The Execution Time
-|--------------------------------------------------------------------------
-|
-| Display the amount of time it took to execute the current request from the
-| LARAVEL_START constant to this point. This will give the user some
-| indication of how long the application has been running.
-|
-*/
-
-$executionTime = microtime(true) - LARAVEL_START;
-
-/*
-|--------------------------------------------------------------------------
-| Display The Memory Usage
-|--------------------------------------------------------------------------
-|
-| Display the amount of memory used to execute the current request from the
-| LARAVEL_START constant to this point. This will give the user some
-| indication of how much memory their application is using.
-|
-*/
-
-$memoryUsage = memory_get_peak_usage(true) / 1024 / 1024;
-
-echo "<!-- Execution Time: {$executionTime} seconds -->\n";
-echo "<!-- Memory Usage: {$memoryUsage} MB -->\n";

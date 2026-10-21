@@ -223,7 +223,7 @@ class DamageController extends Controller
         $item = Item::find($itemId);
         
         if (!$item) {
-            return response()->json(['error' => 'Item not found'], 404);
+            return response()->json(['error' => __('Item not found')], 404);
         }
         
         return response()->json([
@@ -278,7 +278,7 @@ class DamageController extends Controller
         $outletId = $request->outlet_id ?? session('outlet.outlet_id');
 
         if (!$itemId) {
-            return response()->json(['error' => 'Item ID required'], 400);
+            return response()->json(['error' => __('Item ID required')], 400);
         }
 
         $result = DB::table('items as p')

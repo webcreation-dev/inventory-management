@@ -93,19 +93,19 @@ class PurchaseController extends Controller
             if ($request->ajax()) {
                 return response()->json([
                     'status' => 'success',
-                    'message' => 'Purchase created successfully',
+                    'message' => __('Purchase created successfully'),
                     'data' => $purchase
                 ]);
             }
             
             return redirect()->route('purchase.index')
-                ->with('success', 'Purchase created successfully');
+                ->with('success', __('Purchase created successfully'));
         } catch (\Illuminate\Validation\ValidationException $e) {
             // Return JSON response for AJAX requests
             if ($request->ajax()) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'Validation failed',
+                    'message' => __('Validation failed'),
                     'errors' => $e->errors()
                 ], 422);
             }
@@ -117,7 +117,7 @@ class PurchaseController extends Controller
             if ($request->ajax()) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'Failed to create purchase: ' . $e->getMessage()
+                    'message' => __('Failed to create purchase: ') . $e->getMessage()
                 ], 500);
             }
             return redirect()->back()
@@ -136,7 +136,7 @@ class PurchaseController extends Controller
         
         if (!$purchase) {
             return redirect()->route('purchase.index')
-                ->with('error', 'Purchase not found');
+                ->with('error', __('Purchase not found'));
         }
         
         // Load relationships (only live purchase details)
@@ -170,7 +170,7 @@ class PurchaseController extends Controller
 
             if (!$purchase) {
                 return redirect()->route('purchase.index')
-                    ->with('error', 'Purchase not found');
+                    ->with('error', __('Purchase not found'));
             }
 
             // Load relationships (only live purchase details and payments)
@@ -192,7 +192,7 @@ class PurchaseController extends Controller
             return view('purchase::purchase.a4-invoice', compact('purchase'));
         } catch (\Exception $e) {
             return redirect()->route('purchase.index')
-                ->with('error', 'Purchase not found');
+                ->with('error', __('Purchase not found'));
         }
     }
 
@@ -206,7 +206,7 @@ class PurchaseController extends Controller
 
             if (!$purchase) {
                 return redirect()->route('purchase.index')
-                    ->with('error', 'Purchase not found');
+                    ->with('error', __('Purchase not found'));
             }
 
             // Load relationships (only live purchase details and payments)
@@ -260,7 +260,7 @@ class PurchaseController extends Controller
                 ->header('Content-Length', strlen($pdfContent));
         } catch (\Exception $e) {
             return redirect()->route('purchase.index')
-                ->with('error', 'Error generating PDF: ' . $e->getMessage());
+                ->with('error', __('Error generating PDF: ') . $e->getMessage());
         }
     }
 
@@ -273,7 +273,7 @@ class PurchaseController extends Controller
         
         if (!$purchase) {
             return redirect()->route('purchase.index')
-                ->with('error', 'Purchase not found');
+                ->with('error', __('Purchase not found'));
         }
         
         // Load relationships (only live purchase details and payments)
@@ -329,19 +329,19 @@ class PurchaseController extends Controller
             if ($request->ajax()) {
                 return response()->json([
                     'status' => 'success',
-                    'message' => 'Purchase updated successfully',
+                    'message' => __('Purchase updated successfully'),
                     'data' => $purchase
                 ]);
             }
             
             return redirect()->route('purchase.index')
-                ->with('success', 'Purchase updated successfully');
+                ->with('success', __('Purchase updated successfully'));
         } catch (\Illuminate\Validation\ValidationException $e) {
             // Return JSON response for AJAX requests
             if ($request->ajax()) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'Validation failed',
+                    'message' => __('Validation failed'),
                     'errors' => $e->errors()
                 ], 422);
             }
@@ -353,7 +353,7 @@ class PurchaseController extends Controller
             if ($request->ajax()) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'Failed to update purchase: ' . $e->getMessage()
+                    'message' => __('Failed to update purchase: ') . $e->getMessage()
                 ], 500);
             }
             return redirect()->back()
@@ -371,7 +371,7 @@ class PurchaseController extends Controller
             $this->purchaseService->deletePurchase($id);
             
             return redirect()->route('purchase.index')
-                ->with('success', 'Purchase deleted successfully');
+                ->with('success', __('Purchase deleted successfully'));
         } catch (\Exception $e) {
             return redirect()->route('purchase.index')
                 ->with('error', $e->getMessage());
@@ -387,7 +387,7 @@ class PurchaseController extends Controller
         $item = Item::find($itemId);
         
         if (!$item) {
-            return response()->json(['error' => 'Item not found'], 404);
+            return response()->json(['error' => __('Item not found')], 404);
         }
         
         return response()->json([
@@ -449,7 +449,7 @@ class PurchaseController extends Controller
             $this->purchaseService->addPayment($id, $paymentData);
             
             return redirect()->route('purchase.show', $id)
-                ->with('success', 'Payment added successfully');
+                ->with('success', __('Payment added successfully'));
         } catch (\Exception $e) {
             return redirect()->back()
                 ->withInput()
@@ -473,7 +473,7 @@ class PurchaseController extends Controller
             $this->purchaseService->addMultiplePayments($id, $request->payments);
             
             return redirect()->route('purchase.show', $id)
-                ->with('success', 'Payments added successfully');
+                ->with('success', __('Payments added successfully'));
         } catch (\Exception $e) {
             return redirect()->back()
                 ->withInput()
@@ -490,7 +490,7 @@ class PurchaseController extends Controller
             $this->purchaseService->deletePurchasePayment($paymentId);
             
             return redirect()->back()
-                ->with('success', 'Payment deleted successfully');
+                ->with('success', __('Payment deleted successfully'));
         } catch (\Exception $e) {
             return redirect()->back()
                 ->with('error', $e->getMessage());
@@ -551,7 +551,7 @@ class PurchaseController extends Controller
         }
 
         if($cehck){
-            return response()->json(['available' => false, 'message' => 'The IMEI number already exists in stock']);
+            return response()->json(['available' => false, 'message' => __('The IMEI number already exists in stock')]);
         } else {
             return response()->json(['available' => true]);
         }
@@ -569,7 +569,7 @@ class PurchaseController extends Controller
             ->exists();
 
         if($exists){
-            return response()->json(['available' => false, 'message' => 'The IMEI number already taken by another purchase / Sold out']);
+            return response()->json(['available' => false, 'message' => __('The IMEI number already taken by another purchase / Sold out')]);
         } else {
             return response()->json(['available' => true]);
         }

@@ -365,7 +365,7 @@ $(async function () {
                     paging: true,
                     dom: '<"card-header border-bottom p-3"<"head-label"><"dt-action-buttons text-end"B>>' + '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>' + '<"row"<"col-sm-12"tr>>' + '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
                     buttons: [{ extend: 'collection', className: 'btn btn-primary dropdown-toggle me-2', text: '<i class="ti tabler-file-export me-sm-1"></i> Export', buttons: [{ extend: 'print', text: '<i class="ti tabler-printer me-1"></i>' + language_key.Print, className: 'dropdown-item' }, { extend: 'excel', text: '<i class="ti tabler-file-spreadsheet me-1"></i>' + language_key.Excel, className: 'dropdown-item' }, { extend: 'pdf', text: '<i class="ti tabler-file-description me-1"></i>' + language_key.Pdf, className: 'dropdown-item' }] }],
-                    language: { paginate: { next: 'Next', previous: 'Previous' } }
+                    language: { paginate: { next: 'Suivant', previous: 'Précédent' } }
                 });
             },
             error: function (xhr, status, error) { console.error('Error loading table data: ', error); }

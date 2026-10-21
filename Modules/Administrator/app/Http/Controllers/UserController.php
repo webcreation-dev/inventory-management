@@ -57,7 +57,7 @@ class UserController extends Controller
             $this->userService->createUser($userData);
 
             return redirect()->route('user.index')
-                ->with('success', 'User Created Successfully');
+                ->with('success', __('User Created Successfully'));
         } catch (ValidationException $e) {
             return redirect()->route('user.create')
                 ->withErrors($e->errors())
@@ -97,11 +97,11 @@ class UserController extends Controller
             $user = $this->userService->getRepository()->findByEncryptedId($id);
             if (!$user) {
                 return redirect()->route('user.index')
-                    ->with('error', 'User not found');
+                    ->with('error', __('User not found'));
             }
         } catch (\Exception $e) {
             return redirect()->route('user.index')
-                ->with('error', 'Invalid user ID');
+                ->with('error', __('Invalid user ID'));
         }
 
         try {
@@ -109,7 +109,7 @@ class UserController extends Controller
             $this->userService->updateUser($id, $userData);
 
             return redirect()->route('user.index')
-                ->with('success', 'User Updated Successfully');
+                ->with('success', __('User Updated Successfully'));
         } catch (ValidationException $e) {
             return redirect()->back()
                 ->withErrors($e->errors())
@@ -131,7 +131,7 @@ class UserController extends Controller
         try {
             $this->userService->deleteUser($id);
             return redirect()->route('user.index')
-                ->with('success', 'User Deleted Successfully');
+                ->with('success', __('User Deleted Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('user.index')
                 ->with('error', $e->getMessage());
@@ -166,13 +166,13 @@ class UserController extends Controller
 
                 if (!\Hash::check($request->current_password, $user->password)) {
                     return redirect()->route('user.update-profile')
-                        ->with('error', 'Current password is incorrect');
+                        ->with('error', __('Current password is incorrect'));
                 }
 
                 $this->userService->updateProfilePassword($user->id, $request->new_password);
 
                 return redirect()->route('user.update-profile')
-                    ->with('success', 'Password Updated Successfully');
+                    ->with('success', __('Password Updated Successfully'));
             }
 
             if ($updateType === 'security') {
@@ -184,7 +184,7 @@ class UserController extends Controller
                 $this->userService->updateProfileSecurity($user->id, $request->all());
 
                 return redirect()->route('user.update-profile')
-                    ->with('success', 'Security Settings Updated Successfully');
+                    ->with('success', __('Security Settings Updated Successfully'));
             }
 
             // Profile update: validate only profile fields
@@ -211,7 +211,7 @@ class UserController extends Controller
             $user = $this->userService->getRepository()->find($user->id);
             if (!$user) {
                 return redirect()->route('user.update-profile')
-                    ->with('error', 'User not found');
+                    ->with('error', __('User not found'));
             }
 
             // after update profile update session
@@ -225,7 +225,7 @@ class UserController extends Controller
             ]);
 
             return redirect()->route('user.update-profile')
-                ->with('success', 'Profile Updated Successfully');
+                ->with('success', __('Profile Updated Successfully'));
         } catch (\Illuminate\Validation\ValidationException $e) {
             return redirect()->route('user.update-profile')
                 ->withErrors($e->errors())

@@ -185,7 +185,7 @@ class AuthenticatedSessionController extends Controller
 
         // before go to dashboard check if the outlet is set
         if (!session()->has('outlet.outlet_id')) {
-            return redirect()->route('outlet.index')->with('error', 'Please select an outlet first.');
+            return redirect()->route('outlet.index')->with('error', __('Please select an outlet first.'));
         } else {
             // if have dashboard access then redirect to dashboard else home page
             if (Auth::user()->hasPermissionTo('dashboard.dashboard')) {
@@ -206,7 +206,7 @@ class AuthenticatedSessionController extends Controller
         try {
             $user = User::where('email', $request->email)->where('del_status', 'Live')->first();
             if (!$user) {
-                return redirect()->back()->with('error', 'User not found');
+                return redirect()->back()->with('error', __('User not found'));
             }
             return view('auth.security-question', compact('user'));
         } catch (\Exception $e) {
@@ -236,13 +236,13 @@ class AuthenticatedSessionController extends Controller
             return redirect()->route('security.question', $request->auth_id)->withErrors($validator)->withInput();
         }
         if (!$user) {
-            return redirect()->route('security.question', $request->auth_id)->with('error', 'User not found');
+            return redirect()->route('security.question', $request->auth_id)->with('error', __('User not found'));
         }
         if (trim($user->question) != trim($request->security_question)) {
-            return redirect()->route('security.question', $request->auth_id)->with('error', 'Security question is incorrect');
+            return redirect()->route('security.question', $request->auth_id)->with('error', __('Security question is incorrect'));
         }
         if (trim($user->answer) != trim($request->security_answer)) {
-            return redirect()->route('security.question', $request->auth_id)->with('error', 'Security answer is incorrect');
+            return redirect()->route('security.question', $request->auth_id)->with('error', __('Security answer is incorrect'));
         }
         return view('auth.new-password-set', compact('user'));
     }
@@ -260,11 +260,11 @@ class AuthenticatedSessionController extends Controller
             return view('auth.new-password-set', compact('user'))->withInput($request->all())->withErrors($validator);
         }
         if (!$user) {
-            return view('auth.new-password-set', compact('user'))->with('error', 'User not found');
+            return view('auth.new-password-set', compact('user'))->with('error', __('User not found'));
         }
         $user->password = Hash::make($request->password);
         $user->save();
-        return redirect()->route('login')->with('success', 'Password updated successfully');
+        return redirect()->route('login')->with('success', __('Password updated successfully'));
     }
 
     /**

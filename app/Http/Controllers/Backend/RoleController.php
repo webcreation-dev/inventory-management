@@ -66,18 +66,18 @@ class RoleController extends Controller
                 } else {
                     DB::rollBack();
                     return redirect()->back()
-                        ->with('error', 'Selected permissions are invalid')
+                        ->with('error', __('Selected permissions are invalid'))
                         ->withInput();
                 }
             }
             DB::commit();
             return redirect()->route('role.index')
-                ->with('success', 'Role created successfully');
+                ->with('success', __('Role created successfully'));
         } catch (\Exception $e) {
             // Roll back the transaction if any error occurs
             DB::rollBack();
             return redirect()->back()
-                ->with('error', 'Something went wrong: ' . $e->getMessage())
+                ->with('error', __('Something went wrong: ') . $e->getMessage())
                 ->withInput();
         }
     }
@@ -98,7 +98,7 @@ class RoleController extends Controller
         $role = $this->findRole($id);
         if (!$role) {
             return redirect()->route('role.index')
-                ->with('error', 'Role not found');
+                ->with('error', __('Role not found'));
         }
         $data = [];
         $data['role'] = $role;
@@ -114,7 +114,7 @@ class RoleController extends Controller
         $role = $this->findRole($id);
         if (!$role) {
             return redirect()->route('role.index')
-                ->with('error', 'Role not found');
+                ->with('error', __('Role not found'));
         }
 
         $validator = Validator::make($request->all(), [
@@ -138,17 +138,17 @@ class RoleController extends Controller
                 } else {
                     DB::rollBack();
                     return redirect()->back()
-                        ->with('error', 'Selected permissions are invalid')
+                        ->with('error', __('Selected permissions are invalid'))
                         ->withInput();
                 }
             }
             DB::commit();
             return redirect()->route('role.index')
-                ->with('success', 'Role updated successfully');
+                ->with('success', __('Role updated successfully'));
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()
-                ->with('error', 'Something went wrong: ' . $e->getMessage())
+                ->with('error', __('Something went wrong: ') . $e->getMessage())
                 ->withInput();
         }
     }

@@ -68,7 +68,7 @@ class SettingService
         
         return [
             'status' => 'success',
-            'message' => 'Business setting saved successfully'
+            'message' => __('Business setting saved successfully')
         ];
     }
 
@@ -119,7 +119,7 @@ class SettingService
         
         return [
             'status' => 'success',
-            'message' => 'POS setting saved successfully'
+            'message' => __('POS setting saved successfully')
         ];
     }
 
@@ -172,7 +172,7 @@ class SettingService
         $this->updateCompanySession([]);
         return [
             'status' => 'success',
-            'message' => 'Tax setting saved successfully'
+            'message' => __('Tax setting saved successfully')
         ];
     }
 
@@ -429,7 +429,7 @@ class SettingService
         
         return [
             'status' => 'success',
-            'message' => 'Email setting saved successfully'
+            'message' => __('Email setting saved successfully')
         ];
     }
 
@@ -481,7 +481,7 @@ class SettingService
         
         return [
             'status' => 'success',
-            'message' => 'SMS setting saved successfully'
+            'message' => __('SMS setting saved successfully')
         ];
     }
 
@@ -509,7 +509,7 @@ class SettingService
         
         return [
             'status' => 'success',
-            'message' => 'WhatsApp setting saved successfully'
+            'message' => __('WhatsApp setting saved successfully')
         ];
     }
 
@@ -549,7 +549,7 @@ class SettingService
         
         return [
             'status' => 'success',
-            'message' => 'Payment setting saved successfully'
+            'message' => __('Payment setting saved successfully')
         ];
     }
 
@@ -639,7 +639,7 @@ class SettingService
         
         return [
             'status' => 'success',
-            'message' => 'White label settings saved successfully'
+            'message' => __('White label settings saved successfully')
         ];
     }
 
@@ -887,7 +887,7 @@ class SettingService
         
         return [
             'status' => 'success',
-            'message' => 'Invoice setting saved successfully'
+            'message' => __('Invoice setting saved successfully')
         ];
     }
 
@@ -1051,7 +1051,7 @@ class SettingService
         
         return [
             'status' => 'success',
-            'message' => 'ZATCA setting saved successfully'
+            'message' => __('ZATCA setting saved successfully')
         ];
     }
 }

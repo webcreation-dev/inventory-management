@@ -59,7 +59,7 @@ class MultipleCurrencyController extends Controller
         try {
             $this->multipleCurrencyService->createMultipleCurrency($request->validated());
             return redirect()->route('multiple-currency.index')
-                ->with('success', 'Multiple Currency Created Successfully');
+                ->with('success', __('Multiple Currency Created Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('multiple-currency.create')
                 ->with('error', $e->getMessage())
@@ -85,7 +85,7 @@ class MultipleCurrencyController extends Controller
             
             if (!$multiple_currency) {
                 return redirect()->route('multiple-currency.index')
-                    ->with('error', 'Multiple Currency not found');
+                    ->with('error', __('Multiple Currency not found'));
             }
 
             return view('configuration::multiple-currency.create', compact('multiple_currency'));
@@ -103,7 +103,7 @@ class MultipleCurrencyController extends Controller
         try {
             $this->multipleCurrencyService->updateMultipleCurrency($id, $request->validated());
             return redirect()->route('multiple-currency.index')
-                ->with('success', 'Multiple Currency Updated Successfully');
+                ->with('success', __('Multiple Currency Updated Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('multiple-currency.edit', $id)
                 ->with('error', $e->getMessage())
@@ -119,7 +119,7 @@ class MultipleCurrencyController extends Controller
         try {
             $this->multipleCurrencyService->deleteMultipleCurrency($id);
             return redirect()->route('multiple-currency.index')
-                ->with('success', 'Multiple Currency Deleted Successfully');
+                ->with('success', __('Multiple Currency Deleted Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('multiple-currency.index')
                 ->with('error', $e->getMessage());

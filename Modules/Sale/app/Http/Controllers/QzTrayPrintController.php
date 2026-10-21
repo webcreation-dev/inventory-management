@@ -14,7 +14,7 @@ class QzTrayPrintController extends Controller
     {
         $saleId = $this->resolveSaleId($id);
         if (!$saleId) {
-            return response()->json(['message' => 'Invalid invoice id.'], 422);
+            return response()->json(['message' => __('Invalid invoice id.')], 422);
         }
 
         $sale = Sale::query()
@@ -35,7 +35,7 @@ class QzTrayPrintController extends Controller
             ->first();
 
         if (!$sale) {
-            return response()->json(['message' => 'Invoice not found.'], 404);
+            return response()->json(['message' => __('Invoice not found.')], 404);
         }
 
         $items = $sale->saleDetails->map(function ($detail) {
@@ -103,7 +103,7 @@ class QzTrayPrintController extends Controller
     {
         $payload = (string) $request->input('toSign', '');
         if ($payload === '') {
-            return response()->json(['message' => 'Missing toSign payload.'], 422);
+            return response()->json(['message' => __('Missing toSign payload.')], 422);
         }
 
         $privateKey = config('qztray.private_key');

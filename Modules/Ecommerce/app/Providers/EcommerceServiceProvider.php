@@ -45,7 +45,7 @@ class EcommerceServiceProvider extends ServiceProvider
                     'siteFavicon' => null,
                     'brandColor' => \Modules\Ecommerce\Support\BrandColor::DEFAULT,
                     'brandPalette' => \Modules\Ecommerce\Support\BrandColor::palette(null),
-                    'storefrontLanguages' => ['en'],
+                    'storefrontLanguages' => ['fr'],
                     'contactPhone' => null,
                     'contactEmail' => null,
                     'contactAddress' => null,
@@ -60,10 +60,10 @@ class EcommerceServiceProvider extends ServiceProvider
                 $companyId = 0;
             }
 
-            $allowedLocales = $branding['storefrontLanguages'] ?? ['en'];
+            $allowedLocales = $branding['storefrontLanguages'] ?? ['fr'];
             $activeLocale = \Illuminate\Support\Facades\Session::get('locale', config('app.locale'));
             if (! in_array($activeLocale, $allowedLocales, true)) {
-                $activeLocale = $allowedLocales[0] ?? 'en';
+                $activeLocale = $allowedLocales[0] ?? 'fr';
                 \Illuminate\Support\Facades\Session::put('locale', $activeLocale);
                 \Illuminate\Support\Facades\App::setLocale($activeLocale);
             }

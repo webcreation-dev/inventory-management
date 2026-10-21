@@ -56,7 +56,7 @@ class ExpenseController extends Controller
         try {
             $this->expenseService->create($request->validated());
             return redirect()->route('expense.index')
-                ->with('success', 'Expense Created Successfully');
+                ->with('success', __('Expense Created Successfully'));
         } catch (\Exception $e) {
             return redirect()->back()
                 ->with('error', $e->getMessage())
@@ -82,7 +82,7 @@ class ExpenseController extends Controller
             return view('accounting::expense.create', $data);
         } catch (\Exception $e) {
             return redirect()->route('expense.index')
-                ->with('error', 'Expense not found');
+                ->with('error', __('Expense not found'));
         }
     }
 
@@ -94,7 +94,7 @@ class ExpenseController extends Controller
         try {
             $this->expenseService->update($id, $request->validated());
             return redirect()->route('expense.index')
-                ->with('success', 'Expense Updated Successfully');
+                ->with('success', __('Expense Updated Successfully'));
         } catch (\Exception $e) {
             return redirect()->back()
                 ->with('error', $e->getMessage())
@@ -110,7 +110,7 @@ class ExpenseController extends Controller
         try {
             $this->expenseService->delete($id);
             return redirect()->route('expense.index')
-                ->with('success', 'Expense Deleted Successfully');
+                ->with('success', __('Expense Deleted Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('expense.index')
                 ->with('error', $e->getMessage());

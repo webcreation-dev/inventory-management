@@ -5,7 +5,7 @@
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-6 row-gap-4">
         <div class="d-flex flex-column justify-content-center">
             <h4 class="mb-0">{{ __('Modules Usages') }}</h4>
-            <p class="mb-0 text-muted">{{ __('Enable only the unique modules your business needs.') }}</p>
+            <p class="mb-0 text-muted">{{ __('Choisissez les modules visibles dans le menu. Leur désactivation bloque aussi les accès directs, sans supprimer les données.') }}</p>
             @if(!empty($isCompanyScoped))
                 <p class="mb-0 text-muted small">{{ __('These settings apply only to your company.') }}</p>
             @endif

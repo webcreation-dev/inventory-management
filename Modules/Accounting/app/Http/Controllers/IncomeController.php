@@ -56,7 +56,7 @@ class IncomeController extends Controller
         try {
             $this->incomeService->create($request->validated());
             return redirect()->route('income.index')
-                ->with('success', 'Income Created Successfully');
+                ->with('success', __('Income Created Successfully'));
         } catch (\Exception $e) {
             return redirect()->back()
                 ->with('error', $e->getMessage())
@@ -82,7 +82,7 @@ class IncomeController extends Controller
             return view('accounting::income.create', $data);
         } catch (\Exception $e) {
             return redirect()->route('income.index')
-                ->with('error', 'Income not found');
+                ->with('error', __('Income not found'));
         }
     }
 
@@ -94,7 +94,7 @@ class IncomeController extends Controller
         try {
             $this->incomeService->update($id, $request->validated());
             return redirect()->route('income.index')
-                ->with('success', 'Income Updated Successfully');
+                ->with('success', __('Income Updated Successfully'));
         } catch (\Exception $e) {
             return redirect()->back()
                 ->with('error', $e->getMessage())
@@ -110,7 +110,7 @@ class IncomeController extends Controller
         try {
             $this->incomeService->delete($id);
             return redirect()->route('income.index')
-                ->with('success', 'Income Deleted Successfully');
+                ->with('success', __('Income Deleted Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('income.index')
                 ->with('error', $e->getMessage());

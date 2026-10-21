@@ -73,7 +73,7 @@ class MasterController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'Supplier created successfully',
+                'message' => __('Supplier created successfully'),
                 'data' => [
                     'supplier' => $supplier,
                     'suppliers' => $suppliers
@@ -83,13 +83,13 @@ class MasterController extends Controller
         } catch (ValidationException $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Validation failed',
+                'message' => __('Validation failed'),
                 'errors' => $e->errors()
             ], 422);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to create supplier',
+                'message' => __('Failed to create supplier'),
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -110,7 +110,7 @@ class MasterController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to fetch suppliers',
+                'message' => __('Failed to fetch suppliers'),
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -146,7 +146,7 @@ class MasterController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'Brand created successfully',
+                'message' => __('Brand created successfully'),
                 'data' => [
                     'brand' => $brand,
                     'brands' => $brands
@@ -156,13 +156,13 @@ class MasterController extends Controller
         } catch (ValidationException $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Validation failed',
+                'message' => __('Validation failed'),
                 'errors' => $e->errors()
             ], 422);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to create Brand',
+                'message' => __('Failed to create Brand'),
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -183,7 +183,7 @@ class MasterController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to fetch Brands',
+                'message' => __('Failed to fetch Brands'),
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -220,7 +220,7 @@ class MasterController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'Category created successfully',
+                'message' => __('Category created successfully'),
                 'data' => [
                     'category' => $category,
                     'categories' => $categories
@@ -230,13 +230,13 @@ class MasterController extends Controller
         } catch (ValidationException $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Validation failed',
+                'message' => __('Validation failed'),
                 'errors' => $e->errors()
             ], 422);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to create Category',
+                'message' => __('Failed to create Category'),
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -257,7 +257,7 @@ class MasterController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to fetch Categories',
+                'message' => __('Failed to fetch Categories'),
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -293,7 +293,7 @@ class MasterController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'Rack created successfully',
+                'message' => __('Rack created successfully'),
                 'data' => [
                     'rack' => $rack,
                     'racks' => $racks
@@ -303,13 +303,13 @@ class MasterController extends Controller
         } catch (ValidationException $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Validation failed',
+                'message' => __('Validation failed'),
                 'errors' => $e->errors()
             ], 422);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to create Rack',
+                'message' => __('Failed to create Rack'),
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -330,7 +330,7 @@ class MasterController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to fetch Racks',
+                'message' => __('Failed to fetch Racks'),
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -365,7 +365,7 @@ class MasterController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'Unit created successfully',
+                'message' => __('Unit created successfully'),
                 'data' => [
                     'unit' => $unit,
                     'units' => $units
@@ -375,13 +375,13 @@ class MasterController extends Controller
         } catch (ValidationException $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Validation failed', 
+                'message' => __('Validation failed'),
                 'errors' => $e->errors()
             ], 422);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to create Unit',
+                'message' => __('Failed to create Unit'),
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -402,7 +402,7 @@ class MasterController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to fetch Units',
+                'message' => __('Failed to fetch Units'),
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -434,7 +434,7 @@ class MasterController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to fetch Variations',
+                'message' => __('Failed to fetch Variations'),
                 'error' => $e->getMessage()
             ], 500);
         }

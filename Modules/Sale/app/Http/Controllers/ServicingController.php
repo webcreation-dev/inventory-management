@@ -73,7 +73,7 @@ class ServicingController extends Controller
             $this->servicingService->createServicing($request->validated());
 
             return redirect()->route('servicing.index')
-                ->with('success', 'Servicing Created Successfully');
+                ->with('success', __('Servicing Created Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('servicing.create')
                 ->withInput()
@@ -91,7 +91,7 @@ class ServicingController extends Controller
 
             if (!$servicing) {
                 return redirect()->route('servicing.index')
-                    ->with('error', 'Servicing not found');
+                    ->with('error', __('Servicing not found'));
             }
 
             $servicing->load(['customer', 'employee', 'user', 'outlet', 'company', 'paymentMethod']);
@@ -99,7 +99,7 @@ class ServicingController extends Controller
             return view('sale::servicing.show', compact('servicing'));
         } catch (\Exception $e) {
             return redirect()->route('servicing.index')
-                ->with('error', 'Servicing not found');
+                ->with('error', __('Servicing not found'));
         }
     }
 
@@ -113,7 +113,7 @@ class ServicingController extends Controller
 
             if (!$servicing) {
                 return redirect()->route('servicing.index')
-                    ->with('error', 'Servicing not found');
+                    ->with('error', __('Servicing not found'));
             }
 
             $companyId = session('company.company_id');
@@ -139,7 +139,7 @@ class ServicingController extends Controller
             return view('sale::servicing.create', compact('servicing', 'customers', 'employees', 'paymentMethods'));
         } catch (\Exception $e) {
             return redirect()->route('servicing.index')
-                ->with('error', 'Servicing not found');
+                ->with('error', __('Servicing not found'));
         }
     }
 
@@ -153,13 +153,13 @@ class ServicingController extends Controller
 
             if (!$servicing) {
                 return redirect()->route('servicing.index')
-                    ->with('error', 'Servicing not found');
+                    ->with('error', __('Servicing not found'));
             }
 
             $this->servicingService->updateServicing($id, $request->validated());
 
             return redirect()->route('servicing.index')
-                ->with('success', 'Servicing Updated Successfully');
+                ->with('success', __('Servicing Updated Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('servicing.edit', $id)
                 ->withInput()
@@ -177,13 +177,13 @@ class ServicingController extends Controller
 
             if (!$servicing) {
                 return redirect()->route('servicing.index')
-                    ->with('error', 'Servicing not found');
+                    ->with('error', __('Servicing not found'));
             }
 
             $this->servicingService->deleteServicing($id);
 
             return redirect()->route('servicing.index')
-                ->with('success', 'Servicing Deleted Successfully');
+                ->with('success', __('Servicing Deleted Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('servicing.index')
                 ->with('error', $e->getMessage());

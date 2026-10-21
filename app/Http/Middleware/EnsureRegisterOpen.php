@@ -28,7 +28,7 @@ class EnsureRegisterOpen
 
         // Check if outlet is set
         if (!$outletId) {
-            return redirect()->route('outlet.index')->with('error', 'Please select an outlet first.');
+            return redirect()->route('outlet.index')->with('error', __('Please select an outlet first.'));
         }
 
         // Skip register check for register routes themselves
@@ -57,7 +57,7 @@ class EnsureRegisterOpen
             return response()->json([
                 'success' => false,
                 'register_closed' => true,
-                'message' => 'Register is closed. Please open a register first.',
+                'message' => __('Register is closed. Please open a register first.'),
                 'redirect_url' => route('register.create')
             ], 403);
         }
@@ -67,6 +67,6 @@ class EnsureRegisterOpen
 
         // Redirect to register page
         return redirect()->route('register.create')
-            ->with('error', 'Please open a register to continue.');
+            ->with('error', __('Please open a register to continue.'));
     }
 }

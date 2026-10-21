@@ -16,7 +16,7 @@ class EnsureOutletSet
     public function handle(Request $request, Closure $next): Response
     {
         if (!session()->has('outlet.outlet_id')) {
-            return redirect()->route('outlet.index')->with('error', 'Please select an outlet first.');
+            return redirect()->route('outlet.index')->with('error', __('Please select an outlet first.'));
         }
         return $next($request);
     }

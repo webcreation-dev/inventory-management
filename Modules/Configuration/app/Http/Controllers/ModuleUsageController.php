@@ -17,6 +17,7 @@ class ModuleUsageController extends Controller
 
     public function index(): View
     {
+        abort_unless(auth()->user()?->can('role-edit'), 403);
         $definitions = $this->moduleUsageService->definitions();
         $modules = $this->moduleUsageService->all();
 
@@ -32,6 +33,7 @@ class ModuleUsageController extends Controller
 
     public function update(Request $request): RedirectResponse
     {
+        abort_unless($request->user()?->can('role-edit'), 403);
         $allowedKeys = array_keys($this->moduleUsageService->definitions());
         $payload = [];
         foreach ($allowedKeys as $key) {

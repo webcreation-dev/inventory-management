@@ -52,7 +52,7 @@ class InstallmentCustomerController extends Controller
             $this->installmentCustomerService->createInstallmentCustomer($request->validated(), $request);
 
             return redirect()->route('installment-customer.index')
-                ->with('success', 'Installment Customer Created Successfully');
+                ->with('success', __('Installment Customer Created Successfully'));
         } catch (\Illuminate\Validation\ValidationException $e) {
             return redirect()->route('installment-customer.create')
                 ->withErrors($e->errors())
@@ -82,13 +82,13 @@ class InstallmentCustomerController extends Controller
 
             if (!$customer) {
                 return redirect()->route('installment-customer.index')
-                    ->with('error', 'Installment Customer not found');
+                    ->with('error', __('Installment Customer not found'));
             }
 
             return view('sale::installment-customer.create', compact('customer'));
         } catch (\Exception $e) {
             return redirect()->route('installment-customer.index')
-                ->with('error', 'Installment Customer not found');
+                ->with('error', __('Installment Customer not found'));
         }
     }
 
@@ -102,13 +102,13 @@ class InstallmentCustomerController extends Controller
 
             if (!$customer) {
                 return redirect()->route('installment-customer.index')
-                    ->with('error', 'Installment Customer not found');
+                    ->with('error', __('Installment Customer not found'));
             }
 
             $this->installmentCustomerService->updateInstallmentCustomer($customer, $request->validated(), $request);
 
             return redirect()->route('installment-customer.index')
-                ->with('success', 'Installment Customer Updated Successfully');
+                ->with('success', __('Installment Customer Updated Successfully'));
         } catch (\Illuminate\Validation\ValidationException $e) {
             return redirect()->route('installment-customer.edit', $id)
                 ->withErrors($e->errors())
@@ -130,13 +130,13 @@ class InstallmentCustomerController extends Controller
 
             if (!$customer) {
                 return redirect()->route('installment-customer.index')
-                    ->with('error', 'Installment Customer not found');
+                    ->with('error', __('Installment Customer not found'));
             }
 
             $this->installmentCustomerService->deleteInstallmentCustomer($customer);
 
             return redirect()->route('installment-customer.index')
-                ->with('success', 'Installment Customer Deleted Successfully');
+                ->with('success', __('Installment Customer Deleted Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('installment-customer.index')
                 ->with('error', $e->getMessage());

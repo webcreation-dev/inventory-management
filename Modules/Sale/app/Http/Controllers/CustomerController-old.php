@@ -53,7 +53,7 @@ class CustomerController extends Controller
             $this->customerService->createCustomer($request->validated());
 
             return redirect()->route('customer.index')
-                ->with('success', 'Customer Created Successfully');
+                ->with('success', __('Customer Created Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('customer.create')
                 ->with('error', $e->getMessage());
@@ -78,20 +78,20 @@ class CustomerController extends Controller
 
             if (!$customer) {
                 return redirect()->route('customer.index')
-                    ->with('error', 'Customer not found');
+                    ->with('error', __('Customer not found'));
             }
 
             // Prevent editing "Walk-in Customer"
             if ($customer->name === 'Walk-in Customer') {
                 return redirect()->route('customer.index')
-                    ->with('error', '"Walk-in Customer" cannot be edited.');
+                    ->with('error', __('"Walk-in Customer" cannot be edited.'));
             }
 
             $states = \Modules\Configuration\Models\State::orderBy('state_code')->get();
             return view('sale::customer.create', compact('customer', 'states'));
         } catch (\Exception $e) {
             return redirect()->route('customer.index')
-                ->with('error', 'Customer not found');
+                ->with('error', __('Customer not found'));
         }
     }
 
@@ -105,13 +105,13 @@ class CustomerController extends Controller
 
             if (!$customer) {
                 return redirect()->route('customer.index')
-                    ->with('error', 'Customer not found');
+                    ->with('error', __('Customer not found'));
             }
 
             $this->customerService->updateCustomer($customer, $request->validated());
 
             return redirect()->route('customer.index')
-                ->with('success', 'Customer Updated Successfully');
+                ->with('success', __('Customer Updated Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('customer.index')
                 ->with('error', $e->getMessage());
@@ -128,19 +128,19 @@ class CustomerController extends Controller
 
             if (!$customer) {
                 return redirect()->route('customer.index')
-                    ->with('error', 'Customer not found');
+                    ->with('error', __('Customer not found'));
             }
 
             // Prevent deletion of "Walk-in Customer"
             if ($customer->name === 'Walk-in Customer') {
                 return redirect()->route('customer.index')
-                    ->with('error', '"Walk-in Customer" cannot be deleted.');
+                    ->with('error', __('"Walk-in Customer" cannot be deleted.'));
             }
 
             $this->customerService->deleteCustomer($customer);
 
             return redirect()->route('customer.index')
-                ->with('success', 'Customer Deleted Successfully');
+                ->with('success', __('Customer Deleted Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('customer.index')
                 ->with('error', $e->getMessage());
@@ -157,7 +157,7 @@ class CustomerController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'Customer Created Successfully',
+                'message' => __('Customer Created Successfully'),
                 'customer' => [
                     'id' => $customer->id,
                     'encrypted_id' => $customer->encrypted_id,
@@ -186,7 +186,7 @@ class CustomerController extends Controller
             if (!$customer) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'Customer not found'
+                    'message' => __('Customer not found')
                 ], 404);
             }
 
@@ -195,7 +195,7 @@ class CustomerController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'Customer Updated Successfully',
+                'message' => __('Customer Updated Successfully'),
                 'customer' => [
                     'id' => $customer->id,
                     'name' => $customer->name,
@@ -222,7 +222,7 @@ class CustomerController extends Controller
             if (!$customer) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'Customer not found'
+                    'message' => __('Customer not found')
                 ], 404);
             }
 
@@ -250,7 +250,7 @@ class CustomerController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Customer not found'
+                'message' => __('Customer not found')
             ], 404);
         }
     }
@@ -379,7 +379,7 @@ class CustomerController extends Controller
             if (!$customer) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'Customer not found',
+                    'message' => __('Customer not found'),
                 ], 404);
             }
 
@@ -419,7 +419,7 @@ class CustomerController extends Controller
             if (!$customer) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Customer not found'
+                    'message' => __('Customer not found')
                 ], 404);
             }
 
@@ -456,7 +456,7 @@ class CustomerController extends Controller
             if (!$customer) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Customer not found'
+                    'message' => __('Customer not found')
                 ], 404);
             }
 

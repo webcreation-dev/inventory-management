@@ -48,7 +48,7 @@ class WhatsappService
             if (!$company) {
                 return [
                     'status' => 'Error',
-                    'message' => 'Company not found'
+                    'message' => __('Company not found')
                 ];
             }
 
@@ -78,14 +78,14 @@ class WhatsappService
                 default:
                     return [
                         'status' => 'Error',
-                        'message' => 'Unsupported WhatsApp service: ' . $whatsappType
+                        'message' => __('Unsupported WhatsApp service: ') . $whatsappType
                     ];
             }
         } catch (\Exception $e) {
             Log::error('WhatsApp sending failed', ['exception' => $e]);
             return [
                 'status' => 'Error',
-                'message' => 'WhatsApp sending failed: ' . $e->getMessage()
+                'message' => __('WhatsApp sending failed: ') . $e->getMessage()
             ];
         }
     }
@@ -127,7 +127,7 @@ class WhatsappService
                 Log::error('RC Soft WhatsApp cURL error', ['error' => $error]);
                 return [
                     'status' => 'Error',
-                    'message' => 'RC Soft WhatsApp cURL error: ' . $error
+                    'message' => __('RC Soft WhatsApp cURL error: ') . $error
                 ];
             }
 
@@ -137,7 +137,7 @@ class WhatsappService
                 Log::info('RC Soft WhatsApp sent successfully', ['to' => $to]);
                 return [
                     'status' => 'Success',
-                    'message' => 'WhatsApp message sent successfully via RC Soft'
+                    'message' => __('WhatsApp message sent successfully via RC Soft')
                 ];
             } else {
                 Log::error('RC Soft WhatsApp API error', [
@@ -146,14 +146,14 @@ class WhatsappService
                 ]);
                 return [
                     'status' => 'Error',
-                    'message' => 'RC Soft WhatsApp sending failed: ' . ($result['message'] ?? 'Unknown error')
+                    'message' => __('RC Soft WhatsApp sending failed: ') . ($result['message'] ?? 'Unknown error')
                 ];
             }
         } catch (\Exception $e) {
             Log::error('RC Soft WhatsApp exception', ['exception' => $e]);
             return [
                 'status' => 'Error',
-                'message' => 'RC Soft WhatsApp sending failed: ' . $e->getMessage()
+                'message' => __('RC Soft WhatsApp sending failed: ') . $e->getMessage()
             ];
         }
     }
@@ -185,7 +185,7 @@ class WhatsappService
                 Log::info('Twilio WhatsApp sent successfully', ['to' => $to]);
                 return [
                     'status' => 'Success',
-                    'message' => 'WhatsApp message sent successfully via Twilio'
+                    'message' => __('WhatsApp message sent successfully via Twilio')
                 ];
             } else {
                 Log::error('Twilio WhatsApp API error', [
@@ -194,14 +194,14 @@ class WhatsappService
                 ]);
                 return [
                     'status' => 'Error',
-                    'message' => 'Twilio WhatsApp sending failed: ' . ($result['message'] ?? 'Unknown error')
+                    'message' => __('Twilio WhatsApp sending failed: ') . ($result['message'] ?? 'Unknown error')
                 ];
             }
         } catch (\Exception $e) {
             Log::error('Twilio WhatsApp exception', ['exception' => $e]);
             return [
                 'status' => 'Error',
-                'message' => 'Twilio WhatsApp sending failed: ' . $e->getMessage()
+                'message' => __('Twilio WhatsApp sending failed: ') . $e->getMessage()
             ];
         }
     }

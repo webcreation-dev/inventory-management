@@ -55,7 +55,7 @@ class ExpenseCategoryController extends Controller
 
                 return response()->json([
                     'status' => 'success',
-                    'message' => 'Expense Category Created Successfully',
+                    'message' => __('Expense Category Created Successfully'),
                     'data' => [
                         'category' => $category,
                         'categories' => $categories,
@@ -64,7 +64,7 @@ class ExpenseCategoryController extends Controller
             }
 
             return redirect()->route('expense-category.index')
-                ->with('success', 'Expense Category Created Successfully');
+                ->with('success', __('Expense Category Created Successfully'));
         } catch (\Exception $e) {
             if ($request->ajax()) {
                 return response()->json([
@@ -96,7 +96,7 @@ class ExpenseCategoryController extends Controller
             return view('accounting::expense-category.create', compact('expense_category'));
         } catch (\Exception $e) {
             return redirect()->route('expense-category.index')
-                ->with('error', 'Expense Category not found');
+                ->with('error', __('Expense Category not found'));
         }
     }
 
@@ -108,7 +108,7 @@ class ExpenseCategoryController extends Controller
         try {
             $this->expenseCategoryService->update($id, $request->validated());
             return redirect()->route('expense-category.index')
-                ->with('success', 'Expense Category Updated Successfully');
+                ->with('success', __('Expense Category Updated Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('expense-category.index')
                 ->with('error', $e->getMessage());
@@ -123,7 +123,7 @@ class ExpenseCategoryController extends Controller
         try {
             $this->expenseCategoryService->delete($id);
             return redirect()->route('expense-category.index')
-                ->with('success', 'Expense Category Deleted Successfully');
+                ->with('success', __('Expense Category Deleted Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('expense-category.index')
                 ->with('error', $e->getMessage());

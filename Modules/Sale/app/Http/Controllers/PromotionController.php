@@ -73,7 +73,7 @@ class PromotionController extends Controller
             $this->promotionService->createPromotion($request->validated());
 
             return redirect()->route('promotion.index')
-                ->with('success', 'Promotion Created Successfully');
+                ->with('success', __('Promotion Created Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('promotion.create')
                 ->withInput()
@@ -99,7 +99,7 @@ class PromotionController extends Controller
 
             if (!$promotion) {
                 return redirect()->route('promotion.index')
-                    ->with('error', 'Promotion not found');
+                    ->with('error', __('Promotion not found'));
             }
 
             $items = Item::from('items as child')
@@ -124,7 +124,7 @@ class PromotionController extends Controller
             return view('sale::promotion.create', compact('promotion', 'items'));
         } catch (\Exception $e) {
             return redirect()->route('promotion.index')
-                ->with('error', 'Promotion not found');
+                ->with('error', __('Promotion not found'));
         }
     }
 
@@ -138,13 +138,13 @@ class PromotionController extends Controller
 
             if (!$promotion) {
                 return redirect()->route('promotion.index')
-                    ->with('error', 'Promotion not found');
+                    ->with('error', __('Promotion not found'));
             }
 
             $this->promotionService->updatePromotion($promotion, $request->validated());
 
             return redirect()->route('promotion.index')
-                ->with('success', 'Promotion Updated Successfully');
+                ->with('success', __('Promotion Updated Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('promotion.edit', $id)
                 ->withInput()
@@ -162,13 +162,13 @@ class PromotionController extends Controller
 
             if (!$promotion) {
                 return redirect()->route('promotion.index')
-                    ->with('error', 'Promotion not found');
+                    ->with('error', __('Promotion not found'));
             }
 
             $this->promotionService->deletePromotion($promotion);
 
             return redirect()->route('promotion.index')
-                ->with('success', 'Promotion Deleted Successfully');
+                ->with('success', __('Promotion Deleted Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('promotion.index')
                 ->with('error', $e->getMessage());

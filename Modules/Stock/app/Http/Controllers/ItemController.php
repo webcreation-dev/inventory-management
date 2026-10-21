@@ -140,7 +140,7 @@ class ItemController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to fetch items'
+                'message' => __('Failed to fetch items')
             ], 500);
         }
     }
@@ -163,13 +163,13 @@ class ItemController extends Controller
                 if ($request->ajax()) {
                     return response()->json([
                         'status' => 'success',
-                        'message' => 'Variation Product created successfully with ' . count($result['variations']) . ' variations',
+                        'message' => __('Variation Product created successfully with ') . count($result['variations']) . ' variations',
                         'data' => $result
                     ]);
                 }
 
                 return redirect()->route('item.index')
-                    ->with('success', 'Variation Product created successfully.');
+                    ->with('success', __('Variation Product created successfully.'));
 
             } else {
                 // Create the item (non-variation)
@@ -180,20 +180,20 @@ class ItemController extends Controller
                 if ($request->ajax()) {
                     return response()->json([
                         'status' => 'success',
-                        'message' => 'Item created successfully',
+                        'message' => __('Item created successfully'),
                         'data' => $item
                     ]);
                 }
 
                 return redirect()->route('item.index')
-                    ->with('success', 'Item created successfully.');
+                    ->with('success', __('Item created successfully.'));
             }
         } catch (\Illuminate\Validation\ValidationException $e) {
             DB::rollBack();
             if ($request->ajax()) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'Validation failed',
+                    'message' => __('Validation failed'),
                     'errors' => $e->errors()
                 ], 422);
             }
@@ -203,10 +203,10 @@ class ItemController extends Controller
             if ($request->ajax()) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'Failed to create item: ' . $e->getMessage()
+                    'message' => __('Failed to create item: ') . $e->getMessage()
                 ], 500);
             }
-            return back()->with('error', 'Failed to create item: ' . $e->getMessage())->withInput();
+            return back()->with('error', __('Failed to create item: ') . $e->getMessage())->withInput();
         }
     }
 
@@ -222,7 +222,7 @@ class ItemController extends Controller
         
         if (!$item) {
             return redirect()->route('item.index')
-                ->with('error', 'Item not found');
+                ->with('error', __('Item not found'));
         }
         
         // Load relationships
@@ -466,7 +466,7 @@ class ItemController extends Controller
         
         if (!$item) {
             return redirect()->route('item.index')
-                ->with('error', 'Item not found');
+                ->with('error', __('Item not found'));
         }
         
         // Load all necessary data
@@ -706,12 +706,12 @@ class ItemController extends Controller
             if ($request->ajax()) {
                 return response()->json([
                     'status' => 'success',
-                    'message' => 'Item updated successfully.'
+                    'message' => __('Item updated successfully.')
                 ]);
             }
             
             return redirect()->route('item.index')
-                ->with('success', 'Item updated successfully.');
+                ->with('success', __('Item updated successfully.'));
         } catch (\Exception $e) {
             // Return JSON response for AJAX requests
             if ($request->ajax()) {
@@ -735,7 +735,7 @@ class ItemController extends Controller
         try {
             $this->itemService->deleteItem($id);
             return redirect()->route('item.index')
-                ->with('success', 'Item deleted successfully.');
+                ->with('success', __('Item deleted successfully.'));
         } catch (\Exception $e) {
             return redirect()->route('item.index')
                 ->with('error', $e->getMessage());

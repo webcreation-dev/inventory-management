@@ -57,7 +57,7 @@ class CustomerReceiveController extends Controller
             $this->customerReceiveService->createCustomerReceive($request->validated());
 
             return redirect()->route('customer-receive.index')
-                ->with('success', 'Customer Receive Created Successfully');
+                ->with('success', __('Customer Receive Created Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('customer-receive.create')
                 ->with('error', $e->getMessage());
@@ -82,14 +82,14 @@ class CustomerReceiveController extends Controller
 
             if (!$customerReceive) {
                 return redirect()->route('customer-receive.index')
-                    ->with('error', 'Customer Receive not found');
+                    ->with('error', __('Customer Receive not found'));
             }
 
             $data = $this->customerReceiveService->getFormData($customerReceive);
             return view('sale::customer-receive.create', $data);
         } catch (\Exception $e) {
             return redirect()->route('customer-receive.index')
-                ->with('error', 'Customer Receive not found');
+                ->with('error', __('Customer Receive not found'));
         }
     }
 
@@ -103,13 +103,13 @@ class CustomerReceiveController extends Controller
 
             if (!$customerReceive) {
                 return redirect()->route('customer-receive.index')
-                    ->with('error', 'Customer Receive not found');
+                    ->with('error', __('Customer Receive not found'));
             }
 
             $this->customerReceiveService->updateCustomerReceive($customerReceive, $request->validated());
 
             return redirect()->route('customer-receive.index')
-                ->with('success', 'Customer Receive Updated Successfully');
+                ->with('success', __('Customer Receive Updated Successfully'));
         } catch (\Exception $e) {
             $decryptedId = decrypt($id);
             return redirect()->route('customer-receive.edit', encrypt($decryptedId))
@@ -127,13 +127,13 @@ class CustomerReceiveController extends Controller
 
             if (!$customerReceive) {
                 return redirect()->route('customer-receive.index')
-                    ->with('error', 'Customer Receive not found');
+                    ->with('error', __('Customer Receive not found'));
             }
 
             $this->customerReceiveService->deleteCustomerReceive($customerReceive);
 
             return redirect()->route('customer-receive.index')
-                ->with('success', 'Customer Receive Deleted Successfully');
+                ->with('success', __('Customer Receive Deleted Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('customer-receive.index')
                 ->with('error', $e->getMessage());
@@ -149,7 +149,7 @@ class CustomerReceiveController extends Controller
 
         if (!$customerReceive) {
             return redirect()->route('customer-receive.index')
-                ->with('error', 'Customer Receive not found');
+                ->with('error', __('Customer Receive not found'));
         }
 
         $customerCurrentDue = $this->balanceAfterPaymentForDisplay($customerReceive);
@@ -167,7 +167,7 @@ class CustomerReceiveController extends Controller
 
         if (!$customerReceive) {
             return redirect()->route('customer-receive.index')
-                ->with('error', 'Customer Receive not found');
+                ->with('error', __('Customer Receive not found'));
         }
 
         $customerReceive->loadMissing(['outlet', 'customer', 'payment', 'user']);

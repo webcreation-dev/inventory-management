@@ -100,7 +100,7 @@ class InstallController extends Controller
             return redirect()
                 ->route('install.purchase')
                 ->withInput()
-                ->with('error', 'Purchase verification could not be completed. Check your internet connection, then try again. If it keeps failing, verify your Username and Purchase Code or contact support.');
+                ->with('error', __('Purchase verification could not be completed. Check your internet connection, then try again. If it keeps failing, verify your Username and Purchase Code or contact support.'));
         }
 
         if (
@@ -110,7 +110,7 @@ class InstallController extends Controller
             return redirect()
                 ->route('install.purchase')
                 ->withInput()
-                ->with('error', 'You are trying to update, but your software is not yet installed.');
+                ->with('error', __('You are trying to update, but your software is not yet installed.'));
         }
 
         $allowNextStep = $result['success'];
@@ -163,7 +163,7 @@ class InstallController extends Controller
                 ->route('install.purchase')
                 ->with(
                     'error',
-                    'Purchase verification is required before selecting a business type. Verify your purchase code first.'
+                    __('Purchase verification is required before selecting a business type. Verify your purchase code first.')
                 );
         }
 
@@ -188,7 +188,7 @@ class InstallController extends Controller
         ]);
 
         if (! $this->businessTypes->isValid($request->string('type')->toString())) {
-            return response()->json(['message' => 'Invalid business type selected.'], 422);
+            return response()->json(['message' => __('Invalid business type selected.')], 422);
         }
 
         return response()->json(
@@ -204,7 +204,7 @@ class InstallController extends Controller
                 ->route('install.purchase')
                 ->with(
                     'error',
-                    'Purchase verification is required. Complete the Purchase step first.'
+                    __('Purchase verification is required. Complete the Purchase step first.')
                 );
         }
 
@@ -248,7 +248,7 @@ class InstallController extends Controller
 
         return redirect()
             ->route('install.database')
-            ->with('success', 'Business type and module preferences saved successfully.');
+            ->with('success', __('Business type and module preferences saved successfully.'));
     }
 
     /**
@@ -262,7 +262,7 @@ class InstallController extends Controller
                 ->route('install.purchase')
                 ->with(
                     'error',
-                    'Purchase verification is required before the database step. Verify your purchase code first (your progress was not found in the browser session or install backup).'
+                    __('Purchase verification is required before the database step. Verify your purchase code first (your progress was not found in the browser session or install backup).')
                 );
         }
 
@@ -272,7 +272,7 @@ class InstallController extends Controller
                 ->route('install.business-type')
                 ->with(
                     'error',
-                    'Please select your business type and module preferences before continuing to the database step.'
+                    __('Please select your business type and module preferences before continuing to the database step.')
                 );
         }
 
@@ -305,7 +305,7 @@ class InstallController extends Controller
                 ->withInput()
                 ->with(
                     'error',
-                    'Purchase verification is required. Complete the Purchase step first — we could not restore your verification from the session or install backup file.'
+                    __('Purchase verification is required. Complete the Purchase step first — we could not restore your verification from the session or install backup file.')
                 );
         }
 
@@ -316,7 +316,7 @@ class InstallController extends Controller
                 ->withInput()
                 ->with(
                     'error',
-                    'Please select your business type and module preferences before continuing to the database step.'
+                    __('Please select your business type and module preferences before continuing to the database step.')
                 );
         }
 
@@ -394,7 +394,7 @@ class InstallController extends Controller
             return redirect()
                 ->route('install.database')
                 ->withInput()
-                ->with('error', 'Could not test the database connection due to an unexpected error. Check your database server, then try again.');
+                ->with('error', __('Could not test the database connection due to an unexpected error. Check your database server, then try again.'));
         }
 
         if (!$result['success']) {
@@ -422,7 +422,7 @@ class InstallController extends Controller
                 return redirect()
                     ->route('install.database')
                     ->withInput()
-                    ->with('error', 'Could not empty the database due to an unexpected error. Check that your MySQL user has DROP privileges.');
+                    ->with('error', __('Could not empty the database due to an unexpected error. Check that your MySQL user has DROP privileges.'));
             }
 
             if (!$dropResult['success']) {
@@ -465,7 +465,7 @@ class InstallController extends Controller
             return redirect()
                 ->route('install.database')
                 ->withInput()
-                ->with('error', 'Could not write the .env file. Make sure the project root folder is writable by the web server, then try again.');
+                ->with('error', __('Could not write the .env file. Make sure the project root folder is writable by the web server, then try again.'));
         }
 
         if ($databaseInstallMode === 'use_existing') {
@@ -486,7 +486,7 @@ class InstallController extends Controller
                 return redirect()
                     ->route('install.database')
                     ->withInput()
-                    ->with('error', 'Could not register this installation URL with the license server. Check your internet connection and try again.');
+                    ->with('error', __('Could not register this installation URL with the license server. Check your internet connection and try again.'));
             }
 
             if (!$importResult['success']) {
@@ -525,7 +525,7 @@ class InstallController extends Controller
                 return redirect()
                     ->route('install.database')
                     ->withInput()
-                    ->with('error', 'Database import failed due to an unexpected error. Check your connection and try again, or use “Install on existing database” if the schema is already loaded.');
+                    ->with('error', __('Database import failed due to an unexpected error. Check your connection and try again, or use “Install on existing database” if the schema is already loaded.'));
             }
 
             if (!$importResult['success']) {
@@ -576,7 +576,7 @@ class InstallController extends Controller
         if (!$this->installer->isInstalled()) {
             return redirect()
                 ->route('install.welcome')
-                ->with('error', 'Installation is not marked as complete yet. Continue from Welcome in the installer until all steps finish successfully.');
+                ->with('error', __('Installation is not marked as complete yet. Continue from Welcome in the installer until all steps finish successfully.'));
         }
 
         $appUrl = rtrim(request()->getSchemeAndHttpHost() . request()->getBasePath(), '/');
@@ -653,7 +653,7 @@ class InstallController extends Controller
                 ->with('uninstall_status', 'error')
                 ->with('uninstall_message', 'An error occurred. Please try again.')
                 ->with('uninstall_color', 'red')
-                ->with('error', 'An error occurred. Please try again.');
+                ->with('error', __('An error occurred. Please try again.'));
         }
 
         if ($result['success']) {

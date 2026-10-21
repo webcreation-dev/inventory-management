@@ -49,10 +49,10 @@ class OutletController extends Controller
         try {
             $this->outletService->createOutlet($request->all());
             return redirect()->route('outlet.index')
-                ->with('success', 'Outlet created successfully');
+                ->with('success', __('Outlet created successfully'));
         } catch (\Exception $e) {
             return redirect()->back()
-                ->with('error', 'Something went wrong: ' . $e->getMessage())
+                ->with('error', __('Something went wrong: ') . $e->getMessage())
                 ->withInput();
         }
     }
@@ -87,10 +87,10 @@ class OutletController extends Controller
         try {
             $this->outletService->updateOutlet($id, $request->all());
             return redirect()->route('outlet.index')
-                ->with('success', 'Outlet updated successfully');
+                ->with('success', __('Outlet updated successfully'));
         } catch (\Exception $e) {
             return redirect()->back()
-                ->with('error', 'Something went wrong: ' . $e->getMessage())
+                ->with('error', __('Something went wrong: ') . $e->getMessage())
                 ->withInput();
         }
     }
@@ -103,7 +103,7 @@ class OutletController extends Controller
         try {
             $this->outletService->deleteOutlet($id);
             return redirect()->route('outlet.index')
-                ->with('success', 'Outlet Deleted Successfully');
+                ->with('success', __('Outlet Deleted Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('outlet.index')
                 ->with('error', $e->getMessage());

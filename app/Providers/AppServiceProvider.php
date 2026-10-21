@@ -20,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // After update, composer autoload may lag behind new Modules/* until vendor.zip is replaced.
         $this->registerModulesAutoloadFallback();
+        $this->app->scoped(\App\Services\MenuModuleService::class);
 
         $this->app->singleton(ResponseFactoryContract::class, function ($app) {
             return new ResponseFactory(

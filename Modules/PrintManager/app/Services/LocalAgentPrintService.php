@@ -20,7 +20,7 @@ class LocalAgentPrintService implements PrinterInterface
             'fallback' => true,
             'instructions' => [
                 'action' => 'local_agent',
-                'message' => 'Local print agent is not configured yet. Falling back to browser print.',
+                'message' => __('Local print agent is not configured yet. Falling back to browser print.'),
             ],
         ];
     }

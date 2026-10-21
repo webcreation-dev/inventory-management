@@ -38,6 +38,7 @@
 
     <ul class="navbar-nav flex-row align-items-center ms-md-auto">
 
+      @if(app(\App\Services\MenuModuleService::class)->enabled('menu_sales'))
       <li class="nav-item dropdown">
         <a
           class="nav-link btn btn-icon btn-text-secondary rounded-pill"
@@ -50,6 +51,8 @@
         </a>
       </li>
 
+      @endif
+      @if(count(available_ui_locales()) > 1)
       <li class="nav-item dropdown-language dropdown">
         <a
           class="nav-link dropdown-toggle hide-arrow btn btn-icon btn-text-secondary rounded-pill"
@@ -67,6 +70,7 @@
           @endforeach
         </ul>
       </li>
+      @endif
       <!--/ Language -->
 
       <!-- Style Switcher -->

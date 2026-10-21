@@ -211,12 +211,14 @@ document.addEventListener('DOMContentLoaded', function () {
     i18next
       .use(i18NextHttpBackend)
       .init({
-        lng: window.templateCustomizer ? window.templateCustomizer.settings.lang : 'en',
+        lng: 'fr',
         debug: false,
-        fallbackLng: 'en',
+        fallbackLng: 'fr',
         backend: {
-          loadPath: assetsPath + 'json/locales/{{lng}}.json'
+          loadPath: '/resources/lang/fr.json'
         },
+        keySeparator: false,
+        nsSeparator: false,
         returnObjects: true
       })
       .then(function (t) {
@@ -432,7 +434,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // Search Configuration
 const SearchConfig = {
   container: '#autocomplete',
-  placeholder: 'Search [CTRL + K]',
+  placeholder: 'Rechercher [CTRL + K]',
   classNames: {
     detachedContainer: 'd-flex flex-column',
     detachedFormContainer: 'd-flex align-items-center justify-content-between border-bottom',
@@ -610,7 +612,7 @@ function initializeAutocomplete() {
                       <path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2m-5-4h.01M12 11v3" />
                     </g>
                   </svg>
-                  <h5 class="mt-2">No results found</h5>
+                  <h5 class="mt-2">Aucun résultat trouvé</h5>
                 </div>
               </div>
             </div>

@@ -126,7 +126,7 @@ class UserController extends Controller
                 $user->assignRole((int)$request->role);
             }
             return redirect()->route('user.index')
-                ->with('success', 'User Created Successfully');
+                ->with('success', __('User Created Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('user.create')
                 ->with('error', $e->getMessage());
@@ -193,7 +193,7 @@ class UserController extends Controller
                 $user->syncRoles([(int)$request->role]);
             }
             return redirect()->route('user.edit', $id)
-                ->with('success', 'User Updated Successfully');
+                ->with('success', __('User Updated Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('user.edit', $id)
                 ->with('error', $e->getMessage());
@@ -212,7 +212,7 @@ class UserController extends Controller
             $user = User::findOrFail($decryptedId);
             $user->delete();
             return redirect()->route('user.index')
-                ->with('success', 'User Deleted Successfully');
+                ->with('success', __('User Deleted Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('user.index')
                 ->with('error', $e->getMessage());

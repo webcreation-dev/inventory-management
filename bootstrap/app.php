@@ -26,6 +26,7 @@ return Application::configure(basePath: dirname(__DIR__))
         // Apply locale and demo mode middleware to web routes
         $middleware->web(append: [
             SetLocale::class,
+            \App\Http\Middleware\EnsureMenuModuleEnabled::class,
             \App\Http\Middleware\DemoModeRestriction::class,
         ]);
         

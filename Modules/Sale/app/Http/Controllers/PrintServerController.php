@@ -55,12 +55,12 @@ class PrintServerController extends Controller
         $printType = $request->input('print_type', '');
 
         if (empty($contentData)) {
-            return response()->json(['success' => false, 'message' => 'Missing content_data'], 400);
+            return response()->json(['success' => false, 'message' => __('Missing content_data')], 400);
         }
 
         $data = is_string($contentData) ? json_decode($contentData) : $contentData;
         if (!$data) {
-            return response()->json(['success' => false, 'message' => 'Invalid content_data'], 400);
+            return response()->json(['success' => false, 'message' => __('Invalid content_data')], 400);
         }
 
         try {
@@ -72,7 +72,7 @@ class PrintServerController extends Controller
             Log::error('PrintServer receivePrint failed: ' . $e->getMessage(), ['exception' => $e]);
             return response()->json([
                 'success' => false,
-                'message' => 'Print failed: ' . $e->getMessage(),
+                'message' => __('Print failed: ') . $e->getMessage(),
             ], 500);
         }
     }

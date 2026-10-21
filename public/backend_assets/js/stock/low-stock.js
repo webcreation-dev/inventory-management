@@ -172,8 +172,8 @@ $(async function () {
       ] : [],
       language: {
         paginate: {
-          previous: "Previous",
-          next: "Next",
+          previous: 'Précédent',
+          next: 'Suivant',
         }
       }
     });

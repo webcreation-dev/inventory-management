@@ -107,10 +107,10 @@ class DepositWithdrawController extends Controller
         try {
             $this->depositWithdrawService->createDepositWithdraw($request->all());
             return redirect()->route('deposit-withdraw.index')
-                ->with('success', 'Deposit/Withdraw Created Successfully');
+                ->with('success', __('Deposit/Withdraw Created Successfully'));
         } catch (\Exception $e) {
             return redirect()->back()
-                ->with('error', 'Something went wrong: ' . $e->getMessage())
+                ->with('error', __('Something went wrong: ') . $e->getMessage())
                 ->withInput();
         }
     }
@@ -150,10 +150,10 @@ class DepositWithdrawController extends Controller
         try {
             $this->depositWithdrawService->updateDepositWithdraw($id, $request->all());
             return redirect()->route('deposit-withdraw.index')
-                ->with('success', 'Deposit/Withdraw Updated Successfully');
+                ->with('success', __('Deposit/Withdraw Updated Successfully'));
         } catch (\Exception $e) {
             return redirect()->back()
-                ->with('error', 'Something went wrong: ' . $e->getMessage())
+                ->with('error', __('Something went wrong: ') . $e->getMessage())
                 ->withInput();
         }
     }
@@ -166,7 +166,7 @@ class DepositWithdrawController extends Controller
         try {
             $this->depositWithdrawService->deleteDepositWithdraw($id);
             return redirect()->route('deposit-withdraw.index')
-                ->with('success', 'Deposit/Withdraw Deleted Successfully');
+                ->with('success', __('Deposit/Withdraw Deleted Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('deposit-withdraw.index')
                 ->with('error', $e->getMessage());

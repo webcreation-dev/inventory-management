@@ -40,11 +40,11 @@ class EcommerceSetting extends Model
         $selected = $this->storefront_languages;
 
         if (! is_array($selected) || $selected === []) {
-            return array_values(array_intersect(['en'], $available)) ?: ['en'];
+            return array_values(array_intersect(['fr'], $available)) ?: ['fr'];
         }
 
         $enabled = array_values(array_intersect($available, $selected));
 
-        return $enabled !== [] ? $enabled : ['en'];
+        return $enabled !== [] ? $enabled : ['fr'];
     }
 }

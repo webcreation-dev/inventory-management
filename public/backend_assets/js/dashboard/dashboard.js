@@ -210,7 +210,7 @@
         const options = {
             series: [
                 {
-                    name: 'Revenue',
+                    name: 'Recettes',
                     data: revenues
                 }
             ],
@@ -597,7 +597,7 @@
                     if (dateFrom && dateTo) {
                         $('#profitSubtitle').text('Period: ' + dateFrom + ' to ' + dateTo);
                     } else {
-                        $('#profitSubtitle').text('Current Month');
+                        $('#profitSubtitle').text('Mois en cours');
                     }
 
                     // Update Earning Reports
@@ -666,7 +666,7 @@
      * Format number with commas
      */
     function formatNumber(value) {
-        return parseFloat(value || 0).toLocaleString('en-US');
+        return parseFloat(value || 0).toLocaleString('fr-FR');
     }
 
     /**

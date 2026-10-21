@@ -412,7 +412,7 @@ class InstallerService
             if (!is_object($decoded)) {
                 return [
                     'success' => false,
-                    'message' => 'Invalid response. Please try again.',
+                    'message' => __('Invalid response. Please try again.'),
                     'installation_status' => null,
                     'current_installed_url' => null,
                 ];
@@ -436,7 +436,7 @@ class InstallerService
         } catch (\Throwable $e) {
             return [
                 'success' => false,
-                'message' => 'Verification request failed. Please check your internet connection and try again.',
+                'message' => __('Verification request failed. Please check your internet connection and try again.'),
                 'installation_status' => null,
                 'current_installed_url' => null,
             ];
@@ -469,20 +469,20 @@ class InstallerService
                 if ($createIfNotExists) {
                     $safeName = str_replace('`', '``', $database);
                     $pdo->exec("CREATE DATABASE `{$safeName}` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
-                    return ['success' => true, 'message' => 'Database created successfully.'];
+                    return ['success' => true, 'message' => __('Database created successfully.')];
                 }
                 return [
                     'success' => false,
-                    'message' => 'Database does not exist. Enable "Create database if it does not exist" or create it manually.',
+                    'message' => __('Database does not exist. Enable "Create database if it does not exist" or create it manually.'),
                 ];
             }
 
             $pdo->exec('USE `' . str_replace('`', '``', $database) . '`');
-            return ['success' => true, 'message' => 'Connection successful.'];
+            return ['success' => true, 'message' => __('Connection successful.')];
         } catch (PDOException $e) {
             return [
                 'success' => false,
-                'message' => 'Database connection failed. Please check your credentials and that the server is reachable.',
+                'message' => __('Database connection failed. Please check your credentials and that the server is reachable.'),
             ];
         }
     }
@@ -539,7 +539,7 @@ class InstallerService
             if ($views === [] && $tables === []) {
                 return [
                     'success' => true,
-                    'message' => 'No application tables to drop (empty database, or only protected tables such as sessions are present).',
+                    'message' => __('No application tables to drop (empty database, or only protected tables such as sessions are present).'),
                 ];
             }
 
@@ -560,7 +560,7 @@ class InstallerService
             }
             $pdo->exec('SET FOREIGN_KEY_CHECKS=1');
 
-            return ['success' => true, 'message' => 'All tables dropped successfully.'];
+            return ['success' => true, 'message' => __('All tables dropped successfully.')];
         } catch (PDOException $e) {
             Log::channel('single')->error('Install drop all tables failed', [
                 'message' => $e->getMessage(),
@@ -569,7 +569,7 @@ class InstallerService
 
             return [
                 'success' => false,
-                'message' => 'Could not empty the database. Check permissions and try again.',
+                'message' => __('Could not empty the database. Check permissions and try again.'),
             ];
         }
     }
@@ -703,7 +703,7 @@ class InstallerService
             if (!is_object($decoded)) {
                 return [
                     'success' => false,
-                    'message' => 'Invalid response. Please try again.',
+                    'message' => __('Invalid response. Please try again.'),
                     'decoded' => null,
                 ];
             }
@@ -728,7 +728,7 @@ class InstallerService
         } catch (\Throwable $e) {
             return [
                 'success' => false,
-                'message' => 'Could not reach the installation server. Please try again.',
+                'message' => __('Could not reach the installation server. Please try again.'),
                 'decoded' => null,
             ];
         }
@@ -760,7 +760,7 @@ class InstallerService
         if (!is_object($decoded)) {
             return [
                 'success' => false,
-                'message' => 'Invalid response. Please try again.',
+                'message' => __('Invalid response. Please try again.'),
             ];
         }
 
@@ -809,7 +809,7 @@ class InstallerService
         if (!is_object($decoded)) {
             return [
                 'success' => false,
-                'message' => 'Invalid response. Please try again.',
+                'message' => __('Invalid response. Please try again.'),
             ];
         }
 
@@ -817,7 +817,7 @@ class InstallerService
             if (empty($decoded->database) || !is_string($decoded->database)) {
                 return [
                     'success' => false,
-                    'message' => 'No database content received from server.',
+                    'message' => __('No database content received from server.'),
                 ];
             }
 
@@ -835,7 +835,7 @@ class InstallerService
             if ($mysqli->connect_errno) {
                 return [
                     'success' => false,
-                    'message' => 'Database connection failed. Please check your credentials.',
+                    'message' => __('Database connection failed. Please check your credentials.'),
                 ];
             }
 
@@ -856,7 +856,7 @@ class InstallerService
                     $mysqli->close();
                     return [
                         'success' => false,
-                        'message' => 'Database import failed. Please try again.',
+                        'message' => __('Database import failed. Please try again.'),
                     ];
                 }
                 do {
@@ -890,7 +890,7 @@ class InstallerService
         } catch (\Throwable $e) {
             return [
                 'success' => false,
-                'message' => 'Import failed. Please try again.',
+                'message' => __('Import failed. Please try again.'),
             ];
         }
     }
@@ -950,7 +950,7 @@ class InstallerService
                 $mysqli->close();
                 return [
                     'success' => false,
-                    'message' => 'Database import failed. Please try again.',
+                    'message' => __('Database import failed. Please try again.'),
                 ];
             }
         }
@@ -1003,27 +1003,27 @@ class InstallerService
             if (!$response->successful()) {
                 return [
                     'success' => false,
-                    'message' => 'Failed to download application package: HTTP ' . $response->status(),
+                    'message' => __('Failed to download application package: HTTP ') . $response->status(),
                 ];
             }
 
             $dir = dirname($tempZipPath);
             if (!is_dir($dir) && !mkdir($dir, 0755, true)) {
-                return ['success' => false, 'message' => 'Could not create storage directory for download.'];
+                return ['success' => false, 'message' => __('Could not create storage directory for download.')];
             }
             if (file_put_contents($tempZipPath, $response->body()) === false) {
-                return ['success' => false, 'message' => 'Could not save downloaded zip file.'];
+                return ['success' => false, 'message' => __('Could not save downloaded zip file.')];
             }
 
             if (!class_exists(\ZipArchive::class)) {
                 @unlink($tempZipPath);
-                return ['success' => false, 'message' => 'Zip extension is required to extract the application package.'];
+                return ['success' => false, 'message' => __('Zip extension is required to extract the application package.')];
             }
 
             $zip = new \ZipArchive();
             if ($zip->open($tempZipPath) !== true) {
                 @unlink($tempZipPath);
-                return ['success' => false, 'message' => 'Invalid or corrupted zip file.'];
+                return ['success' => false, 'message' => __('Invalid or corrupted zip file.')];
             }
 
             if (is_dir($tempExtractDir)) {
@@ -1032,7 +1032,7 @@ class InstallerService
             if (!mkdir($tempExtractDir, 0755, true)) {
                 $zip->close();
                 @unlink($tempZipPath);
-                return ['success' => false, 'message' => 'Could not create extraction directory.'];
+                return ['success' => false, 'message' => __('Could not create extraction directory.')];
             }
 
             $zip->extractTo($tempExtractDir);
@@ -1049,7 +1049,7 @@ class InstallerService
 
             $this->removeDirectoryRecursive($tempExtractDir);
 
-            return ['success' => true, 'message' => 'Application Updated successfully.'];
+            return ['success' => true, 'message' => __('Application Updated successfully.')];
         } catch (\Throwable $e) {
             if (is_file($tempZipPath ?? '')) {
                 @unlink($tempZipPath);
@@ -1059,7 +1059,7 @@ class InstallerService
             }
             return [
                 'success' => false,
-                'message' => 'Application Update failed. Please try again.',
+                'message' => __('Application Update failed. Please try again.'),
             ];
         }
     }
@@ -1165,7 +1165,7 @@ class InstallerService
             if (!is_object($decoded)) {
                 return [
                     'success' => false,
-                    'message' => 'Invalid response. Please try again.',
+                    'message' => __('Invalid response. Please try again.'),
                 ];
             }
 
@@ -1183,7 +1183,7 @@ class InstallerService
         } catch (\Throwable $e) {
             return [
                 'success' => false,
-                'message' => 'Uninstall request failed. Please try again.',
+                'message' => __('Uninstall request failed. Please try again.'),
             ];
         }
     }

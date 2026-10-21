@@ -3065,7 +3065,7 @@ class ReportController extends Controller
             if (!$supplierId) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Supplier is required'
+                    'message' => __('Supplier is required')
                 ], 400);
             }
             
@@ -3579,7 +3579,7 @@ class ReportController extends Controller
             if (!$customerId) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Customer is required'
+                    'message' => __('Customer is required')
                 ], 400);
             }
             

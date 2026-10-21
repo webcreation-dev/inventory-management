@@ -24,7 +24,7 @@ class RegisterController extends Controller
             $outletId = session('outlet.outlet_id');
 
             if (!$outletId) {
-                return redirect()->route('outlet.index')->with('error', 'Please select an outlet first.');
+                return redirect()->route('outlet.index')->with('error', __('Please select an outlet first.'));
             }
 
             // Get enabled payment methods excluding Loyalty Point
@@ -76,7 +76,7 @@ class RegisterController extends Controller
             if (!$outletId) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Please select an outlet first.'
+                    'message' => __('Please select an outlet first.')
                 ], 400);
             }
 
@@ -139,7 +139,7 @@ class RegisterController extends Controller
             if (!$outletId) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Please select an outlet first.'
+                    'message' => __('Please select an outlet first.')
                 ], 400);
             }
 
@@ -191,7 +191,7 @@ class RegisterController extends Controller
             if (!$outletId) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Please select an outlet first.'
+                    'message' => __('Please select an outlet first.')
                 ], 400);
             }
 
@@ -219,7 +219,7 @@ class RegisterController extends Controller
 
                     return response()->json([
                         'success' => false,
-                        'message' => 'You already have an open register on counter: ' . $counterName . '.'
+                        'message' => __('You already have an open register on counter: ') . $counterName . '.'
                     ], 400);
                 }
 
@@ -262,14 +262,14 @@ class RegisterController extends Controller
 
                 return response()->json([
                     'success' => true,
-                    'message' => 'Register opened successfully.',
+                    'message' => __('Register opened successfully.'),
                     'register' => $register
                 ]);
             });
         } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Validation failed',
+                'message' => __('Validation failed'),
                 'errors' => $e->errors()
             ], 422);
         } catch (\Exception $e) {
@@ -297,7 +297,7 @@ class RegisterController extends Controller
             if (!$register || $register->register_status != 1) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'No open register found.'
+                    'message' => __('No open register found.')
                 ], 404);
             }
 
@@ -511,7 +511,7 @@ class RegisterController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'Register closed successfully.'
+                'message' => __('Register closed successfully.')
             ]);
         } catch (\Exception $e) {
             return response()->json([
@@ -534,7 +534,7 @@ class RegisterController extends Controller
             if (!$outletId) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Please select an outlet first.'
+                    'message' => __('Please select an outlet first.')
                 ], 400);
             }
 
@@ -544,7 +544,7 @@ class RegisterController extends Controller
             if (!$register || $register->register_status != 1) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'No open register found.'
+                    'message' => __('No open register found.')
                 ], 404);
             }
 

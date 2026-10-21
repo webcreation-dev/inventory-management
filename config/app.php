@@ -109,9 +109,9 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'fr',
 
-    'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
+    'fallback_locale' => env('APP_FALLBACK_LOCALE', 'fr'),
 
     'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
 
@@ -125,7 +125,7 @@ return [
     |
     */
 
-    'available_locales' => ['en', 'ar', 'bn', 'fr', 'es', 'si', 'hi', 'ur', 'vi'],
+    'available_locales' => ['fr'],
 
     /*
     |--------------------------------------------------------------------------
@@ -141,7 +141,7 @@ return [
         'en' => 'English',
         'ar' => 'Arabic',
         'bn' => 'Bangla',
-        'fr' => 'French',
+        'fr' => 'Français',
         'es' => 'Spanish',
         'si' => 'Sinhala',
         'hi' => 'Hindi',

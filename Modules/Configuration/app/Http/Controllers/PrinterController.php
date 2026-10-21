@@ -64,7 +64,7 @@ class PrinterController extends Controller
 
                 return response()->json([
                     'status' => 'success',
-                    'message' => 'Printer Created Successfully',
+                    'message' => __('Printer Created Successfully'),
                     'data' => [
                         'printer' => [
                             'id' => $printer->id,
@@ -76,7 +76,7 @@ class PrinterController extends Controller
             }
 
             return redirect()->route('printer.index')
-                ->with('success', 'Printer Created Successfully');
+                ->with('success', __('Printer Created Successfully'));
         } catch (\Exception $e) {
             if ($request->ajax()) {
                 return response()->json([
@@ -108,7 +108,7 @@ class PrinterController extends Controller
             
             if (!$printer) {
                 return redirect()->route('printer.index')
-                    ->with('error', 'Printer not found');
+                    ->with('error', __('Printer not found'));
             }
 
             return view('configuration::printer.create', compact('printer'));
@@ -126,7 +126,7 @@ class PrinterController extends Controller
         try {
             $this->printerService->updatePrinter($id, $request->validated());
             return redirect()->route('printer.index')
-                ->with('success', 'Printer Updated Successfully');
+                ->with('success', __('Printer Updated Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('printer.edit', $id)
                 ->with('error', $e->getMessage())
@@ -142,7 +142,7 @@ class PrinterController extends Controller
         try {
             $this->printerService->deletePrinter($id);
             return redirect()->route('printer.index')
-                ->with('success', 'Printer Deleted Successfully');
+                ->with('success', __('Printer Deleted Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('printer.index')
                 ->with('error', $e->getMessage());

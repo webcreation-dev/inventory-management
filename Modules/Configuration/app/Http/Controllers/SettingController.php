@@ -94,7 +94,7 @@ class SettingController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to save business settings',
+                'message' => __('Failed to save business settings'),
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -111,7 +111,7 @@ class SettingController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to save POS settings',
+                'message' => __('Failed to save POS settings'),
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -131,12 +131,12 @@ class SettingController extends Controller
             session(['company' => $sessionCompany]);
             return response()->json([
                 'status' => 'success',
-                'message' => 'POS setting saved successfully'
+                'message' => __('POS setting saved successfully')
             ], 201);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to save POS settings',
+                'message' => __('Failed to save POS settings'),
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -153,7 +153,7 @@ class SettingController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to save tax settings',
+                'message' => __('Failed to save tax settings'),
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -170,7 +170,7 @@ class SettingController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to add tax',
+                'message' => __('Failed to add tax'),
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -187,7 +187,7 @@ class SettingController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to update tax',
+                'message' => __('Failed to update tax'),
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -204,7 +204,7 @@ class SettingController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to delete tax',
+                'message' => __('Failed to delete tax'),
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -221,7 +221,7 @@ class SettingController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to save email settings',
+                'message' => __('Failed to save email settings'),
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -238,7 +238,7 @@ class SettingController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to save SMS settings',
+                'message' => __('Failed to save SMS settings'),
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -255,7 +255,7 @@ class SettingController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to save WhatsApp settings',
+                'message' => __('Failed to save WhatsApp settings'),
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -272,7 +272,7 @@ class SettingController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to save payment settings',
+                'message' => __('Failed to save payment settings'),
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -289,7 +289,7 @@ class SettingController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to save invoice settings',
+                'message' => __('Failed to save invoice settings'),
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -313,7 +313,7 @@ class SettingController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to save white label settings',
+                'message' => __('Failed to save white label settings'),
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -333,7 +333,7 @@ class SettingController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to save PWA settings',
+                'message' => __('Failed to save PWA settings'),
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -350,7 +350,7 @@ class SettingController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to save ZATCA settings',
+                'message' => __('Failed to save ZATCA settings'),
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -384,7 +384,7 @@ class SettingController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to create directory: ' . $e->getMessage()
+                'message' => __('Failed to create directory: ') . $e->getMessage()
             ], 500);
         }
     }
@@ -491,7 +491,7 @@ class SettingController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'CSR and Private Key generated successfully',
+                'message' => __('CSR and Private Key generated successfully'),
                 'files' => [
                     'csr' => route('zatca.download', ['file' => 'csr']),
                     'private_key' => route('zatca.download', ['file' => 'private_key']),
@@ -500,7 +500,7 @@ class SettingController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to generate CSR: ' . $e->getMessage()
+                'message' => __('Failed to generate CSR: ') . $e->getMessage()
             ], 500);
         }
     }
@@ -645,7 +645,7 @@ class SettingController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to send test email: ' . $e->getMessage()
+                'message' => __('Failed to send test email: ') . $e->getMessage()
             ], 500);
         }
     }
@@ -724,7 +724,7 @@ class SettingController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to send test SMS: ' . $e->getMessage()
+                'message' => __('Failed to send test SMS: ') . $e->getMessage()
             ], 500);
         }
     }
@@ -773,7 +773,7 @@ class SettingController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to send test WhatsApp: ' . $e->getMessage()
+                'message' => __('Failed to send test WhatsApp: ') . $e->getMessage()
             ], 500);
         }
     }

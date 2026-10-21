@@ -85,7 +85,7 @@ class CounterController extends Controller
             }
 
             return redirect()->route('counter.index')
-                ->with('success', 'Counter Created Successfully');
+                ->with('success', __('Counter Created Successfully'));
         } catch (\Exception $e) {
             if ($request->ajax() || $request->wantsJson()) {
                 return response()->json([
@@ -118,7 +118,7 @@ class CounterController extends Controller
             
             if (!$counter) {
                 return redirect()->route('counter.index')
-                    ->with('error', 'Counter not found');
+                    ->with('error', __('Counter not found'));
             }
 
             $formData = $this->counterService->getFormData();
@@ -137,7 +137,7 @@ class CounterController extends Controller
         try {
             $this->counterService->updateCounter($id, $request->validated());
             return redirect()->route('counter.index')
-                ->with('success', 'Counter Updated Successfully');
+                ->with('success', __('Counter Updated Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('counter.edit', $id)
                 ->with('error', $e->getMessage())
@@ -153,7 +153,7 @@ class CounterController extends Controller
         try {
             $this->counterService->deleteCounter($id);
             return redirect()->route('counter.index')
-                ->with('success', 'Counter Deleted Successfully');
+                ->with('success', __('Counter Deleted Successfully'));
         } catch (\Exception $e) {
             return redirect()->route('counter.index')
                 ->with('error', $e->getMessage());

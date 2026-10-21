@@ -352,7 +352,7 @@ class ReportController extends Controller
         if (!$paymentMethodId) {
             return response()->json([
                 'success' => false,
-                'message' => 'Payment Method is required',
+                'message' => __('Payment Method is required'),
             ], 400);
         }
 
@@ -360,7 +360,7 @@ class ReportController extends Controller
         if (!$paymentMethod) {
             return response()->json([
                 'success' => false,
-                'message' => 'Payment Method not found',
+                'message' => __('Payment Method not found'),
             ], 404);
         }
 
